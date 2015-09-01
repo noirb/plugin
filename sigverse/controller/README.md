@@ -1,54 +1,42 @@
 #Controller#
 
-Controller ‚ÌŽÀ‘•—á‚ðŠi”[‚µ‚Ä‚¢‚Ü‚·D  
-SIGVerse ‚Ì man-nii ‚ÌƒAƒoƒ^[‚ðCKinectV2 ‚Æ OculusRiftDK1 ‚Å‘€ì‚·‚é Controller ‚ÌŽÀ‘•—á‚Å‚·D  
+Controller ã®å®Ÿè£…ä¾‹ã‚’æ ¼ç´ã—ã¦ã„ã¾ã™ï¼Ž  
+SIGVerse ã® man-nii ã®ã‚¢ãƒã‚¿ãƒ¼ã‚’ï¼ŒKinectV2 ã¨ OculusRiftDK1 ã§æ“ä½œã™ã‚‹ Controller ã®å®Ÿè£…ä¾‹ã§ã™ï¼Ž  
 
-iUbunutu‚Ì’[––‚Åj  
-ŠeƒfƒBƒŒƒNƒgƒŠ“à‚Å make ‚·‚é‚ÆCŠe Controller ‚ÅƒŠƒ“ƒN‚·‚é‹¤—LƒIƒuƒWƒFƒNƒgƒ‰ƒCƒuƒ‰ƒŠi.soj‚ð¶¬‚µ‚Ü‚·D  
-‚»‚ÌŒãC sigserver.sh -w ./world.xml ‚ÆƒRƒ}ƒ“ƒh‚ð“ü—Í‚·‚é‚ÆCSIGServer ‚ª‹N“®‚µC  
- Plugin ‚©‚ç‚ÌƒƒbƒZ[ƒW‚ÌŽóM‘Ò‚¿ó‘Ô‚É‚È‚è‚Ü‚·D  
-‚»‚ÌŒãCSIGViewer ‚Å Connect ƒ{ƒ^ƒ“‚ðƒNƒŠƒbƒN‚µ‚Ä START ƒ{ƒ^ƒ“‚ðƒNƒŠƒbƒN‚µC Services ‚©‚çŠe Plugin ‚ðƒXƒ^[ƒg‚³‚¹‚é‚ÆC  
-Še Controller ‚ª“®ì‚µ‚Ü‚·D
+ï¼ˆUbunutuã®ç«¯æœ«ã§ï¼‰  
+å„ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå†…ã§ make ã™ã‚‹ã¨ï¼Œå„ Controller ã§ãƒªãƒ³ã‚¯ã™ã‚‹å…±æœ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼ˆ.soï¼‰ã‚’ç”Ÿæˆã—ã¾ã™ï¼Ž  
+ãã®å¾Œï¼Œ sigserver.sh -w ./world.xml ã¨ã‚³ãƒžãƒ³ãƒ‰ã‚’å…¥åŠ›ã™ã‚‹ã¨ï¼ŒSIGServer ãŒèµ·å‹•ã—ï¼Œ  
+ Plugin ã‹ã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å—ä¿¡å¾…ã¡çŠ¶æ…‹ã«ãªã‚Šã¾ã™ï¼Ž  
+ãã®å¾Œï¼ŒSIGViewer ã§ Connect ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ START ãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ï¼Œ Services ã‹ã‚‰å„ Plugin ã‚’ã‚¹ã‚¿ãƒ¼ãƒˆã•ã›ã‚‹ã¨ï¼Œ  
+å„ Controller ãŒå‹•ä½œã—ã¾ã™ï¼Ž
 
 ##ManNiiAvatarControllerByKinectV2##
 
-KinectV2 ‚ðŽg‚Á‚ÄƒAƒoƒ^[‚ð‘€ì‚·‚éController‚ÌŽÀ‘•—á‚Å‚·D  
-Plugin ‚©‚ç‘—‚ç‚ê‚éƒƒbƒZ[ƒW‚ðŽó‚¯Žæ‚Á‚½Žž‚Ìˆ—‚ÍCŽå‚ÉŽŸ‚Ì’Ê‚è‚Å‚·D
+KinectV2 ã‚’ä½¿ã£ã¦ã‚¢ãƒã‚¿ãƒ¼ã‚’æ“ä½œã™ã‚‹Controllerã®å®Ÿè£…ä¾‹ã§ã™ï¼Ž  
+Plugin ã‹ã‚‰é€ã‚‰ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã£ãŸæ™‚ã®å‡¦ç†ã¯ï¼Œä¸»ã«æ¬¡ã®é€šã‚Šã§ã™ï¼Ž
 
-* KinectV2_vs2013.sig ‚ðŽg—p‚µ‚Ä‘—M‚³‚ê‚éƒƒbƒZ[ƒW‚ðŽó‚¯Žæ‚éD
-* Žó‚¯Žæ‚Á‚½ƒƒbƒZ[ƒW‚ÉŠî‚Ã‚¢‚Ä KinectV2SensorData ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬idecodej‚·‚éD
-* KinectV2SensorData iKinectV2 ‚ÅŒv‘ª‚³‚ê‚½‘Sg‚ÌƒNƒH[ƒ^ƒjƒIƒ“j‚ðCman-nii ‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚Ö•ÏŠ·‚·‚éD
-* man-nii ‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ðCSIGViewer ã‚ÌƒAƒoƒ^[‚ÖƒZƒbƒg‚·‚éD
+* KinectV2_vs2013.sig ã‚’ä½¿ç”¨ã—ã¦é€ä¿¡ã•ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹ï¼Ž
+* å—ã‘å–ã£ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«åŸºã¥ã„ã¦ KinectV2SensorData ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆï¼ˆdecodeï¼‰ã™ã‚‹ï¼Ž
+* KinectV2SensorData ï¼ˆKinectV2 ã§è¨ˆæ¸¬ã•ã‚ŒãŸå…¨èº«ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ï¼‰ã‚’ï¼Œman-nii ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã¸å¤‰æ›ã™ã‚‹ï¼Ž
+* man-nii ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ï¼ŒSIGViewer ä¸Šã®ã‚¢ãƒã‚¿ãƒ¼ã¸ã‚»ãƒƒãƒˆã™ã‚‹ï¼Ž
 
 
 ##ManNiiAvatarControllerByOculus##
 
-OculusRiftDK1 ‚ðŽg‚Á‚ÄƒAƒoƒ^[‚ð‘€ì‚·‚éController‚ÌŽÀ‘•—á‚Å‚·D  
-Plugin ‚©‚ç‘—‚ç‚ê‚éƒƒbƒZ[ƒW‚ðŽó‚¯Žæ‚Á‚½Žž‚Ìˆ—‚ÍCŽå‚ÉŽŸ‚Ì’Ê‚è‚Å‚·D
+OculusRiftDK1 ã‚’ä½¿ã£ã¦ã‚¢ãƒã‚¿ãƒ¼ã‚’æ“ä½œã™ã‚‹Controllerã®å®Ÿè£…ä¾‹ã§ã™ï¼Ž  
+Plugin ã‹ã‚‰é€ã‚‰ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã£ãŸæ™‚ã®å‡¦ç†ã¯ï¼Œä¸»ã«æ¬¡ã®é€šã‚Šã§ã™ï¼Ž
 
-* OculusRiftDK1_vs2010.sig ‚ðŽg—p‚µ‚Ä‘—M‚³‚ê‚éƒƒbƒZ[ƒW‚ðŽó‚¯Žæ‚éD
-* Žó‚¯Žæ‚Á‚½ƒƒbƒZ[ƒW‚ÉŠî‚Ã‚¢‚Ä OculusRiftDK1SensorData ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬idecodej‚·‚éD
-* OculusRiftDK1SensorData iOculus ‚ÌŽp¨‚ðŽ¦‚·ƒIƒCƒ‰[Špj‚ðCman-nii ‚ÌŽñ‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ÖƒZƒbƒg‚·‚éD
-* man-nii ‚ÌŽñ‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ðCSIGViewer ã‚ÌƒAƒoƒ^[‚ÖƒZƒbƒg‚·‚éD
-
-##MirrorTherapyController##
-
-KinectV2 ‚Æ OculusRiftDK1 ‚Ì—¼•ûi‚ ‚é‚¢‚Í‚»‚Ì‚Ç‚¿‚ç‚©j‚ðŽg‚Á‚ÄƒAƒoƒ^[‚ð‘€ì‚µCMirrorTherapy ‚ðs‚¤ŽÀ‘•—á‚Å‚·D  
-ã‹L2‚Â‚ÌƒRƒ“ƒgƒ[ƒ‰‚ªŽ‚Â‹@”\‚É‰Á‚¦‚ÄCŽŸ‚Ì‚æ‚¤‚È‹@”\‚ðŽå‚ÉŽÀ‘•‚µ‚Ä‚¢‚Ü‚·D
-
-* ŽÀ¢ŠE‚Å‚Ì‰E˜r‚Ì“®ì‚ð”½“]‚³‚¹‚ÄƒAƒoƒ^[‚Ì¶˜r‚Ö“`‚¦‚é‹@”\iŽÀ¢ŠE‚Å‚Ì¶˜r‚Ì“®ì‚Í–³Ž‹‚³‚ê‚éj
-* ŽÀ¢ŠE‚Å‚Ì¶˜r‚Ì“®ì‚ð”½“]‚³‚¹‚ÄƒAƒoƒ^[‚Ì‰E˜r‚Ö“`‚¦‚é‹@”\iŽÀ¢ŠE‚Å‚Ì‰E˜r‚Ì“®ì‚Í–³Ž‹‚³‚ê‚éj
-* ŽÀ¢ŠE‚Å‚Ì‚Ç‚¿‚ç‚©‚Ì˜r‚Ì“®ì‚ð”½“]‚³‚¹‚Ä“`‚¦‚éÛ‚ÉCŽw’è‚Ì•b[ms]‚¾‚¯’x‚ç‚¹‚Ä“`‚¦‚é‹@”\
-* “®ì‚Ì”½“]ƒ‚[ƒhi‰E˜r‚Ì“®ì‚ð¶˜r‚ÖC¶˜r‚Ì“®ì‚ð‰E˜r‚ÖCŽÀ¢ŠE‚Ì“®ì‚ð‚»‚Ì‚Ü‚Ü“`‚¦‚éi”½“]‚µ‚È‚¢jC‚Ì3‚Âj‚ð  
-SIGViewer ‚©‚ç‘—M‚·‚éƒƒbƒZ[ƒW‚É‚æ‚Á‚Ä•ÏX‚·‚é‹@”\
-* “®ì‚ð’x‚ç‚¹‚é•b”i“®ì‚Ì’x‰„ŽžŠÔj‚ðCSIGViewer ‚©‚ç‘—M‚·‚éƒƒbƒZ[ƒW‚É‚æ‚Á‚Ä•ÏX‚·‚é‹@”\
+* OculusRiftDK1_vs2010.sig ã‚’ä½¿ç”¨ã—ã¦é€ä¿¡ã•ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹ï¼Ž
+* å—ã‘å–ã£ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«åŸºã¥ã„ã¦ OculusRiftDK1SensorData ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆï¼ˆdecodeï¼‰ã™ã‚‹ï¼Ž
+* OculusRiftDK1SensorData ï¼ˆOculus ã®å§¿å‹¢ã‚’ç¤ºã™ã‚ªã‚¤ãƒ©ãƒ¼è§’ï¼‰ã‚’ï¼Œman-nii ã®é¦–ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã¸ã‚»ãƒƒãƒˆã™ã‚‹ï¼Ž
+* man-nii ã®é¦–ã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ï¼ŒSIGViewer ä¸Šã®ã‚¢ãƒã‚¿ãƒ¼ã¸ã‚»ãƒƒãƒˆã™ã‚‹ï¼Ž
 
 ##ControllerCommon##
 
-ã‹L3‚Â‚Ì Controller ‚Å‹¤’Ê‚·‚é‹@”\‚ðŽ‚ÂƒNƒ‰ƒX‚ðŽÀ‘•‚µ‚½ƒ\[ƒXƒR[ƒh‚ðŠi”[‚µ‚Ä‚¢‚Ü‚·D
+ä¸Šè¨˜3ã¤ã® Controller ã§å…±é€šã™ã‚‹æ©Ÿèƒ½ã‚’æŒã¤ã‚¯ãƒ©ã‚¹ã‚’å®Ÿè£…ã—ãŸã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’æ ¼ç´ã—ã¦ã„ã¾ã™ï¼Ž
 
-* AvatarController ƒNƒ‰ƒX‚ÌŽÀ‘•‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·D
- * ã‹L3‚Â‚ÌController‚ÍCAvatarController ƒNƒ‰ƒX‚ðŒp³‚µ‚Ä‚¢‚Ü‚·D
-* Posture ƒNƒ‰ƒX‚ÌŽÀ‘•‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·D
-* Posture ƒNƒ‰ƒX‚ðŒp³‚·‚é ManNiiPosture ƒNƒ‰ƒX‚ÌŽÀ‘•‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·D
- * man-nii ‚ÌŽp¨‚Ìî•ñ‚ÍC ManNiiPosture ƒNƒ‰ƒX‚Åˆµ‚¢‚Ü‚·D
+* AvatarController ã‚¯ãƒ©ã‚¹ã®å®Ÿè£…ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ï¼Ž
+ * ä¸Šè¨˜3ã¤ã®Controllerã¯ï¼ŒAvatarController ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã—ã¦ã„ã¾ã™ï¼Ž
+* Posture ã‚¯ãƒ©ã‚¹ã®å®Ÿè£…ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ï¼Ž
+* Posture ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã™ã‚‹ ManNiiPosture ã‚¯ãƒ©ã‚¹ã®å®Ÿè£…ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ï¼Ž
+ * man-nii ã®å§¿å‹¢ã®æƒ…å ±ã¯ï¼Œ ManNiiPosture ã‚¯ãƒ©ã‚¹ã§æ‰±ã„ã¾ã™ï¼Ž
