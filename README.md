@@ -1,64 +1,60 @@
-MirrorTherapy_v2
-================
-
-���߂ɁC(1) Controller, (2) Plugin, (3) Common��3�̃f�B���N�g���ɂ��Đ������܂��D  
-���̌�C(4) ��{�I�Ȏg�����i�\�[�X�R�[�h�̃r���h���@�Ǝ��s���@�̗�j�ɂ��Đ������܂��D
+初めに，(1) Controller, (2) Plugin, (3) Commonの3つのディレクトリについて説明します．  
+その後，(4) 基本的な使い方（ソースコードのビルド方法と実行方法の例）について説明します．
 
 (1) Controller
 --------------
-�R���g���[���̃\�[�X�R�[�h�̃f�B���N�g���ł��D  
-Ubuntu��SIGServer���N�����CPlugin���瑗�M����郁�b�Z�[�W���󂯎���āCSIGViewer���man-nii�𑀍삷�邱�Ƃ��ł��܂��D
+コントローラのソースコードのディレクトリです．  
+UbuntuでSIGServerを起動し，Pluginから送信されるメッセージを受け取って，SIGViewer上のman-niiを操作することができます．
 
 (2) Plugin
 ----------
-�T�[�r�X�v���o�C�_�̃\�[�X�R�[�h�̃f�B���N�g���ł��D
-���������T�[�r�X�v���o�C�_�̋@�\�͎��̂悤�Ȃ��̂ł��D
+サービスプロバイダのソースコードのディレクトリです．
+実装したサービスプロバイダの機能は次のようなものです．
 
-* Windows�œ��삷��KinectV2��OculusRiftDK1�̏���Controller�֑��M����D  
-* KinectV2�p�̃T�[�r�X�v���o�C�_�ł́CKinectV2��SDK�ŎZ�o�����N�H�[�^�j�I���𑗐M����D  
-* OculusRiftDK1�p�̃T�[�r�X�v���o�C�_�ł́COculus��SDK�ŎZ�o������̃I�C���[�p�𑗐M����D
+* Windowsで動作するKinectV2とOculusRiftDK1の情報をControllerへ送信する．  
+* KinectV2用のサービスプロバイダでは，KinectV2のSDKで算出されるクォータニオンを送信する．  
+* OculusRiftDK1用のサービスプロバイダでは，OculusのSDKで算出される首のオイラー角を送信する．
 
 (3) Common
 ----------
-Controller��Plugin�̗����ɕK�v�ȃ\�[�X�R�[�h�̃f�B���N�g���ł��D  
-SensorData�N���X�̎������܂܂�Ă��܂��D  
-���ӓ_�Ȃǂ����ɗ񋓂��܂��D
+ControllerとPluginの両方に必要なソースコードのディレクトリです．  
+SensorDataクラスの実装が含まれています．  
+注意点などを次に列挙します．
 
-* Windows �� Ubuntu �̗����Ŏg�p����D
-* �����ɂ� boost ���܂܂�Ă���̂ŁC�\�[�X�R�[�h�̃r���h�̂��߂� boost ���C���X�g�[������K�v������D
-* Ubuntu �ւ� boost �̃C���X�g�[����i�[���őłR�}���h�j�����Ɏ����D
+* Windows と Ubuntu の両方で使用する．
+* 実装には boost が含まれているので，ソースコードのビルドのために boost をインストールする必要がある．
+* Ubuntu への boost のインストール例（端末で打つコマンド）を次に示す．
 
 ` sudo apt-get install boost-all-dev`
 
 
-(4) ��{�I�Ȏg����
+(4) 基本的な使い方
 -----------------
 
-���|�W�g���� Clone ���CMirrorTherapy_v2 �̑S�\�[�X�R�[�h���r���h����ƁC���̕\�́u���s�t�@�C�����v�Ɏ������s�t�@�C���������܂��D  
-���\�ɁC���s�t�@�C���̎�ށiPlugin��Windows�p�CController��Ubuntu�p�j�ƊȒP�ȊT�v���L�ڂ��܂����D
+リポジトリを Clone し，MirrorTherapy_v2 の全ソースコードをビルドすると，次の表の「実行ファイル名」に示す実行ファイルが得られます．  
+同表に，実行ファイルの種類（PluginはWindows用，ControllerはUbuntu用）と簡単な概要も記載しました．
 
-| - | ���s�t�@�C����  | Plugin / Controller | �T�v |
+| - | 実行ファイル名  | Plugin / Controller | 概要 |
 | ---------- | ------------- | ------------- | ------------- |
-|a| KinectV2_vs2013.sig  | Plugin  | KinectV2�̃N�H�[�^�j�I����Controller�֑��M���� |
-|b| OculusRiftDK1_vs2010.sig  | Plugin  | OculusRiftDK1�̃I�C���[�p��Controller�֑��M���� |
-|c| ManNiiAvatarControllerByKinectV2.so  | Controller | KinectV2�̃N�H�[�^�j�I������M����SIGViewer��̃A�o�^�[�𑀍삷�� |
-|d| ManNiiAvatarControllerByOculus.so  | Controller | Oculus�̃I�C���[�p����M����SIGViewer��̃A�o�^�[�𑀍삷�� |
-|e| MirrorTherapyController.so  | Controller | KinectV2��Oculus�𓯎��ɗ��p����SIGViewer��̃A�o�^�[�̓�������H���� |
+|a| KinectV2_vs2013.sig  | Plugin  | KinectV2のクォータニオンをControllerへ送信する |
+|b| OculusRiftDK1_vs2010.sig  | Plugin  | OculusRiftDK1のオイラー角をControllerへ送信する |
+|c| ManNiiAvatarControllerByKinectV2.so  | Controller | KinectV2のクォータニオンを受信してSIGViewer上のアバターを操作する |
+|d| ManNiiAvatarControllerByOculus.so  | Controller | Oculusのオイラー角を受信してSIGViewer上のアバターを操作する |
 
-��{�I�ɂ́C���̂悤�Ȏ菇�Ńr���h���Ď��s���܂��D
+基本的には，次のような手順でビルドして実行します．
 
-1. �g�p����@��iKinect V2 �� OculusRiftDK1�j�� PC �ɐڑ�����iOculus�̓L�����u���[�V���������Ă����� better�j�D
-2. Windows���ŁCC:\SIGVerse\src\ �����Ƀ��|�W�g���� Clone ����D
-3. Windows���ŁC��̕\�� a �� b �𐶐��i�r���h�j����D
-4. Windows���ŁCSIGViewer ���N�����C��̕\�� a �� b �� SIGViewer �� Services �� Add ����D
-5. Ubuntu���ŁC/home/sigverse/ �ȉ��̔C�ӂ̃f�B���N�g���Ƀ��|�W�g���� Clone ����D
-6. Ubuntu���ŁC��̕\�� c, d, e �𐶐��i�r���h�j����D
-7. Ubuntu���ŁCSIGServer ���N������iSIGServer �̃��[���h�t�@�C���� c, d, e �̂����ꂩ�������N����j�D
-8. Windows���ŁCSIGViewer �� IP Address �� Port Number ���w�肵�� Connect ����D
-9. Windows���ŁCSIGViewer �� START ���N���b�N���� Services -> Start �� a �� b �̂����ꂩ�C���邢�͗������N���b�N���� Plugin �����s����D
-10. �i�ȍ~�͏I�����̎菇�j Windows���ŁCSIGViewer �� STOP ���N���b�N����D
-11. Windows���ŁCPlugin ���s���ɊJ�����R�}���h�v�����v�g���N���b�N���āi�A�N�e�B�u�ɂ��āj�C�L�[�{�[�h�� Ctrl+C ����������D
-12. Windows���ŁC SIGViewer �� Quit Simulation ���N���b�N����D
+1. 使用する機器（Kinect V2 と OculusRiftDK1）を PC に接続する（Oculusはキャリブレーションをしておくと better）．
+2. Windows側で，C:\SIGVerse\src\ 直下にリポジトリを Clone する．
+3. Windows側で，上の表の a と b を生成（ビルド）する．
+4. Windows側で，SIGViewer を起動し，上の表の a と b を SIGViewer の Services に Add する．
+5. Ubuntu側で，/home/sigverse/ 以下の任意のディレクトリにリポジトリを Clone する．
+6. Ubuntu側で，上の表の c, d, e を生成（ビルド）する．
+7. Ubuntu側で，SIGServer を起動する（SIGServer のワールドファイルに c, d, e のいずれかをリンクする）．
+8. Windows側で，SIGViewer で IP Address と Port Number を指定して Connect する．
+9. Windows側で，SIGViewer で START をクリックして Services -> Start で a か b のいずれか，あるいは両方をクリックして Plugin を実行する．
+10. （以降は終了時の手順） Windows側で，SIGViewer で STOP をクリックする．
+11. Windows側で，Plugin 実行時に開いたコマンドプロンプトをクリックして（アクティブにして），キーボードで Ctrl+C を押下する．
+12. Windows側で， SIGViewer で Quit Simulation をクリックする．
 
-�菇�� 3 �� 6 �Ńr���h���܂����C�r���h�̗�͂��ꂼ��� Plugin / Controller �̃f�B���N�g�����ɋL�ڂ��Ă��܂��̂ŁC�r���h�̍ۂ͂�������Q�l�ɂ��Ă��������D  
-���s�t�@�C���Q�i.sig �� .so�j���r���h�ς݂̏ꍇ�́C�菇�� 2 ���� 6 �͕K�v����܂���D
+手順の 3 と 6 でビルドしますが，ビルドの例はそれぞれの Plugin / Controller のディレクトリ内に記載していますので，ビルドの際はそちらを参考にしてください．  
+実行ファイル群（.sig と .so）をビルド済みの場合は，手順の 2 から 6 は必要ありません．
