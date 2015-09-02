@@ -16,11 +16,13 @@ const std::string KinectV2Device::parameterFileName = "KinectV2.ini";
 
 //Parameter file information
 const std::string KinectV2Device::paramFileKeyKinectV2SensorDataMode        = "KinectV2.sensor_data_mode";
+const std::string KinectV2Device::paramFileKeyKinectV2SendHandState         = "KinectV2.send_hand_state";
 const std::string KinectV2Device::paramFileKeyKinectV2SmoothingType         = "KinectV2.smoothing_type";
 const std::string KinectV2Device::paramFileKeyKinectV2SmoothingSMANum       = "KinectV2.smoothing_sma_num";
 const std::string KinectV2Device::paramFileKeyKinectV2SmoothingWMAWeight    = "KinectV2.smoothing_wma_weight";
 
 const std::string KinectV2Device::paramFileValKinectV2SensorDataModeDefault     = "QUATERNION";
+const bool        KinectV2Device::paramFileValKinectV2SendHandStateDefault      = true;
 const std::string KinectV2Device::paramFileValKinectV2SmoothingTypeDefault      = "NONE";
 const std::string KinectV2Device::paramFileValKinectV2SmoothingSMANumDefault    = "3";
 const std::string KinectV2Device::paramFileValKinectV2SmoothingWMAWeightDefault = "0,8";
@@ -389,10 +391,15 @@ int KinectV2Device::run()
 
 										if (this->sendMessageFlag)
 										{
+											if (this->sendHandState)
+											{
+												smoothedSensorData.setLeftHandState((KinectV2SensorData::HandState)leftHandState);
+												smoothedSensorData.setRightHandState((KinectV2SensorData::HandState)rightHandState);
+											}
 											// Send message to SigServer.
-											const std::string sensorDataMessage = smoothedSensorData.encodeSensorData();
-											const std::string messageHeader = this->generateMessageHeader();
-											const std::string message = messageHeader + sensorDataMessage;
+											std::string messageHeader = this->generateMessageHeader();
+											std::string sensorDataMessage = smoothedSensorData.encodeSensorData();
+											std::string message = messageHeader + sensorDataMessage;
 											this->sendMessage(sigService, message);
 //											std::cout << "SEND: " << message << std::endl;
 										}
@@ -557,6 +564,7 @@ void KinectV2Device::readIniFile()
 	this->deviceUniqueID = DEV_UNIQUE_ID_0;
 	
 	std::string sensorDataModeStr    = paramFileValKinectV2SensorDataModeDefault;
+	this->sendHandState              = paramFileValKinectV2SendHandStateDefault;
 	std::string smoothingTypeStr     = paramFileValKinectV2SmoothingTypeDefault;
 	std::string smoothingSMANumStr   = paramFileValKinectV2SmoothingSMANumDefault;
 	std::string smoothingWMAWeightStr= paramFileValKinectV2SmoothingWMAWeightDefault;
@@ -583,6 +591,7 @@ void KinectV2Device::readIniFile()
 			this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
 
 			sensorDataModeStr       = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+			this->sendHandState     = pt.get<bool>       (paramFileKeyKinectV2SendHandState);
 			smoothingTypeStr        = pt.get<std::string>(paramFileKeyKinectV2SmoothingType);
 			smoothingSMANumStr      = pt.get<std::string>(paramFileKeyKinectV2SmoothingSMANum);
 			smoothingWMAWeightStr   = pt.get<std::string>(paramFileKeyKinectV2SmoothingWMAWeight);
@@ -604,6 +613,7 @@ void KinectV2Device::readIniFile()
 	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType        << std::endl;
 	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID    << std::endl;
 	std::cout << paramFileKeyKinectV2SensorDataMode          << ":" << sensorDataModeStr       << std::endl;
+	std::cout << paramFileKeyKinectV2SendHandState           << ":" << this->sendHandState     << std::endl;
 	std::cout << paramFileKeyKinectV2SmoothingType           << ":" << smoothingTypeStr        << std::endl;
 	std::cout << paramFileKeyKinectV2SmoothingSMANum         << ":" << smoothingSMANumStr      << std::endl;
 	std::cout << paramFileKeyKinectV2SmoothingWMAWeight      << ":" << smoothingWMAWeightStr   << std::endl;

@@ -58,7 +58,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SIGSERVICE_120_LIB_DIR)\SIGService;$(BOOST_1_55_0_LIB_DIR);$(KINECTSDK20_DIR)\inc;$(OPENCV_LIB_DIR)\build\include;$(SIGVERSE_BUILD_PATH);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SIGSERVICE_120_LIB_DIR)\SIGService;$(BOOST_1_55_0_LIB_DIR);$(KINECTSDK20_DIR)\inc;$(OPENCV_LIB_DIR)\build\include;$(SolutionDir)..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG_PRINT;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

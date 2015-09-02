@@ -34,17 +34,20 @@ public:
 
 	//Parameter file info (key)
 	static const std::string paramFileKeyKinectV2SensorDataMode;
+	static const std::string paramFileKeyKinectV2SendHandState;
 	static const std::string paramFileKeyKinectV2SmoothingType;
 	static const std::string paramFileKeyKinectV2SmoothingSMANum;
 	static const std::string paramFileKeyKinectV2SmoothingWMAWeight;
 
 	//Parameter file info (default value)
 	static const std::string paramFileValKinectV2SensorDataModeDefault;
+	static const bool        paramFileValKinectV2SendHandStateDefault;
 	static const std::string paramFileValKinectV2SmoothingTypeDefault;
 	static const std::string paramFileValKinectV2SmoothingSMANumDefault;
 	static const std::string paramFileValKinectV2SmoothingWMAWeightDefault;
 
 private:
+	bool sendHandState;
 	SmoothingType smoothingType;
 	int    smoothingSMANum;
 	double smoothingWMAWeight;
@@ -77,6 +80,7 @@ private:
 
 	///@brief Smoothing by Weighted Moving Average. (Only for POSITION mode)
 	KinectV2SensorData smoothingByWMA(const std::vector<KinectV2SensorData> &sensorDataList);
+
 public:
 	KinectV2Device();
 	KinectV2Device(int argc, char **argv);
