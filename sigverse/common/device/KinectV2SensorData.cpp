@@ -2,6 +2,14 @@
 
 KinectV2SensorData::SensorDataMode KinectV2SensorData::sensorDataMode;
 
+///@brief Constructor.
+KinectV2SensorData::KinectV2SensorData()
+{
+	this->leftHandState  = HandState::HandState_NotUsed;
+	this->rightHandState = HandState::HandState_NotUsed;
+}
+
+
 ///@brief Set sensor data mode
 void KinectV2SensorData::setSensorDataMode(std::string sensorDataModeStr)
 {
@@ -87,6 +95,11 @@ std::string KinectV2SensorData::encodeSensorData(const std::string &pairsDelim, 
 				<< jointOrientation2Message(this->jointOrientations[ThumbRight],    keyValueDelim, vectorDelim);
 			break;
 		}
+	}
+
+	if (this->leftHandState!=HandState::HandState_NotUsed && this->rightHandState!=HandState::HandState_NotUsed)
+	{
+		ss << pairsDelim << this->handState2Message(this->leftHandState, this->rightHandState, keyValueDelim, vectorDelim);
 	}
 
 	return(ss.str());
@@ -396,4 +409,34 @@ std::string KinectV2SensorData::jointOrientation2Message(const KinectV2JointOrie
 	return ss.str();
 }
 
+///@brief Hand state (left hand and right hand) to string.
+std::string KinectV2SensorData::handState2Message(const HandState &leftHandState, const HandState &rightHandState, const std::string &keyValueDelim, const std::string &valuesDelim) const
+{
+	std::stringstream ss;
+	ss << MSG_KEY_HAND_STATE << keyValueDelim << leftHandState << valuesDelim << rightHandState;
+	return ss.str();
+}
 
+
+
+///@brief Set hand state of left hand.
+void KinectV2SensorData::setLeftHandState(const HandState &handState)
+{
+	this->leftHandState = handState;
+}
+
+///@brief Set hand state of right hand.
+void KinectV2SensorData::setRightHandState(const HandState &handState)
+{
+	this->rightHandState = handState;
+}
+///@brief Get hand state of left hand.
+KinectV2SensorData::HandState KinectV2SensorData::getLeftHandState() const
+{
+	return this->leftHandState;
+}
+///@brief Get hand state of right hand.
+KinectV2SensorData::HandState KinectV2SensorData::getRightHandState() const
+{
+	return this->rightHandState;
+}

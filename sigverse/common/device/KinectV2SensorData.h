@@ -14,6 +14,7 @@
 #define POSITION_PRECISION 5
 
 #define MSG_KEY_ROOT_P "Root_P"
+#define MSG_KEY_HAND_STATE  "HandState"
 
 
 ///@brief Posture class for using kinect v2 device.
@@ -63,6 +64,15 @@ public:
 		Tracked,
 	};
 
+	enum HandState
+	{
+		HandState_Unknown    = 0,
+		HandState_NotTracked = 1,
+		HandState_Open       = 2,
+		HandState_Closed     = 3,
+		HandState_Lasso      = 4,
+		HandState_NotUsed    = 9
+	};
 
 	typedef struct _KinectV2JointPosition
 	{
@@ -97,7 +107,19 @@ private:
 
 	std::string jointType2ShortJointName(KinectV2JointType e) const;
 
+	///@brief Hand state (left hand and right hand) to string.
+	std::string handState2Message(const HandState &leftHandState, const HandState &rightHandState, const std::string &keyValueDelim, const std::string &valuesDelim) const;
+
+	///@brief Left hand state. (Open, Closed, Lasso, and so on.)
+	HandState leftHandState;
+	///@brief Right hand state. (Open, Closed, Lasso, and so on.)
+	HandState rightHandState;
+
+
 public:
+
+	///@brief Constructor.
+	KinectV2SensorData();
 
 	///@brief Precision of quaternion when send message.
 	static const int orientationPrecision = ORIENTATION_PRECISION;
@@ -135,6 +157,15 @@ public:
 
 	///@brief Get orientations from kinect joint orientations.
 	void getKinectV2JointOrientation(KinectV2JointOrientation *destination) const;
+
+	///@brief Set hand state of left hand.
+	void setLeftHandState(const HandState &handState);
+	///@brief Set hand state of right hand.
+	void setRightHandState(const HandState &handState);
+	///@brief Get hand state of left hand.
+	HandState getLeftHandState() const;
+	///@brief Get hand state of right hand.
+	HandState getRightHandState() const;
 
 	///@brief Set joint quaternions for man-nii avatar.
 	KinectV2JointType shortJointName2KinectV2JointType(const std::string &shortJointName) const;
