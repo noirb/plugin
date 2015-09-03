@@ -147,9 +147,13 @@ bool KinectV2SensorData::setSensorData(const std::map<std::string, std::vector<s
 	{
 		const std::string key = (*it).first;
 
-		if (jointMap.find(key) == jointMap.end()){ continue; }
-
-		if ((*it).first == MSG_KEY_ROOT_P)
+		if(key == MSG_KEY_HAND_STATE)
+		{
+			this->leftHandState  = (HandState)atoi((*it).second[0].c_str());
+			this->rightHandState = (HandState)atoi((*it).second[1].c_str());
+			continue;
+		}
+		else if (key == MSG_KEY_ROOT_P)
 		{
 			SigCmn::Vector3 tmpPosition;
 			tmpPosition.x = (float)atof((*it).second[0].c_str());
@@ -158,9 +162,10 @@ bool KinectV2SensorData::setSensorData(const std::map<std::string, std::vector<s
 			this->rootPosition = tmpPosition;
 			continue;
 		}
-		//std::cout << (*i).first << ":" << (*i).second[0] << "," << (*i).second[1] << "," << (*i).second[2] << "," << (*i).second[3] << ";" << std::endl;
 		else
 		{
+			if (jointMap.find(key) == jointMap.end()){ continue; }
+
 			try
 			{
 				switch (sensorDataMode)
@@ -169,7 +174,7 @@ bool KinectV2SensorData::setSensorData(const std::map<std::string, std::vector<s
 					{
 
 						KinectV2JointPosition tmpJointPosition;
-						tmpJointPosition.jointType     = this->shortJointName2KinectV2JointType((*it).first);
+						tmpJointPosition.jointType     = this->shortJointName2KinectV2JointType(key);
 						tmpJointPosition.position.x    = (float)atof((*it).second[0].c_str());
 						tmpJointPosition.position.y    = (float)atof((*it).second[1].c_str());
 						tmpJointPosition.position.z    = (float)atof((*it).second[2].c_str());
@@ -182,7 +187,7 @@ bool KinectV2SensorData::setSensorData(const std::map<std::string, std::vector<s
 					{
 
 						KinectV2JointOrientation tmpJointOrientation;
-						tmpJointOrientation.jointType = this->shortJointName2KinectV2JointType((*it).first);
+						tmpJointOrientation.jointType = this->shortJointName2KinectV2JointType(key);
 						tmpJointOrientation.orientation.w = (float)atof((*it).second[0].c_str());
 						tmpJointOrientation.orientation.x = (float)atof((*it).second[1].c_str());
 						tmpJointOrientation.orientation.y = (float)atof((*it).second[2].c_str());
