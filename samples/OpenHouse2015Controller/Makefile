@@ -14,7 +14,7 @@ SRCS =\
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/ManNiiAvatarController.cpp \
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/device/KinectV2DeviceManager.cpp \
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/device/OculusDK1DeviceManager.cpp \
-	$(SIGVERSE_BUILD_PATH)/sigverse/controller/OpenHouse2015Controller/OpenHouse2015Controller.cpp \
+	OpenHouse2015Controller.cpp \
 
 # sigverse path
 SIG_SRC = $(SIGVERSE_PATH)/include
