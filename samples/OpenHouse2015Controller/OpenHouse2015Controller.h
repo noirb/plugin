@@ -15,7 +15,9 @@
 #include <sigverse/common/device/OculusRiftDK1SensorData.h>
 #include <sigverse/controller/common/AvatarController.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
-
+#include <sigverse/controller/common/ManNiiAvatarController.h>
+#include <sigverse/controller/common/device/KinectV2DeviceManager.h>
+#include <sigverse/controller/common/device/OculusDK1DeviceManager.h>
 
 class OpenHouse2015Controller : public ManNiiAvatarController
 {
