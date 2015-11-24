@@ -10,11 +10,6 @@
 #define MSG_KEY_DEV_TYPE        "DEV_TYPE"
 #define MSG_KEY_DEV_UNIQUE_ID   "DEV_UNIQUE_ID"
 
-#define DEV_UNIQUE_ID_0     "0"
-#define DEV_UNIQUE_ID_1     "1"
-#define DEV_UNIQUE_ID_2     "2"
-#define DEV_UNIQUE_ID_3     "3"
-
 //Parameter file information
 #define PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME      "General.service_name"
 #define PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE       "General.device_type"
