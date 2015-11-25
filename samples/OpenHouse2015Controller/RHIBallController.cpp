@@ -11,9 +11,6 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include <math.h>
 
-const std::string RHIBallController::mirrorTherapyManName = "mirror_therapy_man";
-
-
 ///@brief Initialize this controller.
 void RHIBallController::onInit(InitEvent &evt)
 {

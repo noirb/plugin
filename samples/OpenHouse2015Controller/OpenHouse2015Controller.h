@@ -7,17 +7,17 @@
 #ifndef SIGVERSE_OPEN_HOUSE_2015_CONTROLLER_H
 #define SIGVERSE_OPEN_HOUSE_2015_CONTROLLER_H
 
-#include <sigverse/Controller.h>
-#include <sigverse/ControllerEvent.h>
-#include <sigverse/comm/controller/Controller.h>
+#include <sigverse/commonlib/Controller.h>
+#include <sigverse/commonlib/ControllerEvent.h>
+#include <sigverse/commonlib/comm/controller/Controller.h>
 
-#include <sigverse/common/device/KinectV2SensorData.h>
-#include <sigverse/common/device/OculusRiftDK1SensorData.h>
 #include <sigverse/controller/common/AvatarController.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
 #include <sigverse/controller/common/ManNiiAvatarController.h>
 #include <sigverse/controller/common/device/KinectV2DeviceManager.h>
 #include <sigverse/controller/common/device/OculusDK1DeviceManager.h>
+#include <sigverse/devicecommon/device/KinectV2SensorData.h>
+#include <sigverse/devicecommon/device/OculusRiftDK1SensorData.h>
 
 class OpenHouse2015Controller : public ManNiiAvatarController
 {
@@ -53,11 +53,7 @@ public:
 	static const std::string paramFileKeyOculusDK1Devicetype;
 	static const std::string paramFileKeyOculusDK1DeviceUniqueID;
 
-	static const std::string paramFileValKinectV2SensorDataModeDefault;
-	static const double      paramFileValKinectV2ScaleRatioDefault;
-
 	static const std::string paramFileKeyChangeAvatarGUIServiceName;
-	static const std::string paramFileValChangeAvatarGUIServiceNameDefault;
 
 	//static param
 	static const std::string msgKeyAvatar;
@@ -142,7 +138,37 @@ public:
 
 	BaseService *guiService;
 	std::string guiServiceName;
-
 };
+
+
+const std::string OpenHouse2015Controller::parameterFileName = "OpenHouse2015.ini";
+
+const std::string OpenHouse2015Controller::paramFileKeyKinectV2ServiceName    = "KinectV2.service_name";
+const std::string OpenHouse2015Controller::paramFileKeyKinectV2Devicetype     = "KinectV2.device_type";
+const std::string OpenHouse2015Controller::paramFileKeyKinectV2DeviceUniqueID = "KinectV2.device_unique_id";
+
+const std::string OpenHouse2015Controller::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
+const std::string OpenHouse2015Controller::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
+
+const std::string OpenHouse2015Controller::paramFileKeyOculusDK1ServiceName   = "OculusDK1.service_name";
+const std::string OpenHouse2015Controller::paramFileKeyOculusDK1Devicetype    = "OculusDK1.device_type";
+const std::string OpenHouse2015Controller::paramFileKeyOculusDK1DeviceUniqueID= "OculusDK1.device_unique_id";
+
+const std::string OpenHouse2015Controller::paramFileKeyChangeAvatarGUIServiceName = "ChangeAvatarGUI.service_name";
+
+const std::string OpenHouse2015Controller::msgKeyAvatar  = "AVATAR";
+const std::string OpenHouse2015Controller::msgKeyReverse = "REVERSE";
+const std::string OpenHouse2015Controller::msgKeyDelay   = "DELAY";
+
+const double OpenHouse2015Controller::defaultDelayTime      = 1000.0;
+const int    OpenHouse2015Controller::timeSeriesBufferSize  = 500;
+
+const std::string OpenHouse2015Controller::reverseModes[ReverseMode_Count] = { "RIGHTHAND", "LEFTHAND", "NOREVERSE" };
+
+const std::string OpenHouse2015Controller::headName             = "man_nii_head";
+const std::string OpenHouse2015Controller::mirrorTherapyManName = "mirror_therapy_man";
+const std::string OpenHouse2015Controller::longArmManName       = "right_arm_long_man";
+const std::string OpenHouse2015Controller::shortArmManName      = "right_arm_short_man";
+const std::string OpenHouse2015Controller::robotArmManName      = "right_arm_robot_man";
 
 #endif // SIGVERSE_OPEN_HOUSE_2015_CONTROLLER_H

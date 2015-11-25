@@ -8,8 +8,8 @@
 #ifndef SIGVERSE_MAN_NII_POSTURE_H
 #define SIGVERSE_MAN_NII_POSTURE_H
 
-#include <sigverse/common/Quaternion.h>
 #include <sigverse/controller/common/Posture.h>
+#include <sigverse/devicecommon/Quaternion.h>
 #include <string>
 #include <sstream>
 

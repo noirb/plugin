@@ -7,14 +7,13 @@
 #ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
 #define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
 
-#include <sigverse/Controller.h>
-#include <sigverse/ControllerEvent.h>
-
-#include <sigverse/common/device/OculusRiftDK1SensorData.h>
+#include <sigverse/commonlib/Controller.h>
+#include <sigverse/commonlib/ControllerEvent.h>
 
 #include <sigverse/controller/common/device/OculusDK1DeviceManager.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
 #include <sigverse/controller/common/ManNiiAvatarController.h>
+#include <sigverse/devicecommon/device/OculusRiftDK1SensorData.h>
 
 
 class ManNiiAvatarControllerByOculusDK1 : public ManNiiAvatarController
@@ -38,5 +37,8 @@ public:
 
 	ManNiiPosture posture;
 };
+
+///@brief Parameter file name.
+const std::string ManNiiAvatarControllerByOculusDK1::parameterFileName = "OculusRiftDK1.ini";
 
 #endif // SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H

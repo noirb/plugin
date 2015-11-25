@@ -5,23 +5,12 @@
  *      Author: Nozaki
  */
 
-#include <sigverse/common/device/SensorData.h>
-#include "ManNiiAvatarControllerByKinectV2.h"
-
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
+#include <samples/ManNiiAvatarControllerByKinectV2/ManNiiAvatarControllerByKinectV2.h>
+#include <sigverse/devicecommon/device/SensorData.h>
 #include <cmath>
-
-///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByKinectV2::parameterFileName = "KinectV2.ini";
-
-//Parameter file information
-const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
-const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
-
-const std::string ManNiiAvatarControllerByKinectV2::paramFileValKinectV2SensorDataModeDefault = "QUATERNION";
-const double      ManNiiAvatarControllerByKinectV2::paramFileValKinectV2ScaleRatioDefault     = 10000.0;
 
 ///@brief Initialize this controller.
 void ManNiiAvatarControllerByKinectV2::onInit(InitEvent &evt)
@@ -76,14 +65,6 @@ void ManNiiAvatarControllerByKinectV2::onRecvMsg(RecvMsgEvent &evt)
 		this->kinectV2DeviceManager.setRootPosition(obj, sensorData.rootPosition);
 		KinectV2DeviceManager::setJointQuaternions2ManNii(obj, posture, sensorData);
 	}
-	catch(SimObj::NoAttributeException &err)
-	{
-		LOG_MSG(("NoAttributeException: %s", err.msg()));
-	}
-	catch(SimObj::AttributeReadOnlyException &err)
-	{
-		LOG_MSG(("AttributeReadOnlyException: %s", err.msg()));
-	}
 	catch(SimObj::Exception &err)
 	{
 		LOG_MSG(("Exception: %s", err.msg()));
@@ -111,35 +92,25 @@ void ManNiiAvatarControllerByKinectV2::readIniFileAndInitialize()
 	if (ifs.fail())
 	{
 		std::cout << "Not exist : " << parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		serviceName    = SERVICE_NAME_KINECT_V2;
-		deviceType     = DEV_TYPE_KINECT_V2;
-		deviceUniqueID = DEV_UNIQUE_ID_0;
-
-		scaleRatio        = paramFileValKinectV2ScaleRatioDefault;
-		sensorDataModeStr = paramFileValKinectV2SensorDataModeDefault;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else
+	try
 	{
-		try
-		{
-			std::cout << "Read " << parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(parameterFileName, pt);
+		std::cout << "Read " << parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(parameterFileName, pt);
 
-			serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+		serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
 
-			scaleRatio        = pt.get<double>(paramFileKeyKinectV2ScaleRatio);
-			sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
-		}
-		catch (boost::exception &ex)
-		{
-			std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		scaleRatio        = pt.get<double>(paramFileKeyKinectV2ScaleRatio);
+		sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+	}
+	catch (boost::exception &ex)
+	{
+		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;

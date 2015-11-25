@@ -5,16 +5,12 @@
  *      Author: Nozaki
  */
 
-#include <sigverse/common/SigCmn.h>
 #include "ManNiiAvatarControllerByOptiTrack.h"
 #include <math.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-
-
-///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByOptiTrack::parameterFileName = "OptiTrack.ini";
+#include <sigverse/devicecommon/SigCmn.h>
 
 
 ///@brief Initialize this controller.
@@ -104,29 +100,22 @@ void ManNiiAvatarControllerByOptiTrack::readIniFileAndInitialize()
 	if (ifs.fail())
 	{
 		std::cout << "Not exist : " << parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		serviceName    = SERVICE_NAME_OPTITRACK;
-		deviceType     = DEV_TYPE_OPTITRACK;
-		deviceUniqueID = DEV_UNIQUE_ID_0;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else
+	try
 	{
-		try
-		{
-			std::cout << "Read " << parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(parameterFileName, pt);
+		std::cout << "Read " << parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(parameterFileName, pt);
 
-			serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-		}
-		catch (boost::exception &ex)
-		{
-			std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+	}
+	catch (boost::exception &ex)
+	{
+		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;

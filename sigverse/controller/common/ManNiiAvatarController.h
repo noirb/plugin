@@ -8,9 +8,9 @@
 #ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_H
 #define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_H
 
-#include <sigverse/common/SigCmn.h>
 #include <sigverse/controller/common/Posture.h>
 #include <sigverse/controller/common/AvatarController.h>
+#include <sigverse/devicecommon/SigCmn.h>
 #include <iostream>
 #include <sstream>
 #include <string>

@@ -7,11 +7,11 @@
 #ifndef SIGVERSE_OCULUS_DK1_DEVICE_MANAGER_H
 #define SIGVERSE_OCULUS_DK1_DEVICE_MANAGER_H
 
-#include <sigverse/SimObj.h>
-#include <sigverse/ControllerImpl.h>
+#include <sigverse/commonlib/SimObj.h>
+#include <sigverse/commonlib/ControllerImpl.h>
 
-#include <sigverse/common/device/SensorData.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
+#include <sigverse/devicecommon/device/SensorData.h>
 
 class OculusDK1DeviceManager
 {

@@ -7,12 +7,12 @@
 #ifndef SIGVERSE_OPTITRACK_DEVICE_MANAGER_H
 #define SIGVERSE_OPTITRACK_DEVICE_MANAGER_H
 
-#include <sigverse/SimObj.h>
-#include <sigverse/ControllerImpl.h>
+#include <sigverse/commonlib/SimObj.h>
+#include <sigverse/commonlib/ControllerImpl.h>
 
-#include <sigverse/common/device/SensorData.h>
-#include <sigverse/common/device/OptiTrackSensorData.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
+#include <sigverse/devicecommon/device/OptiTrackSensorData.h>
+#include <sigverse/devicecommon/device/SensorData.h>
 
 class OptiTrackDeviceManager
 {

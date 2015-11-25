@@ -7,13 +7,13 @@
 #ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H
 #define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H
 
-#include <sigverse/Controller.h>
-#include <sigverse/ControllerEvent.h>
+#include <sigverse/commonlib/Controller.h>
+#include <sigverse/commonlib/ControllerEvent.h>
 
-#include <sigverse/common/device/OptiTrackSensorData.h>
 #include <sigverse/controller/common/device/OptiTrackDeviceManager.h>
 #include <sigverse/controller/common/ManNiiAvatarController.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
+#include <sigverse/devicecommon/device/OptiTrackSensorData.h>
 
 
 class ManNiiAvatarControllerByOptiTrack : public ManNiiAvatarController
@@ -42,5 +42,9 @@ public:
 
 	ManNiiPosture posture;
 };
+
+
+///@brief Parameter file name.
+const std::string ManNiiAvatarControllerByOptiTrack::parameterFileName = "OptiTrack.ini";
 
 #endif // SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H

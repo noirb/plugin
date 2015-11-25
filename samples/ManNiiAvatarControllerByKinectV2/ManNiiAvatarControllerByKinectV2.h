@@ -7,13 +7,13 @@
 #ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H
 #define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H
 
-#include <sigverse/Controller.h>
-#include <sigverse/ControllerEvent.h>
+#include <sigverse/commonlib/Controller.h>
+#include <sigverse/commonlib/ControllerEvent.h>
 
-#include <sigverse/common/device/KinectV2SensorData.h>
 #include <sigverse/controller/common/ManNiiAvatarController.h>
 #include <sigverse/controller/common/ManNiiPosture.h>
 #include <sigverse/controller/common/device/KinectV2DeviceManager.h>
+#include <sigverse/devicecommon/device/KinectV2SensorData.h>
 
 
 class ManNiiAvatarControllerByKinectV2 : public ManNiiAvatarController
@@ -25,8 +25,6 @@ public:
 	//Parameter file information
 	static const std::string paramFileKeyKinectV2SensorDataMode;
 	static const std::string paramFileKeyKinectV2ScaleRatio;
-	static const std::string paramFileValKinectV2SensorDataModeDefault;
-	static const double      paramFileValKinectV2ScaleRatioDefault;
 
 	///@brief Movement of the robot.
 	double onAction(ActionEvent &evt);
@@ -41,5 +39,12 @@ public:
 
 	KinectV2DeviceManager kinectV2DeviceManager;
 };
+
+///@brief Parameter file name.
+const std::string ManNiiAvatarControllerByKinectV2::parameterFileName = "KinectV2.ini";
+
+//Parameter file information
+const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
+const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
 
 #endif //__MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H

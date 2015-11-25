@@ -8,7 +8,7 @@
 #ifndef SIGVERSE_AVATAR_CONTROLLER_H
 #define SIGVERSE_AVATAR_CONTROLLER_H
 
-#include <sigverse/Controller.h>
+#include <sigverse/commonlib/Controller.h>
 
 #include <sigverse/controller/common/Posture.h>
 

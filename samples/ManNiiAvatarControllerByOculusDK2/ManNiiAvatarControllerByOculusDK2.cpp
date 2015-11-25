@@ -5,16 +5,12 @@
  *      Author: Wada
  */
 
-#include <sigverse/common/device/OculusRiftDK2SensorData.h>
 #include "ManNiiAvatarControllerByOculusDK2.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
+#include <sigverse/devicecommon/device/OculusRiftDK2SensorData.h>
 #include <cmath>
-
-///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByOculusDK2::parameterFileName = "OculusRiftDK2.ini";
-
 
 ///@brief Initialize this controller.
 void ManNiiAvatarControllerByOculusDK2::onInit(InitEvent &evt)
@@ -81,29 +77,22 @@ void ManNiiAvatarControllerByOculusDK2::readIniFileAndInitialize()
 	if (ifs.fail())
 	{
 		std::cout << "Not exist : " << parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		serviceName    = SERVICE_NAME_OCULUS_DK2;
-		deviceType     = DEV_TYPE_OCULUS_DK2;
-		deviceUniqueID = DEV_UNIQUE_ID_0;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else
+	try
 	{
-		try
-		{
-			std::cout << "Read " << parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(parameterFileName, pt);
+		std::cout << "Read " << parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(parameterFileName, pt);
 
-			serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-		}
-		catch (boost::exception &ex)
-		{
-			std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+	}
+	catch (boost::exception &ex)
+	{
+		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;

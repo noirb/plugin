@@ -5,7 +5,6 @@
  *      Author: Yamada@tome
  */
 
-#include <sigverse/common/device/SensorData.h>
 #include "OpenHouse2015Controller.h"
 
 
@@ -14,41 +13,7 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <math.h>
-
-
-const std::string OpenHouse2015Controller::parameterFileName = "OpenHouse2015.ini";
-
-const std::string OpenHouse2015Controller::paramFileKeyKinectV2ServiceName    = "KinectV2.service_name";
-const std::string OpenHouse2015Controller::paramFileKeyKinectV2Devicetype     = "KinectV2.device_type";
-const std::string OpenHouse2015Controller::paramFileKeyKinectV2DeviceUniqueID = "KinectV2.device_unique_id";
-
-const std::string OpenHouse2015Controller::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
-const std::string OpenHouse2015Controller::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
-
-const std::string OpenHouse2015Controller::paramFileKeyOculusDK1ServiceName   = "OculusDK1.service_name";
-const std::string OpenHouse2015Controller::paramFileKeyOculusDK1Devicetype    = "OculusDK1.device_type";
-const std::string OpenHouse2015Controller::paramFileKeyOculusDK1DeviceUniqueID= "OculusDK1.device_unique_id";
-
-const std::string OpenHouse2015Controller::paramFileValKinectV2SensorDataModeDefault = "QUATERNION";
-const double      OpenHouse2015Controller::paramFileValKinectV2ScaleRatioDefault     = 10000.0;
-
-const std::string OpenHouse2015Controller::paramFileKeyChangeAvatarGUIServiceName        = "ChangeAvatarGUI.service_name";
-const std::string OpenHouse2015Controller::paramFileValChangeAvatarGUIServiceNameDefault = "SVC_CHANGE_AVATAR_GUI";
-
-const std::string OpenHouse2015Controller::msgKeyAvatar  = "AVATAR";
-const std::string OpenHouse2015Controller::msgKeyReverse = "REVERSE";
-const std::string OpenHouse2015Controller::msgKeyDelay   = "DELAY";
-
-const double OpenHouse2015Controller::defaultDelayTime      = 1000.0;
-const int    OpenHouse2015Controller::timeSeriesBufferSize  = 500;
-
-const std::string OpenHouse2015Controller::reverseModes[ReverseMode_Count] = { "RIGHTHAND", "LEFTHAND", "NOREVERSE" };
-
-const std::string OpenHouse2015Controller::headName             = "man_nii_head";
-const std::string OpenHouse2015Controller::mirrorTherapyManName = "mirror_therapy_man";
-const std::string OpenHouse2015Controller::longArmManName       = "right_arm_long_man";
-const std::string OpenHouse2015Controller::shortArmManName      = "right_arm_short_man";
-const std::string OpenHouse2015Controller::robotArmManName      = "right_arm_robot_man";
+#include <sigverse/devicecommon/device/SensorData.h>
 
 
 ///@brief Initialize this controller.
@@ -398,47 +363,31 @@ void OpenHouse2015Controller::readIniFileAndInitialize()
 	if (ifs.fail())
 	{
 		std::cout << "Not exist : " << parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		kinectV2ServiceName    = SERVICE_NAME_KINECT_V2;
-		kinectV2DeviceType     = DEV_TYPE_KINECT_V2;
-		kinectV2DeviceUniqueID = DEV_UNIQUE_ID_0;
-
-		sensorDataModeStr = paramFileValKinectV2SensorDataModeDefault;
-		scaleRatio        = paramFileValKinectV2ScaleRatioDefault;
-
-		oculusDK1ServiceName    = SERVICE_NAME_OCULUS_DK1;
-		oculusDK1DeviceType     = DEV_TYPE_OCULUS_DK1;
-		oculusDK1DeviceUniqueID = DEV_UNIQUE_ID_0;
-
-		this->guiServiceName = paramFileValChangeAvatarGUIServiceNameDefault;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else
+	try
 	{
-		try
-		{
-			std::cout << "Read " << parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(parameterFileName, pt);
+		std::cout << "Read " << parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(parameterFileName, pt);
 
-			kinectV2ServiceName    = pt.get<std::string>(paramFileKeyKinectV2ServiceName);
-			kinectV2DeviceType     = pt.get<std::string>(paramFileKeyKinectV2Devicetype);
-			kinectV2DeviceUniqueID = pt.get<std::string>(paramFileKeyKinectV2DeviceUniqueID);
+		kinectV2ServiceName    = pt.get<std::string>(paramFileKeyKinectV2ServiceName);
+		kinectV2DeviceType     = pt.get<std::string>(paramFileKeyKinectV2Devicetype);
+		kinectV2DeviceUniqueID = pt.get<std::string>(paramFileKeyKinectV2DeviceUniqueID);
 
-			sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
-			scaleRatio        = pt.get<double>     (paramFileKeyKinectV2ScaleRatio);
+		sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+		scaleRatio        = pt.get<double>     (paramFileKeyKinectV2ScaleRatio);
 
-			oculusDK1ServiceName    = pt.get<std::string>(paramFileKeyOculusDK1ServiceName);
-			oculusDK1DeviceType     = pt.get<std::string>(paramFileKeyOculusDK1Devicetype);
-			oculusDK1DeviceUniqueID = pt.get<std::string>(paramFileKeyOculusDK1DeviceUniqueID);
+		oculusDK1ServiceName    = pt.get<std::string>(paramFileKeyOculusDK1ServiceName);
+		oculusDK1DeviceType     = pt.get<std::string>(paramFileKeyOculusDK1Devicetype);
+		oculusDK1DeviceUniqueID = pt.get<std::string>(paramFileKeyOculusDK1DeviceUniqueID);
 
-			this->guiServiceName = pt.get<std::string>(paramFileKeyChangeAvatarGUIServiceName);
-		}
-		catch (boost::exception &ex)
-		{
-			std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		this->guiServiceName = pt.get<std::string>(paramFileKeyChangeAvatarGUIServiceName);
+	}
+	catch (boost::exception &ex)
+	{
+		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << paramFileKeyKinectV2ServiceName    << ":" << kinectV2ServiceName    << std::endl;

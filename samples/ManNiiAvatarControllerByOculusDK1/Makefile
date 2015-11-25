@@ -3,10 +3,10 @@ TARGET = ./ManNiiAvatarControllerByOculusDK1.so
 
 # sources
 SRCS =\
-	$(SIGVERSE_BUILD_PATH)/sigverse/common/SigCmn.cpp \
-	$(SIGVERSE_BUILD_PATH)/sigverse/common/Quaternion.cpp \
-	$(SIGVERSE_BUILD_PATH)/sigverse/common/device/SensorData.cpp \
-	$(SIGVERSE_BUILD_PATH)/sigverse/common/device/OculusRiftDK1SensorData.cpp \
+	$(SIGVERSE_BUILD_PATH)/sigverse/devicecommon/SigCmn.cpp \
+	$(SIGVERSE_BUILD_PATH)/sigverse/devicecommon/Quaternion.cpp \
+	$(SIGVERSE_BUILD_PATH)/sigverse/devicecommon/device/SensorData.cpp \
+	$(SIGVERSE_BUILD_PATH)/sigverse/devicecommon/device/OculusRiftDK1SensorData.cpp \
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/Posture.cpp \
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/ManNiiPosture.cpp \
 	$(SIGVERSE_BUILD_PATH)/sigverse/controller/common/AvatarController.cpp \

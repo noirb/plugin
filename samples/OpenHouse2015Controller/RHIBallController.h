@@ -7,9 +7,9 @@
 #ifndef SIGVERSE_RHI_BALL_CONTROLLER_H
 #define SIGVERSE_RHI_BALL_CONTROLLER_H
 
-#include <sigverse/Controller.h>
-#include <sigverse/ControllerEvent.h>
-#include <sigverse/comm/controller/Controller.h>
+#include <sigverse/commonlib/Controller.h>
+#include <sigverse/commonlib/ControllerEvent.h>
+#include <sigverse/commonlib/comm/controller/Controller.h>
 
 
 class RHIBallController : public Controller
@@ -36,5 +36,8 @@ private :
 	double zOffset;
 	double totalTime;
 };
+
+const std::string RHIBallController::mirrorTherapyManName = "mirror_therapy_man";
+
 
 #endif // SIGVERSE_RHI_BALL_CONTROLLER_H
