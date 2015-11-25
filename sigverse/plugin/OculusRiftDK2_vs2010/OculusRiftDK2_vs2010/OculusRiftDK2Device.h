@@ -1,9 +1,8 @@
 #pragma once
 #include <SIGService.h>
 #include <sigverse\plugin\common\Device.h>
-#include "Kernel/OVR_Math.h"
+#include "OVR.h"
 #include <d3d11.h>
-#include "OVR_CAPI.h"
 #include <conio.h>
 #include <iostream>
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <SIGService.h>
-#include <sigverse/common/device/KinectV2SensorData.h>
+#include <sigverse/devicecommon/device/KinectV2SensorData.h>
 #include <sigverse/plugin/common/Device.h>
 #include <Kinect.h>
 #include <opencv2/opencv.hpp>
@@ -38,13 +38,6 @@ public:
 	static const std::string paramFileKeyKinectV2SmoothingType;
 	static const std::string paramFileKeyKinectV2SmoothingSMANum;
 	static const std::string paramFileKeyKinectV2SmoothingWMAWeight;
-
-	//Parameter file info (default value)
-	static const std::string paramFileValKinectV2SensorDataModeDefault;
-	static const bool        paramFileValKinectV2SendHandStateDefault;
-	static const std::string paramFileValKinectV2SmoothingTypeDefault;
-	static const std::string paramFileValKinectV2SmoothingSMANumDefault;
-	static const std::string paramFileValKinectV2SmoothingWMAWeightDefault;
 
 private:
 	bool sendHandState;

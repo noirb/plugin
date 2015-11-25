@@ -1,4 +1,4 @@
-#include <sigverse/common/device/OptiTrackSensorData.h>
+#include <sigverse/devicecommon/device/OptiTrackSensorData.h>
 #include <sigverse/plugin/common/CheckRecvSIGServiceData.h>
 #include <sigverse/plugin/OptiTrack_vs2010/OptiTrack_vs2010/OptiTrackDevice.h>
 
@@ -373,29 +373,22 @@ void OptiTrackDevice::readIniFile()
 	if (ifs.fail()) 
 	{
 		std::cout << "Not exist : " << this->parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		this->serviceName    = SERVICE_NAME_OPTITRACK;
-		this->deviceType     = DEV_TYPE_OPTITRACK;
-		this->deviceUniqueID = DEV_UNIQUE_ID_0;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else 
+	try 
 	{
-		try 
-		{
-			std::cout << "Read " << this->parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(this->parameterFileName, pt);
+		std::cout << "Read " << this->parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(this->parameterFileName, pt);
 
-			this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-		}
-		catch (boost::exception &ex) 
-		{
-			std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+	}
+	catch (boost::exception &ex) 
+	{
+		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << this->serviceName    << std::endl;

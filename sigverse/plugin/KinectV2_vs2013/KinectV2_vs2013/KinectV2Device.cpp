@@ -21,12 +21,6 @@ const std::string KinectV2Device::paramFileKeyKinectV2SmoothingType         = "K
 const std::string KinectV2Device::paramFileKeyKinectV2SmoothingSMANum       = "KinectV2.smoothing_sma_num";
 const std::string KinectV2Device::paramFileKeyKinectV2SmoothingWMAWeight    = "KinectV2.smoothing_wma_weight";
 
-const std::string KinectV2Device::paramFileValKinectV2SensorDataModeDefault     = "QUATERNION";
-const bool        KinectV2Device::paramFileValKinectV2SendHandStateDefault      = true;
-const std::string KinectV2Device::paramFileValKinectV2SmoothingTypeDefault      = "NONE";
-const std::string KinectV2Device::paramFileValKinectV2SmoothingSMANumDefault    = "3";
-const std::string KinectV2Device::paramFileValKinectV2SmoothingWMAWeightDefault = "0,8";
-
 
 ///@brief Default Constructor
 KinectV2Device::KinectV2Device()
@@ -559,53 +553,46 @@ void KinectV2Device::readIniFile()
 {
 	std::ifstream ifs(this->parameterFileName.c_str());
 
-	this->serviceName    = SERVICE_NAME_KINECT_V2;
-	this->deviceType     = DEV_TYPE_KINECT_V2;
-	this->deviceUniqueID = DEV_UNIQUE_ID_0;
-	
-	std::string sensorDataModeStr    = paramFileValKinectV2SensorDataModeDefault;
-	this->sendHandState              = paramFileValKinectV2SendHandStateDefault;
-	std::string smoothingTypeStr     = paramFileValKinectV2SmoothingTypeDefault;
-	std::string smoothingSMANumStr   = paramFileValKinectV2SmoothingSMANumDefault;
-	std::string smoothingWMAWeightStr= paramFileValKinectV2SmoothingWMAWeightDefault;
+	std::string sensorDataModeStr;
+	this->sendHandState;
+	std::string smoothingTypeStr;
+	std::string smoothingSMANumStr;
+	std::string smoothingWMAWeightStr;
 
 
 	// Parameter file is "not" exists.
 	if (ifs.fail()) 
 	{
 		std::cout << "Not exist : " << this->parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else 
+	try 
 	{
-		try 
-		{
-			std::cout << "Read " << this->parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(this->parameterFileName, pt);
+		std::cout << "Read " << this->parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(this->parameterFileName, pt);
 
 
-			this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+		this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
 
-			sensorDataModeStr       = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
-			this->sendHandState     = pt.get<bool>       (paramFileKeyKinectV2SendHandState);
-			smoothingTypeStr        = pt.get<std::string>(paramFileKeyKinectV2SmoothingType);
-			smoothingSMANumStr      = pt.get<std::string>(paramFileKeyKinectV2SmoothingSMANum);
-			smoothingWMAWeightStr   = pt.get<std::string>(paramFileKeyKinectV2SmoothingWMAWeight);
-		}
-		catch (std::string &ex)
-		{
-			std::cout << ex << std::endl;
-			exit(EXIT_FAILURE);
-		}
-		catch (boost::exception &ex) 
-		{
-			std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-			exit(EXIT_FAILURE);
-		}
+		sensorDataModeStr       = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+		this->sendHandState     = pt.get<bool>       (paramFileKeyKinectV2SendHandState);
+		smoothingTypeStr        = pt.get<std::string>(paramFileKeyKinectV2SmoothingType);
+		smoothingSMANumStr      = pt.get<std::string>(paramFileKeyKinectV2SmoothingSMANum);
+		smoothingWMAWeightStr   = pt.get<std::string>(paramFileKeyKinectV2SmoothingWMAWeight);
+	}
+	catch (std::string &ex)
+	{
+		std::cout << ex << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	catch (boost::exception &ex) 
+	{
+		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		exit(EXIT_FAILURE);
 	}
 
 	

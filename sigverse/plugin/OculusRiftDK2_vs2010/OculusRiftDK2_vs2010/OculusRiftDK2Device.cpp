@@ -1,5 +1,5 @@
 #include <sigverse/plugin/OculusRiftDK2_vs2010/OculusRiftDK2_vs2010/OculusRiftDK2Device.h>
-#include <sigverse/common/device/OculusRiftDK2SensorData.h>
+#include <sigverse/devicecommon/device/OculusRiftDK2SensorData.h>
 #include <sigverse/plugin/common/CheckRecvSIGServiceData.h>
 #include <Windows.h>
 #include <boost/thread.hpp>
@@ -16,8 +16,6 @@ OculusRiftDK2Device::OculusRiftDK2Device(int argc, char **argv)
 		this->sendMessageFlag = true;
 		this->serverAddress = argv[1];
 		this->portNumber = atoi(argv[2]);
-		this->setDeviceType(DEV_TYPE_OCULUS_DK2);
-		this->setDeviceUniqueID(DEV_UNIQUE_ID_0);
 	}
 	else {
 		std::cout << "Please execute with SIGServer address and port number." << std::endl;
@@ -145,29 +143,22 @@ void OculusRiftDK2Device::readIniFile()
 	if (ifs.fail())
 	{
 		std::cout << "Not exist : " << this->parameterFileName << std::endl;
-		std::cout << "Use default parameter." << std::endl;
-
-		this->serviceName = SERVICE_NAME_OCULUS_DK2;
-		this->deviceType = DEV_TYPE_OCULUS_DK2;
-		this->deviceUniqueID = DEV_UNIQUE_ID_0;
+		exit(-1);
 	}
 	// Parameter file is exists.
-	else
+	try
 	{
-		try
-		{
-			std::cout << "Read " << this->parameterFileName << std::endl;
-			boost::property_tree::ptree pt;
-			boost::property_tree::read_ini(this->parameterFileName, pt);
+		std::cout << "Read " << this->parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(this->parameterFileName, pt);
 
-			this->serviceName = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-			this->deviceType = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-			this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-		}
-		catch (boost::exception &ex)
-		{
-			std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		}
+		this->serviceName = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		this->deviceType = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+	}
+	catch (boost::exception &ex)
+	{
+		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 	}
 
 	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME << ":" << this->serviceName << std::endl;

@@ -24,19 +24,19 @@
     <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\DeviceCommon.h">
+    <ClInclude Include="..\..\..\devicecommon\device\DeviceCommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\KinectV2SensorData.h">
+    <ClInclude Include="..\..\..\devicecommon\device\KinectV2SensorData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\SensorData.h">
+    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\Quaternion.h">
+    <ClInclude Include="..\..\..\devicecommon\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\SigCmn.h">
+    <ClInclude Include="..\..\..\devicecommon\SigCmn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,16 +53,16 @@
     <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\KinectV2SensorData.cpp">
+    <ClCompile Include="..\..\..\devicecommon\device\KinectV2SensorData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\SensorData.cpp">
+    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\Quaternion.cpp">
+    <ClCompile Include="..\..\..\devicecommon\Quaternion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\SigCmn.cpp">
+    <ClCompile Include="..\..\..\devicecommon\SigCmn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

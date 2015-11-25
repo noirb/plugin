@@ -58,39 +58,39 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SIGSERVICE_120_LIB_DIR)\SIGService;$(BOOST_1_55_0_LIB_DIR);$(KINECTSDK20_DIR)\inc;$(OPENCV_LIB_DIR)\build\include;$(SolutionDir)..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\;$(KINECTSDK20_DIR)\inc;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\opencv_2.4.10\build\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG_PRINT;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SIGSERVICE_120_LIB_DIR)\Release_2013;$(BOOST_1_55_0_LIB_DIR)\lib32-msvc-12.0;$(OPENCV_LIB_DIR)\build\x86\vc12\lib;$(KINECTSDK20_DIR)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(KINECTSDK20_DIR)\Lib\x86;C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-12.0;C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\lib;C:\SIGVerse\GitHub\SIGService\Windows\Release_2013;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SIGService.lib;kinect20.lib;opencv_highgui2410.lib;opencv_core2410.lib;opencv_imgproc2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy ".\KinectV2.ini" "..\Release"
-copy "$(OPENCV_LIB_DIR)\build\x86\vc12\bin\opencv_core2410.dll" "..\Release"
-copy "$(OPENCV_LIB_DIR)\build\x86\vc12\bin\opencv_highgui2410.dll" "..\Release"
-copy "$(OPENCV_LIB_DIR)\build\x86\vc12\bin\opencv_imgproc2410.dll" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_core2410.dll" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_highgui2410.dll" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_imgproc2410.dll" "..\Release"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\common\device\DeviceCommon.h" />
-    <ClInclude Include="..\..\..\common\device\KinectV2SensorData.h" />
-    <ClInclude Include="..\..\..\common\device\SensorData.h" />
-    <ClInclude Include="..\..\..\Common\Quaternion.h" />
-    <ClInclude Include="..\..\..\Common\SigCmn.h" />
+    <ClInclude Include="..\..\..\devicecommon\device\DeviceCommon.h" />
+    <ClInclude Include="..\..\..\devicecommon\device\KinectV2SensorData.h" />
+    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h" />
+    <ClInclude Include="..\..\..\devicecommon\Quaternion.h" />
+    <ClInclude Include="..\..\..\devicecommon\SigCmn.h" />
     <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h" />
     <ClInclude Include="..\..\common\Device.h" />
     <ClInclude Include="KinectV2Device.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Common\device\KinectV2SensorData.cpp" />
-    <ClCompile Include="..\..\..\Common\device\SensorData.cpp" />
-    <ClCompile Include="..\..\..\Common\Quaternion.cpp" />
-    <ClCompile Include="..\..\..\Common\SigCmn.cpp" />
+    <ClCompile Include="..\..\..\devicecommon\device\KinectV2SensorData.cpp" />
+    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp" />
+    <ClCompile Include="..\..\..\devicecommon\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\devicecommon\SigCmn.cpp" />
     <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp" />
     <ClCompile Include="..\..\common\Device.cpp" />
     <ClCompile Include="KinectV2Device.cpp" />

@@ -24,10 +24,10 @@
     <ClCompile Include="..\..\common\Device.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\OculusRiftDK1SensorData.cpp">
+    <ClCompile Include="..\..\..\devicecommon\device\OculusRiftDK1SensorData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\SensorData.cpp">
+    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp">
@@ -41,17 +41,20 @@
     <ClInclude Include="..\..\common\Device.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\OculusRiftDK1SensorData.h">
+    <ClInclude Include="..\..\..\devicecommon\device\OculusRiftDK1SensorData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\SensorData.h">
+    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\DeviceCommon.h">
+    <ClInclude Include="..\..\..\devicecommon\device\DeviceCommon.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OculusRiftDK1.ini" />
   </ItemGroup>
 </Project>
