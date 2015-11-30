@@ -1,19 +1,35 @@
-Plugin
------------------
+(1) controller
+--------------
+コントローラのソースコードのディレクトリです。  
 
-Plugin �́A��� Windows �� PC �ɐڑ������f�o�C�X�̏��� SIGServer �� Controller �֑��M����@�\�������܂��B  
+(2) plugin
+----------
+サービスプロバイダのソースコードのディレクトリです。
+実装したサービスプロバイダの機能は次のようなものです。
 
-KinectV2_vs2013
------------------
+(3) common
+----------
+ControllerとPluginの両方に必要なソースコードのディレクトリです。  
+SensorDataクラスの実装が含まれています。  
+注意点などを次に列挙します。
 
-KinectV2 ���瓾������i�S�g�̃N�H�[�^�j�I���j�� Controller �֑��M����v���O�����̃\�[�X�R�[�h���A  
-VisualStudio2013 �̃v���W�F�N�g�`���Ŋi�[���Ă��܂��B  
-�v���W�F�N�g�̃r���h��ɂ́A���f�B���N�g������ Release �f�B���N�g���� KinectV2_vs2013.sig ����������܂��B  
+* Windows と Ubuntu の両方で使用する。
+* 実装には boost が含まれているので、ソースコードのビルドのために boost をインストールする必要がある。
+* Ubuntu への boost のインストール例（端末で打つコマンド）を次に示す。
 
-OculusRiftDK1_vs2010
------------------
+` sudo apt-get install boost-all-dev`
 
-OculusRiftDK1 ���瓾������iOculus�̎p���F��̃I�C���[�p�j�� Controller �֑��M����v���O�����̃\�[�X�R�[�h���A  
-Visual C++ 2010 �̃v���W�F�N�g�`���Ŋi�[���Ă��܂��B  
-�v���W�F�N�g�̃r���h��ɂ́A���f�B���N�g������ Release/Debug �f�B���N�g���� OculusRiftDK1_vs2010.sig ����������܂��B  
+(4) controller/common
+----------
+Controller で共通する機能を持つクラスを実装したソースコードを格納しています。
+
+* AvatarController クラスの実装が含まれています。
+ * 上記3つのControllerは、AvatarController クラスを継承しています。
+* Posture クラスの実装が含まれています。
+* Posture クラスを継承する ManNiiPosture クラスの実装が含まれています。
+ * man-nii の姿勢の情報は、 ManNiiPosture クラスで扱います。
+
+(5) plugin/common
+----------
+Plugin に共通する機能（クラス）を実装しているプログラムのソースコードを格納しています。  
 
