@@ -74,7 +74,7 @@ public:
 	static const std::string reverseModes[ReverseMode_Count];
 
 	static const std::string headName;
-	static const std::string mirrorTherapyManName;
+	static const std::string middleArmManName;
 	static const std::string longArmManName;
 	static const std::string shortArmManName;
 	static const std::string robotArmManName;
@@ -166,7 +166,7 @@ const int    OpenHouse2015Controller::timeSeriesBufferSize  = 500;
 const std::string OpenHouse2015Controller::reverseModes[ReverseMode_Count] = { "RIGHTHAND", "LEFTHAND", "NOREVERSE" };
 
 const std::string OpenHouse2015Controller::headName             = "man_nii_head";
-const std::string OpenHouse2015Controller::mirrorTherapyManName = "mirror_therapy_man";
+const std::string OpenHouse2015Controller::middleArmManName = "mirror_therapy_man";
 const std::string OpenHouse2015Controller::longArmManName       = "right_arm_long_man";
 const std::string OpenHouse2015Controller::shortArmManName      = "right_arm_short_man";
 const std::string OpenHouse2015Controller::robotArmManName      = "right_arm_robot_man";

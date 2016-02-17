@@ -37,7 +37,7 @@ void OpenHouse2015Controller::onInit(InitEvent &evt)
 		this->isHead = true;
 	}
 	//Set default avatar
-	this->bodyAvatarName = this->mirrorTherapyManName;
+	this->bodyAvatarName = this->middleArmManName;
 
 	this->guiService = NULL;
 }
@@ -107,10 +107,10 @@ void OpenHouse2015Controller::onRecvMsg(RecvMsgEvent &evt)
 		{
 			if(this->isHead)
 			{
-				sendMsg(this->mirrorTherapyManName, allMsg);
-				sendMsg(this->longArmManName,       allMsg);
-				sendMsg(this->shortArmManName,      allMsg);
-				sendMsg(this->robotArmManName,      allMsg);
+				sendMsg(this->middleArmManName, allMsg);
+				sendMsg(this->longArmManName,   allMsg);
+				sendMsg(this->shortArmManName,  allMsg);
+				sendMsg(this->robotArmManName,  allMsg);
 //				sendMsg(this->bodyAvatarName, allMsg);
 			}
 
@@ -124,10 +124,10 @@ void OpenHouse2015Controller::onRecvMsg(RecvMsgEvent &evt)
 			{
 				if(this->isHead && !this->kinectV2DeviceManager.started)
 				{
-					sendMsg(this->mirrorTherapyManName, allMsg);
-					sendMsg(this->longArmManName,       allMsg);
-					sendMsg(this->shortArmManName,      allMsg);
-					sendMsg(this->robotArmManName,      allMsg);
+					sendMsg(this->middleArmManName, allMsg);
+					sendMsg(this->longArmManName,   allMsg);
+					sendMsg(this->shortArmManName,  allMsg);
+					sendMsg(this->robotArmManName,  allMsg);
 				}
 
 				// Decode message to sensor data of kinect v2.
@@ -143,7 +143,7 @@ void OpenHouse2015Controller::onRecvMsg(RecvMsgEvent &evt)
 					posture.joint[ManNiiPosture::HEAD_JOINT1].quaternion.setQuaternion(0.0, 0.0, 0.0, 0.0);
 				}
 
-				if(std::string(myname())==mirrorTherapyManName)
+				if(std::string(myname())==middleArmManName)
 				{
 					// Store current posture and time stamp.
 					int currentIndex = this->storeCurrentPosture(posture);
@@ -182,15 +182,15 @@ void OpenHouse2015Controller::onRecvMsg(RecvMsgEvent &evt)
 		{
 			if(this->isHead)
 			{
-				sendMsg(this->mirrorTherapyManName, allMsg);
-				sendMsg(this->longArmManName,       allMsg);
-				sendMsg(this->shortArmManName,      allMsg);
-				sendMsg(this->robotArmManName,      allMsg);
+				sendMsg(this->middleArmManName, allMsg);
+				sendMsg(this->longArmManName,   allMsg);
+				sendMsg(this->shortArmManName,  allMsg);
+				sendMsg(this->robotArmManName,  allMsg);
 			}
 
 			this->changeAvatar(sensorDataMap);
 
-			if(std::string(myname())==mirrorTherapyManName)
+			if(std::string(myname())==middleArmManName)
 			{
 				this->setReverseModeAndDelayTime(sensorDataMap);
 			}

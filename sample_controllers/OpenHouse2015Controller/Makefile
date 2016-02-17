@@ -1,59 +1,31 @@
 # target file (.so)
-TARGET1 = ./OpenHouse2015Controller.so
-TARGET2 = ./RHIBallController.so
+TARGET = ./OpenHouse2015Controller.so
 
 # sources
-SRCS1 =\
-	../../sigverse/plugin/common/SigCmn.cpp \
-	../../sigverse/plugin/common/Quaternion.cpp \
-	../../sigverse/plugin/common/sensor/SensorData.cpp \
-	../../sigverse/plugin/common/sensor/KinectV2SensorData.cpp \
-	../../sigverse/plugin/common/sensor/OculusRiftDK1SensorData.cpp \
-	../../sigverse/plugin/controller/common/Posture.cpp \
-	../../sigverse/plugin/controller/common/ManNiiPosture.cpp \
-	../../sigverse/plugin/controller/common/AvatarController.cpp \
-	../../sigverse/plugin/controller/common/ManNiiAvatarController.cpp \
-	../../sigverse/plugin/controller/common/sensor/KinectV2DeviceManager.cpp \
-	../../sigverse/plugin/controller/common/sensor/OculusDK1DeviceManager.cpp \
-	OpenHouse2015Controller.cpp \
-
-SRCS2 =\
-	$(SIGVERSE_BUILD_PATH)/sigverse/common/SigCmn.cpp \
-	RHIBallController.cpp \
+SRCS = OpenHouse2015Controller.cpp \
 	
-	
-# sigverse path
-SIG_SRC = $(SIGVERSE_PATH)/include
-
 # compiler
 CXX = g++
 
 # compile option
-CFLAGS = -std=c++11 -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIG_SRC) -I../../ -fPIC -shared
+CFLAGS  = -std=c++11 -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIGVERSE_PATH)/include  -fPIC -shared 
+LDFLAGS = -Wl,-rpath=$(SIGVERSE_PATH)/lib -L$(SIGVERSE_PATH)/lib -lsigplugin
 
 # generate intermediate object file from sources.
-OBJS1 := $(SRCS1:.cpp=.o)
-OBJS2 := $(SRCS2:.cpp=.o)
+OBJS := $(SRCS:.cpp=.o)
 
 # -- compile rule --
-
-all: $(TARGET1) $(TARGET2) 
+all: $(TARGET)
 
 # intermediate output file
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -o $@ -c $<
 
 # target file(.so)
-$(TARGET1): $(OBJS1) $(SRCS1)
-	$(CXX) $(CFLAGS) -o $@ $(OBJS1)
-#	rm -f $(OBJS1) # Remove intermediate files.
-
-$(TARGET2): $(OBJS2) $(SRCS2)
-	$(CXX) $(CFLAGS) -o $@ $(OBJS2)
-#	rm -f $(OBJS2) # Remove intermediate files.
+$(TARGET): $(OBJS) 
+	$(CXX) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	rm -f $(OBJS) # Remove intermediate files.
 
 # remove object file
 clean:
-	rm -f $(TARGET1) $(OBJS1)
-	rm -f $(TARGET2) $(OBJS2)
-	
+	rm -f $(TARGET) $(OBJS)
