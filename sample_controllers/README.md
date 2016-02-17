@@ -1,12 +1,7 @@
-samples
+本ディレクトリについて
 -----------------
-Controller の実装例を格納しています。  
-本サンプルは、sigverseフォルダのコードを使用しています。
-利用する際には、各フォルダ内にある Makefile 中の SIGVERSE_BUILD_PATH をsigverseフォルダの親フォルダに設定します。
+本プラグインを使用するコントローラの実装例を格納しています。  
 
-（Ubunutuの端末で）  
-各ディレクトリ内で make すると、各 Controller でリンクする共有オブジェクトライブラリ（.so）を生成します。  
-以下に例を示します。
 
 ManNiiAvatarControllerByKinectV2
 -----------------
@@ -25,6 +20,6 @@ Plugin から送られるメッセージを受け取った時の処理は、主�
 
 * OculusRiftDK1用Plugin から送信されるメッセージを受け取る。
 * 受け取ったメッセージに基づいて OculusRiftDK1SensorData クラスのインスタンスを生成する。
-* OculusRiftDK1SensorData （Oculus の姿勢を示すオイラー角）を、man-nii の首のクォータニオンへセットする。
+* OculusRiftDK1SensorData （Oculus の姿勢を示すオイラー角）を、man-nii の首のクォータニオンへ変換する。
 * man-nii の首のクォータニオンを、SIGViewer 上のアバターへセットする。
 
