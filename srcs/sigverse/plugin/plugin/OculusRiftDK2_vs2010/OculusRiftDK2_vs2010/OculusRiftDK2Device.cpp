@@ -104,6 +104,7 @@ void OculusRiftDK2Device::run()
 			int key = _getch();
 			if (key == 'r'){
 				ovrHmd_RecenterPose(HMD);
+				
 				std::cout << "Reset center position" << std::endl;
 			}
 		}
@@ -124,7 +125,7 @@ void OculusRiftDK2Device::run()
 			std::map<std::string, std::vector<std::string> > sensorDataMap = tmp.decodeSensorData(message);
 			tmp.setSensorData(sensorDataMap);
 		}
-		Sleep(100);
+		Sleep(10);
 	}
 
 	sigService.disconnect();

@@ -120,7 +120,7 @@ void OculusRiftDK1Device::run()
 			std::map<std::string, std::vector<std::string> > sensorDataMap = tmp.decodeSensorData(message);
 			tmp.setSensorData(sensorDataMap);
 		}
-		Sleep(100);
+		Sleep(10);
 	}
 
 	sigService.disconnect();

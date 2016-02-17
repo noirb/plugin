@@ -64,7 +64,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\OculusSDK_0.4.3\LibOVR\Include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\..\;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\OculusSDK_0.4.3\LibOVR\Include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -78,16 +78,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\devicecommon\device\OculusRiftDK2SensorData.cpp" />
-    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp" />
+    <ClCompile Include="..\..\..\common\sensor\OculusRiftDK2SensorData.cpp" />
+    <ClCompile Include="..\..\..\common\sensor\SensorData.cpp" />
     <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp" />
     <ClCompile Include="..\..\common\Device.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OculusRiftDK2Device.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\devicecommon\device\OculusRiftDK2SensorData.h" />
-    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h" />
+    <ClInclude Include="..\..\..\common\sensor\OculusRiftDK2SensorData.h" />
+    <ClInclude Include="..\..\..\common\sensor\SensorData.h" />
     <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h" />
     <ClInclude Include="..\..\common\Device.h" />
     <ClInclude Include="OculusRiftDK2Device.h" />
