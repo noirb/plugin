@@ -58,7 +58,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\;$(KINECTSDK20_DIR)\inc;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\opencv_2.4.10\build\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\..\;$(KINECTSDK20_DIR)\inc;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\opencv_2.4.10\build\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG_PRINT;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -77,20 +77,20 @@ copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_imgproc2410.dll" "
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\devicecommon\device\SensorCommon.h" />
-    <ClInclude Include="..\..\..\devicecommon\device\KinectV2SensorData.h" />
-    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h" />
-    <ClInclude Include="..\..\..\devicecommon\Quaternion.h" />
-    <ClInclude Include="..\..\..\devicecommon\SigCmn.h" />
+    <ClInclude Include="..\..\..\common\sensor\SensorCommon.h" />
+    <ClInclude Include="..\..\..\common\sensor\KinectV2SensorData.h" />
+    <ClInclude Include="..\..\..\common\sensor\SensorData.h" />
+    <ClInclude Include="..\..\..\common\Quaternion.h" />
+    <ClInclude Include="..\..\..\common\SigCmn.h" />
     <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h" />
     <ClInclude Include="..\..\common\Device.h" />
     <ClInclude Include="KinectV2Device.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\devicecommon\device\KinectV2SensorData.cpp" />
-    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp" />
-    <ClCompile Include="..\..\..\devicecommon\Quaternion.cpp" />
-    <ClCompile Include="..\..\..\devicecommon\SigCmn.cpp" />
+    <ClCompile Include="..\..\..\common\sensor\KinectV2SensorData.cpp" />
+    <ClCompile Include="..\..\..\common\sensor\SensorData.cpp" />
+    <ClCompile Include="..\..\..\common\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\common\SigCmn.cpp" />
     <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp" />
     <ClCompile Include="..\..\common\Device.cpp" />
     <ClCompile Include="KinectV2Device.cpp" />
