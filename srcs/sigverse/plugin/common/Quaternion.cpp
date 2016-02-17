@@ -70,6 +70,21 @@ const Quaternion Quaternion::calcCrossProduct(const Quaternion &q, const Quatern
 };
 
 
+const Quaternion Quaternion::calcInverse(const Quaternion &q)
+{
+	double norm2 = q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z;
+
+	if(norm2==0){ return Quaternion(1.0, 0.0, 0.0, 0.0); }
+
+	Quaternion tmp;
+	tmp.w = +q.w / norm2;
+	tmp.x = -q.x / norm2;
+	tmp.y = -q.y / norm2;
+	tmp.z = -q.z / norm2;
+	return tmp;
+};
+
+
 /*
  * Calculate Quaternion from 2 Vectors
  */

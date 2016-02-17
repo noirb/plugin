@@ -18,29 +18,57 @@ class SigCmn
 public:
 
 	///@brief For expression position.
-	typedef struct _Vector3
+	struct Vector3
 	{
 		float x;
 		float y;
 		float z;
-	} Vector3;
+
+		void operator+=(const Vector3 &vec)
+		{
+			x += vec.x;
+			y += vec.y;
+			z += vec.z;
+		}
+
+		void operator-=(const Vector3 &vec)
+		{
+			x -= vec.x;
+			y -= vec.y;
+			z -= vec.z;
+		}
+
+		void operator*=(double val)
+		{
+			x *= val;
+			y *= val;
+			z *= val;
+		}
+
+		void operator/=(double val)
+		{
+			x /= val;
+			y /= val;
+			z /= val;
+		}
+	};
 
 	///@brief For expression position.
-	typedef struct _Vector4
+	struct Vector4
 	{
 		float w;
 		float x;
 		float y;
 		float z;
-	} Vector4;
+	};
 
 	///@brief For expression position.
-	typedef struct
+	struct EulerAngleType
 	{
 		float yaw;
 		float pitch;
 		float roll;
-	} EulerAngleType;
+	};
 
 	///@brief Calculate Vector from 2 position.
 	static bool diffVec(SigCmn::Vector3 &rvec, const SigCmn::Vector3 &jvec, const SigCmn::Vector3 &kvec);

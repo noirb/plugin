@@ -36,6 +36,8 @@ public:
 	///@return Cross product of two input quaternions.
 	static const Quaternion calcCrossProduct(const Quaternion &q, const Quaternion &r);
 
+	static const Quaternion calcInverse(const Quaternion &q);
+
 	static const Quaternion calcQuaternionFromVector(const SigCmn::Vector3 &kvec, const SigCmn::Vector3 &svec);
 	static void rotVec(SigCmn::Vector3 &v, const Quaternion &q);
 };
