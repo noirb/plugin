@@ -22,59 +22,6 @@ KinectV2_vs2013.sln ‚ğg‚Á‚Ä KinectV2_vs2013.sig ‚ğƒrƒ‹ƒh‚·‚é‚½‚ß‚ÉCŸ‚ÌŠÂ‹«‚È‚
 
 1. GitHub ‚©‚çƒNƒ[ƒ“‚µ‚Ä‚«‚½ KinectV2_vs2013.sln ‚ğ VS2013 ‚ÅŠJ‚­D
 2. ƒvƒƒWƒFƒNƒg‚ÌƒAƒNƒeƒBƒu‚È\¬‚ğ Release ‚É‚·‚éD
-3. ƒvƒƒWƒFƒNƒg‚ÌƒvƒƒpƒeƒB‚ğŠJ‚¢‚ÄCŸ‚Ì4`7‚É]‚Á‚ÄƒCƒ“ƒNƒ‹[ƒh‚ÆƒŠƒ“ƒN‚Ìİ’è‚ğs‚¤D
-4. ’Ç‰Á‚ÌƒCƒ“ƒNƒ‹[ƒhƒfƒBƒŒƒNƒgƒŠ‚ÉCŸ‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚·‚éD
- * SIGService.h ‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ
- * MirrorTherapy_v2 ƒfƒBƒŒƒNƒgƒŠ
- * boost ‚ÌƒfƒBƒŒƒNƒgƒŠ
- * KinectV2 ‚Ì SDK ‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚éƒfƒBƒŒƒNƒgƒŠ“à‚É‚ ‚éuincvƒfƒBƒŒƒNƒgƒŠ  
-  ¦ SDK ‚Ìƒo[ƒWƒ‡ƒ“‚É‚æ‚Á‚ÄCƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚éiì¬‚³‚ê‚éjƒfƒBƒŒƒNƒgƒŠ–¼‚ª•Ï‚í‚é—l‚Å‚·D  
-Šî–{“I‚É‚ÍCuC:\Program Files\Microsoft SDKs\Kinect\vƒfƒBƒŒƒNƒgƒŠˆÈ‰º‚Ì‚Ç‚±‚©‚É‚ ‚é‚Æv‚¢‚Ü‚·D
- * OpenCV ‚Ì include ƒfƒBƒŒƒNƒgƒŠ
-5. ’Ç‰Á‚Ìƒ‰ƒCƒuƒ‰ƒŠƒfƒBƒŒƒNƒgƒŠ‚ÉCŸ‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚·‚éD  
- ‚È‚¨C‚·‚×‚Ä VS2013 —p‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢D
- * SIGService.lib ‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ
- * boost ‚Ìƒ‰ƒCƒuƒ‰ƒŠŒQ‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ
- * OpenCV ‚Ìƒ‰ƒCƒuƒ‰ƒŠŒQ‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ
- * KinectV2 ‚Ì SDK ‚Ìƒ‰ƒCƒuƒ‰ƒŠikinect20.libj‚ª‚ ‚éƒfƒBƒŒƒNƒgƒŠ
-6. ’Ç‰Á‚ÌˆË‘¶ƒtƒ@ƒCƒ‹‚ÉCŸ‚Ì•¶š—ñ‚ğ’Ç‰Á‚·‚éD
- * SIGService.lib
- * kinect20.lib
- * opencv\_highgui\*.lib
- * opencv\_core\*.lib
- * opencv\_imgproc\*.lib  
- ¦u\*v‚Ì•”•ª‚ÍCƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚ ‚é OpenCV ‚Ìƒo[ƒWƒ‡ƒ“‚É‡‚í‚¹‚Ä•ÏX‚µ‚Ä‚­‚¾‚³‚¢D
-7. ƒ^[ƒQƒbƒg‚ÌŠg’£q‚ğu.exev‚©‚çu.sigv‚Ö•ÏX‚·‚éD
-8. ƒrƒ‹ƒh‚·‚éD
-9. OpenCV ‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚éƒfƒBƒŒƒNƒgƒŠiƒfƒtƒHƒ‹ƒg‚Å‚ÍC:\opencv\build\x86\vc12\binj‚©‚çC  
-Ÿ‚Ì3‚Â‚Ìƒtƒ@ƒCƒ‹‚ğ Release ƒfƒBƒŒƒNƒgƒŠ‚ÖƒRƒs[‚·‚éD
- * opencv\_core\*.dll
- * opencv\_highgui\*.dll
- * opencv\_imgproc\*.dll  
- ¦u\*v‚Ì•”•ª‚ÍCƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚ ‚é OpenCV ‚Ìƒo[ƒWƒ‡ƒ“‚É‡‚í‚¹‚Ä•ÏX‚µ‚Ä‚­‚¾‚³‚¢D
+3. IncludeƒfƒBƒŒƒNƒgƒŠALibraryƒfƒBƒŒƒNƒgƒŠAƒ‰ƒCƒuƒ‰ƒŠAƒrƒ‹ƒhŒãƒCƒxƒ“ƒg‚È‚Ç‚Ì‹LÚEƒpƒX‚ğŒ©’¼‚·D
+4. ƒrƒ‹ƒh‚·‚éD
 
-##VS2013—p‚ÌSIGService.lib‚É‚Â‚¢‚Ä##
-KinectV2 ‚ğg‚¤ƒvƒ‰ƒOƒCƒ“‚ğƒrƒ‹ƒh‚·‚éê‡C VS2013 ‚Åg‚¦‚é SIGService.lib ‚ª•K—v‚Å‚·D  
-
-ˆî—Wæ¶‚ÌŒ¤‹†º‚ÌŠÖŒWÒ‚Ì•û‚ÍCVS2013 ‚Åƒrƒ‹ƒh‚µ‚½ SIGService.lib ‚ğˆÈ‰º‚©‚çƒRƒs[‚Å‚«‚Ü‚·D
-
-* \\tera2.iir.nii.ac.jp\share\tome-nozaki\SIGServiceLibs
-
-SIGService.lib ‚ğ VS2013 ‚Å‰ü‚ß‚Äƒrƒ‹ƒh‚·‚éÛ‚ÍCˆÈ‰º‚ğ‚²——‚­‚¾‚³‚¢D
-
-###VS2013—p‚ÌSIGService.lib‚ğƒrƒ‹ƒh‚·‚é###
-  
-SIGService.lib ‚ğƒrƒ‹ƒh‚·‚é‚½‚ß‚É‚ÍC boost ‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚à VS2013 —p‚Ì‚à‚Ì‚ª•K—v‚Å‚·D  
-SIGService.lib ‚ğƒrƒ‹ƒh‚·‚é—á‚ÍŸ‚Ì’Ê‚è‚Å‚·D
-
-1. http://sourceforge.net/projects/boost/files/boost-binaries/1.55.0-build2/  
-‚Ìuboost\_1\_55\_0-msvc-12.0-32.exev‚ğ DL ‚µ‚ÄƒCƒ“ƒXƒg[ƒ‹‚·‚éD
-2. https://github.com/SIGVerse/Client ƒŠƒ|ƒWƒgƒŠ‚ğ C:\SIGVerse\GitHub\ ’¼‰º‚É Clone ‚·‚éD
-3. SIGService_2010.sln ‚ğ VS2013 ‚ÅŠJ‚¢‚ÄC@boost ü‚è‚Ìİ’è‚ğ 1. ‚ÅƒCƒ“ƒXƒg[ƒ‹‚µ‚½ boost ‚Ì‚à‚Ì‚É‚·‚éD
-4. iVS2010 —p‚Ì SIGService.lib ‚ğƒrƒ‹ƒh‚µ‚½‚±‚Æ‚ª‚ ‚éê‡‚ÍCŠù‘¶‚Ì‚à‚Ì‚ğã‘‚«‚µ‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚ÉC  
-o—Íæ‚Ì Release ƒfƒBƒŒƒNƒgƒŠ‚ğ‘Ş”ğ‚µ‚Ä‚¨‚­Dj
-5. ƒrƒ‹ƒh‚·‚éD
-6. ƒrƒ‹ƒhŒ‹‰Ê‚ª Release ƒfƒBƒŒƒNƒgƒŠ‚Éo—Í‚³‚ê‚Ä‚¢‚é‚±‚Æ‚ğŠm”F‚·‚éD
-7. Release ƒfƒBƒŒƒNƒgƒŠ‚Ì–¼Ì‚ğ Release_2013 ‚Ö•ÏX‚·‚éD
-
-„‚ªGit‚Ö‚ ‚°‚½ƒvƒƒWƒFƒNƒgƒtƒ@ƒCƒ‹‚É‚ÍC‚±‚Ìè‡‚Å¶¬‚µ‚½ SIGService.lib ‚ğg—p‚·‚éİ’è‚É‚È‚Á‚Ä‚¢‚Ü‚·D
