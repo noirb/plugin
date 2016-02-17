@@ -13,7 +13,7 @@
 SIGViewerに登録するプラグイン(sig)を作成する
 -----------------
 
-srcs/sigverse/plugin/plugin/ の下の、各種デバイス名のフォルダ内にある、
+srcs/sigverse/plugin/plugin/ の下の、各種デバイス名のフォルダ内にある、  
 ソリューションファイル(sln)をVisualStudioで開いてビルドし、作成します。
 
 
