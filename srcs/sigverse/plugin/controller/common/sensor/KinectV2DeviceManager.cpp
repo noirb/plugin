@@ -92,6 +92,8 @@ void KinectV2DeviceManager::setRootPosition(SimObj *obj, const SigCmn::Vector3 &
 // for ManNiiAvatar
 void KinectV2DeviceManager::setJointQuaternion2ManNii(SimObj *obj, const ManNiiPosture::ManNiiJoint &joint)
 {
+	if(joint.quaternion.w==1.0){ return; }
+
 	double angle = acos(joint.quaternion.w)*2.0;
 	double tmp = sin(angle/2.0);
 	double vx = joint.quaternion.x/tmp;
@@ -109,7 +111,7 @@ void KinectV2DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNii
 	if(sensorData.sensorDataMode==KinectV2SensorData::SensorDataMode::POSITION)
 	{
 		setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::ROOT_JOINT0]);
-		setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::HEAD_JOINT1]);
+		setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::HEAD_JOINT0]);
 	}
 
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::WAIST_JOINT1]);
@@ -118,6 +120,8 @@ void KinectV2DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNii
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::LARM_JOINT2]);
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::RARM_JOINT3]);
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::LARM_JOINT3]);
+//	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::RARM_JOINT5]);
+//	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::LARM_JOINT5]);
 
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::RLEG_JOINT2]);
 	setJointQuaternion2ManNii(obj, manNiiPosture.joint[ManNiiPosture::LLEG_JOINT2]);
@@ -431,6 +435,26 @@ ManNiiPosture KinectV2DeviceManager::convertKinectV2JointOrientations2ManNiiPost
 
 
 /*
+ * Correct the position by the device slope.
+ */
+void KinectV2DeviceManager::correctSlope(KinectV2SensorData::KinectV2JointPosition* jointPositions, const double slopeRadX)
+{
+	double slopeCos = cos(slopeRadX);
+	double slopeSin = sin(slopeRadX);
+
+	for(int i=0; i<KinectV2SensorData::KinectV2JointType_Count; i++)
+	{
+		float y = jointPositions[i].position.y;
+		float z = jointPositions[i].position.z;
+
+//		jointPositions[i].position.x;
+		jointPositions[i].position.y = y * slopeCos - z * slopeSin;
+		jointPositions[i].position.z = y * slopeSin + z * slopeCos;
+	}
+}
+
+
+/*
  * for ManNiiAvatar
  *
  * Convert KinectV2 joint position data to ManNiiPosture.
@@ -655,7 +679,7 @@ ManNiiPosture KinectV2DeviceManager::convertKinectV2JointPosition2ManNiiPosture(
 
 			//ManNiiAvatarPosture posture;
 			manNiiPosture.joint[ManNiiPosture::ROOT_JOINT0].quaternion  = q_waist;
-			manNiiPosture.joint[ManNiiPosture::HEAD_JOINT1].quaternion  = q_head_joint1;
+			manNiiPosture.joint[ManNiiPosture::HEAD_JOINT0].quaternion  = q_head_joint1;
 
 			manNiiPosture.joint[ManNiiPosture::WAIST_JOINT1].quaternion = q_waist_joint1;
 
@@ -663,6 +687,8 @@ ManNiiPosture KinectV2DeviceManager::convertKinectV2JointPosition2ManNiiPosture(
 			manNiiPosture.joint[ManNiiPosture::LARM_JOINT2].quaternion = q_larm_joint2;
 			manNiiPosture.joint[ManNiiPosture::RARM_JOINT3].quaternion = q_rarm_joint3;
 			manNiiPosture.joint[ManNiiPosture::LARM_JOINT3].quaternion = q_larm_joint3;
+//			manNiiPosture.joint[ManNiiPosture::RARM_JOINT5].quaternion = q_rarm_joint5;
+//			manNiiPosture.joint[ManNiiPosture::LARM_JOINT5].quaternion = q_larm_joint5;
 
 			manNiiPosture.joint[ManNiiPosture::RLEG_JOINT2].quaternion = q_rleg_joint2;
 			manNiiPosture.joint[ManNiiPosture::LLEG_JOINT2].quaternion = q_lleg_joint2;

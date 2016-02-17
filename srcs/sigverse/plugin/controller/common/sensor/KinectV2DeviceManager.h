@@ -24,6 +24,8 @@ public:
 
 	void initPositionAndRotation(SimObj *myself);
 
+	static void correctSlope(KinectV2SensorData::KinectV2JointPosition* jointPositions, const double slopeRadX);
+
 	static ManNiiPosture convertSensorData2ManNiiPosture(const KinectV2SensorData &sensorData);
 	///@brief Convert Kinect V2 joint orientation to avatar posture structure.
 	static ManNiiPosture convertKinectV2JointOrientations2ManNiiPosture(const KinectV2SensorData::KinectV2JointOrientation* kinectV2Joints);
