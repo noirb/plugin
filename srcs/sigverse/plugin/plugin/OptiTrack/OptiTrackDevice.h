@@ -1,5 +1,5 @@
-#ifndef __OPTITRACK_DEVICE_H__
-#define __OPTITRACK_DEVICE_H__
+#ifndef SIGVERSE__OPTITRACK_DEVICE_H
+#define SIGVERSE__OPTITRACK_DEVICE_H
 
 #include <sigverse/plugin/plugin/common/Device.h>
 
@@ -62,4 +62,4 @@ public:
 	sigverse::SIGService *sigService;
 };
 
-#endif // __OPTITRACK_DEVICE_H__
+#endif // SIGVERSE__OPTITRACK_DEVICE_H

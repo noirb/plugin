@@ -38,14 +38,14 @@ public:
 			z -= vec.z;
 		}
 
-		void operator*=(double val)
+		void operator*=(float val)
 		{
 			x *= val;
 			y *= val;
 			z *= val;
 		}
 
-		void operator/=(double val)
+		void operator/=(float val)
 		{
 			x /= val;
 			y /= val;

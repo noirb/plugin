@@ -1,5 +1,5 @@
-#ifndef __CHECK_RECV_SIGSERVICE_DATA_H__
-#define __CHECK_RECV_SIGSERVICE_DATA_H__
+#ifndef SIGVERSE_CHECK_RECV_SIGSERVICE_DATA_H
+#define SIGVERSE_CHECK_RECV_SIGSERVICE_DATA_H
 
 #include <SIGService.h>
 
@@ -14,4 +14,4 @@ public:
 	void run(sigverse::SIGService *m_srv);
 };
 
-#endif //__CHECK_RECV_SIGSERVICE_DATA_H__
+#endif //SIGVERSE_CHECK_RECV_SIGSERVICE_DATA_H

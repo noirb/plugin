@@ -15,54 +15,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KinectV2Device.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\KinectV2Device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\Device.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\Device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\SensorCommon.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\device\SensorCommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\KinectV2SensorData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\device\KinectV2SensorData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\device\SensorData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\device\SensorData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\Quaternion.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\SigCmn.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\SigCmn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KinectV2Device.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\KinectV2Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\Device.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\KinectV2SensorData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\device\KinectV2SensorData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\device\SensorData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\device\SensorData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\Quaternion.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\Quaternion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\SigCmn.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\SigCmn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

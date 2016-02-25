@@ -1,6 +1,6 @@
 #include <sigverse/plugin/common/sensor/OculusRiftDK1SensorData.h>
 #include <sigverse/plugin/plugin/common/CheckRecvSIGServiceData.h>
-#include <sigverse/plugin/plugin/OculusRiftDK1_vs2010/OculusRiftDK1_vs2010/OculusRiftDK1Device.h>
+#include <sigverse/plugin/plugin/OculusRiftDK1/OculusRiftDK1Device.h>
 
 #include <Windows.h>
 #include <boost/thread.hpp>

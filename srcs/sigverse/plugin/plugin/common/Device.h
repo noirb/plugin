@@ -1,5 +1,5 @@
-#ifndef __DEVICE_H__
-#define __DEVICE_H__
+#ifndef SIGVERSE_PLUGIN_COMMON_DEVICE_H
+#define SIGVERSE_PLUGIN_COMMON_DEVICE_H
 
 #include <SIGService.h>
 #include <sigverse/plugin/common/sensor/SensorCommon.h>
@@ -74,4 +74,4 @@ public:
 	}
 };
 
-#endif //__DEVICE_H__
+#endif //SIGVERSE_PLUGIN_COMMON_DEVICE_H

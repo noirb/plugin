@@ -1,5 +1,5 @@
 #include <iostream>
-#include <sigverse/plugin/plugin/OculusRiftDK2_vs2010/OculusRiftDK2_vs2010/OculusRiftDK2Device.h>
+#include <sigverse/plugin/plugin/OculusRiftDK2/OculusRiftDK2Device.h>
 
 int main(int argc, char* argv[])
 {

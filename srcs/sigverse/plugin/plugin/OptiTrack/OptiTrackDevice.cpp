@@ -1,6 +1,6 @@
 #include <sigverse/plugin/common/sensor/OptiTrackSensorData.h>
 #include <sigverse/plugin/plugin/common/CheckRecvSIGServiceData.h>
-#include <sigverse/plugin/plugin/OptiTrack_vs2010/OptiTrack_vs2010/OptiTrackDevice.h>
+#include <sigverse/plugin/plugin/OptiTrack/OptiTrackDevice.h>
 
 #include <sstream>
 

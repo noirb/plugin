@@ -1,4 +1,4 @@
-#include <sigverse/plugin/plugin/OculusRiftDK2_vs2010/OculusRiftDK2_vs2010/OculusRiftDK2Device.h>
+#include <sigverse/plugin/plugin/OculusRiftDK2/OculusRiftDK2Device.h>
 #include <sigverse/plugin/common/sensor/OculusRiftDK2SensorData.h>
 #include <sigverse/plugin/plugin/common/CheckRecvSIGServiceData.h>
 #include <Windows.h>

@@ -11,22 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ABC7F87C-91DC-4BAD-8078-F0B973AED701}</ProjectGuid>
-    <RootNamespace>OptiTrack_vs2010</RootNamespace>
+    <ProjectGuid>{CD2BFED6-51A5-4E7B-9CFA-EB434F4B0241}</ProjectGuid>
+    <RootNamespace>KinectV2_vs2013</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -41,20 +41,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.sig</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetExt>.sig</TargetExt>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\SIGVerse\src\boost_1_57_0;C:\SIGVerse\src\EmbodiedBrain\MirrorTherapy_v2;C:\SIGVerse\GitHub\Client\SIGService\Windows\SIGService;C:\SIGVerse\src\NatNet_SDK_2.7\NatNetSDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SIGVerse\GitHub\Client\SIGService\Windows\Debug_2010;C:\SIGVerse\src\boost_1_57_0\stage\x86\vc10\lib;C:\SIGVerse\src\NatNet_SDK_2.7\NatNetSDK\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;NatNetLibStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -63,37 +57,47 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\NatNet_SDK_2.7\NatNetSDK\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\srcs;$(KINECTSDK20_DIR)\inc;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\opencv_2.4.10\build\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG_PRINT;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-10.0;C:\SIGVerse\ext\NatNet_SDK_2.7\NatNetSDK\lib;C:\SIGVerse\GitHub\SIGService\Windows\Release_2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;NatNetLibStatic.lib;SIGService.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(KINECTSDK20_DIR)\Lib\x86;C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-12.0;C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\lib;C:\SIGVerse\GitHub\SIGService\Windows\Release_2013;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SIGService.lib;kinect20.lib;opencv_highgui2410.lib;opencv_core2410.lib;opencv_imgproc2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy ".\OptiTrack.ini" "..\Release"</Command>
+      <Command>copy ".\KinectV2.ini" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_core2410.dll" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_highgui2410.dll" "..\Release"
+copy "C:\SIGVerse\ext\opencv_2.4.10\build\x86\vc12\bin\opencv_imgproc2410.dll" "..\Release"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\devicecommon\device\OptiTrackSensorData.cpp" />
-    <ClCompile Include="..\..\..\devicecommon\device\SensorData.cpp" />
-    <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp" />
-    <ClCompile Include="..\..\common\Device.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="OptiTrackDevice.cpp" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorCommon.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\KinectV2SensorData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\Quaternion.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\SigCmn.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\Device.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\KinectV2Device.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\devicecommon\device\SensorCommon.h" />
-    <ClInclude Include="..\..\..\devicecommon\device\OptiTrackSensorData.h" />
-    <ClInclude Include="..\..\..\devicecommon\device\SensorData.h" />
-    <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h" />
-    <ClInclude Include="..\..\common\Device.h" />
-    <ClInclude Include="OptiTrackDevice.h" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\KinectV2SensorData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\Quaternion.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\SigCmn.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\Device.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\KinectV2Device.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\KinectV2\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OptiTrack.ini" />
+    <None Include="KinectV2.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

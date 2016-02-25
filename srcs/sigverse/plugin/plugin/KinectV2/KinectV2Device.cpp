@@ -1,4 +1,4 @@
-#include <sigverse/plugin/plugin/KinectV2_vs2013/KinectV2_vs2013/KinectV2Device.h>
+#include <sigverse/plugin/plugin/KinectV2/KinectV2Device.h>
 #include <sigverse/plugin/plugin/common/CheckRecvSIGServiceData.h>
 
 #include <opencv2/opencv.hpp>

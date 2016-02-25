@@ -7,7 +7,7 @@
     </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
@@ -15,43 +15,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\OculusRiftDK1\Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\sensor\OculusRiftDK2SensorData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\OculusRiftDK1\OculusRiftDK1Device.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="OculusRiftDK2Device.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\Device.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\common\sensor\SensorData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\OculusRiftDK1SensorData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\CheckRecvSIGServiceData.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\Device.cpp">
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OculusRiftDK2Device.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\OculusRiftDK1\OculusRiftDK1Device.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\sensor\OculusRiftDK2SensorData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\Device.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\sensor\SensorData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\OculusRiftDK1SensorData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\CheckRecvSIGServiceData.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\Device.h">
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorCommon.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="OculusRiftDK2.ini" />
+    <None Include="OculusRiftDK1.ini" />
   </ItemGroup>
 </Project>
