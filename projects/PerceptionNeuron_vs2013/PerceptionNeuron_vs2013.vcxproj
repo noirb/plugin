@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{35991AE2-7583-46E1-B049-F4D5B16ED10A}</ProjectGuid>
+    <RootNamespace>PerceptionNeuron_vs2013</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetExt>.sig</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\srcs;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;C:\SIGVerse\ext\NeuronDataReader_SDK_b15\Windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG_PRINT;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-12.0;C:\SIGVerse\GitHub\SIGService\Windows\Release_2013;C:\SIGVerse\ext\NeuronDataReader_SDK_b15\Windows\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SIGService.lib;NeuronDataReader.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ".\PerceptionNeuron.ini" "..\Release"
+copy "C:\SIGVerse\ext\NeuronDataReader_SDK_b15\Windows\lib\x86\NeuronDataReader.dll" "..\Release"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorCommon.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\PerceptionNeuronSensorData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\Quaternion.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\common\SigCmn.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\common\Device.h" />
+    <ClInclude Include="..\..\srcs\sigverse\plugin\plugin\PerceptionNeuron\PerceptionNeuronDevice.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\PerceptionNeuronSensorData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\sensor\SensorData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\Quaternion.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\common\SigCmn.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\common\Device.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\PerceptionNeuron\PerceptionNeuronDevice.cpp" />
+    <ClCompile Include="..\..\srcs\sigverse\plugin\plugin\PerceptionNeuron\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PerceptionNeuron.ini" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
