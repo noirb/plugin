@@ -124,7 +124,7 @@ int PerceptionNeuronDevice::run()
 
 		BRRegisterFrameDataCallback(this, this->bvhFrameDataReceived);
 
-		BRRegisterSocketStatusCallback(NULL, this->socketStatusChanged);
+		BRRegisterSocketStatusCallback(this, this->socketStatusChanged);
 			
 //		UpdateBvhDataShowUI();  //update the BoneID index when BVH data received
 
@@ -168,8 +168,8 @@ void PerceptionNeuronDevice::sendBvhData(void* customedObj, SOCKET_REF sender, B
 
 	sensorData.bvhData.avatarIndex   = header->AvatarIndex;
 	sensorData.bvhData.avatarName    = std::string((char*)header->AvatarName);
-	sensorData.bvhData.withDisp      = header->WithDisp;
-	sensorData.bvhData.withReference = header->WithReference;
+	sensorData.bvhData.withDisp      = (header->WithDisp==1);
+	sensorData.bvhData.withReference = (header->WithReference==1);
 	sensorData.bvhData.frameIndex    = header->FrameIndex;
 	sensorData.bvhData.dataCount     = header->DataCount;
 	sensorData.bvhData.data          = data;
@@ -253,7 +253,8 @@ void PerceptionNeuronDevice::sendBvhData(void* customedObj, SOCKET_REF sender, B
 
 void __stdcall PerceptionNeuronDevice::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data)
 {
-	this->sendBvhData(customedObj, sender, header, data);
+	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
+	pthis->sendBvhData(customedObj, sender, header, data);
 }
 
 void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message)

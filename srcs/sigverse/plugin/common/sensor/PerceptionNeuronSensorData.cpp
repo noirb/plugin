@@ -32,7 +32,7 @@ std::string PerceptionNeuronSensorData::getBvhItemName(BvhItemEnum bvhItemEnum) 
 /// @brief 
 PerceptionNeuronSensorData::BvhItemEnum PerceptionNeuronSensorData::getBvhItemEnum(std::string itemName) const
 {
-	return this->mapItemStr2Enum.at[itemName];
+	return this->mapItemStr2Enum.at(itemName);
 }
 
 
@@ -124,14 +124,14 @@ bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::
 			}
 			case WithDisp:
 			{
-				this->bvhData.withDisp = std::stoi((*it).second[0]);
+				this->bvhData.withDisp = (std::stoi((*it).second[0]) == 1);
 //				bool a = (strcmp((*it).second[0].c_str(),"true"))? false:true;
 //				bool b = (strcmp((*it).second[0].c_str(),"false"))?true :false;
 				break; 
 			}
 			case WithReference:
 			{
-				this->bvhData.withReference = std::stoi((*it).second[0]);
+				this->bvhData.withReference = (std::stoi((*it).second[0]) == 1);
 				break; 
 			}
 			case FrameIndex:

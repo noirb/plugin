@@ -100,9 +100,9 @@ public:
 //	std::vector<PerceptionNeuronSensorData> sensorDataList;
 //	unsigned int sensorDataListNum;
 
-	void __stdcall PerceptionNeuronDevice::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
+	static void __stdcall bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
 
-	void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message);
+	static void __stdcall socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message);
 
 	void sendBvhData(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
 
