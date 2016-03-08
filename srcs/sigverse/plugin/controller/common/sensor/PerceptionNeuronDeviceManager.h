@@ -1,16 +1,16 @@
 /*
  * PerceptionNeuronDeviceManager.h
  *
- *  Created on: 2015/07/09
- *      Author: tome-yamada
+ *  Created on: 2016/03/02
+ *      Author: Yamada
  */
-#ifndef SIGVERSE_KINECT_V2_DEVICE_MANAGER_H
-#define SIGVERSE_KINECT_V2_DEVICE_MANAGER_H
+#ifndef SIGVERSE_PERCEPTION_NEURON_DEVICE_MANAGER_H
+#define SIGVERSE_PERCEPTION_NEURON_DEVICE_MANAGER_H
 
 #include <sigverse/commonlib/SimObj.h>
 #include <sigverse/commonlib/ControllerImpl.h>
 
-#include <sigverse/plugin/controller/common/ManNiiPosture.h>
+#include <sigverse/plugin/controller/common/ManBvhPosture.h>
 #include <sigverse/plugin/common/sensor/PerceptionNeuronSensorData.h>
 #include <sigverse/plugin/common/sensor/SensorData.h>
 
@@ -20,38 +20,29 @@ public:
 	static const double normalization_range;
 
 	PerceptionNeuronDeviceManager();
-	PerceptionNeuronDeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID, double scaleRatio);
+	PerceptionNeuronDeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID);
 
 	void initPositionAndRotation(SimObj *myself);
 
-	static void correctSlope(PerceptionNeuronSensorData::PerceptionNeuronJointPosition* jointPositions, const double slopeRadX);
+private:
+	void setPosition2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
+public:
+	void setJointAngle2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType);
+	void setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
 
-	static ManNiiPosture convertSensorData2ManNiiPosture(const PerceptionNeuronSensorData &sensorData);
-	///@brief Convert Kinect V2 joint orientation to avatar posture structure.
-	static ManNiiPosture convertPerceptionNeuronJointOrientations2ManNiiPosture(const PerceptionNeuronSensorData::PerceptionNeuronJointOrientation* PerceptionNeuronJoints);
-	///@brief Convert Kinect V2 joint position to avatar posture structure.
-	static ManNiiPosture convertPerceptionNeuronJointPosition2ManNiiPosture(const PerceptionNeuronSensorData::PerceptionNeuronJointPosition* positionArray);
-
-	static void setJointQuaternion2ManNii(SimObj *obj, const ManNiiPosture::ManNiiJoint &joint);
-	static void setJointQuaternions2ManNii(SimObj *obj, const ManNiiPosture &manNiiPosture, const PerceptionNeuronSensorData &sensorData);
-
-	void setRootPosition(SimObj *obj, const SigCmn::Vector3 &pos);
-
+	///@brief Convert Perception Neuron joint rotation to avatar posture structure.
+	static ManBvhPosture convertSensorData2ManBvhPosture(const PerceptionNeuronSensorData &sensorData);
 
 	BaseService *service;
 	std::string serviceName;
 	std::string deviceType;
 	std::string deviceUniqueID;
 
-	SigCmn::Vector3 rootPos;
-
-	double scaleRatio;
-
 	SigCmn::Vector3 iniPos;
 	double yrot;
 
-	SigCmn::Vector3 startpos;
+	SigCmn::Vector3 startpos, startRot;
 	bool started;
 };
 
-#endif //SIGVERSE_KINECT_V2_DEVICE_MANAGER_H
+#endif //SIGVERSE_PERCEPTION_NEURON_DEVICE_MANAGER_H

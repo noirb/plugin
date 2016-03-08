@@ -15,7 +15,10 @@ std::map<std::string, std::vector<std::string> > SensorData::decodeSensorData(co
 }
 
 
-bool SensorData::setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap){ return NULL; }
+bool SensorData::setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap)
+{
+	return NULL;
+}
 
 
 std::map<std::string, std::vector<std::string> > SensorData::convertMessage2Map(const std::string &message, const std::string &itemsDelim, const std::string &keyValueDelim, const std::string &valuesDelim)
