@@ -123,9 +123,7 @@ bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::
 		}
 	}
 
-	this->setSensorDataJointRotation(sensorDataMap);
-
-	return true;
+	return this->setSensorDataJointRotation(sensorDataMap);
 }
 
 
@@ -203,5 +201,7 @@ bool PerceptionNeuronSensorData::setSensorDataJointRotation(const std::map<std::
 			}
 		}
 	}
+
+	return true;
 }
 
