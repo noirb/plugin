@@ -25,7 +25,7 @@ Create common library(sigplugin.so) for connecting to plugin.
 Please perform the following steps.  
 Created library(sigplugin.so) and headers will copy into an install directory of SIGServer.  
 
-0. Please install SIGServer and set environment variables SIGVERSE_PATH.
+0. Before type following commands, please install SIGServer and set environment variables SIGVERSE_PATH.
 1. mkdir build
 2. cd build
 3. cmake ..
