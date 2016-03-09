@@ -11,8 +11,8 @@ Please perform the following steps.
 
 Create SIGVerse plugin(.sig) for getting sensor data.
 -----------------
-Please open the solution file(.sln) by VisualStudio and build.
-Solution files are in under the projects/ directory.
+Please open the solution file(.sln) by VisualStudio and build.  
+Solution files are in under the projects/ directory.  
 
 Notes are the following.
 * Have to prepare SIGService.lib.
@@ -22,8 +22,8 @@ Notes are the following.
 
 Create common library(sigplugin.so) for connecting to plugin.
 -----------------
-Please perform the following steps.
-Created library(sigplugin.so) and headers will copy into an install directory of SIGServer.
+Please perform the following steps.  
+Created library(sigplugin.so) and headers will copy into an install directory of SIGServer.  
 
 0. Please install SIGServer and set environment variables SIGVERSE_PATH.
 1. mkdir build
@@ -35,8 +35,8 @@ Created library(sigplugin.so) and headers will copy into an install directory of
 
 Use the created common library(sigplugin.so) in your controllers, and get sensor data.
 -----------------
-You can use sigplugin.so in your controllers.
-Please add linker flags "-L$(SIGVERSE_PATH)/lib -lsigplugin" into your Makefile.
-Sample controllers are in sample_controllers/ directory.
+You can use sigplugin.so in your controllers.  
+Please add linker flags "-L$(SIGVERSE_PATH)/lib -lsigplugin" into your Makefile.  
+Sample controllers are in sample_controllers/ directory.  
 
 
