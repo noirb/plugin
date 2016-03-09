@@ -87,7 +87,6 @@ void ManNiiAvatarControllerByOptiTrack::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-///@return When couldn't read parameter file, return false;
 void ManNiiAvatarControllerByOptiTrack::readIniFileAndInitialize()
 {
 	std::ifstream ifs(parameterFileName.c_str());

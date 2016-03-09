@@ -20,11 +20,10 @@ void ManNiiAvatarControllerByPerceptionNeuron::onInit(InitEvent &evt)
 
 	SimObj *myself = getObj(myname());
 
-	this->perceptionNeuronDeviceManager.initPositionAndRotation(myself);
+	this->perceptionNeuronDeviceManager.getInitialPositionAndRotation(myself);
 }
 
 
-///@brief Movement of the robot.
 double ManNiiAvatarControllerByPerceptionNeuron::onAction(ActionEvent &evt)
 {
 	bool perceptionNeuronAvailable = checkService(this->perceptionNeuronDeviceManager.serviceName);
@@ -41,6 +40,7 @@ double ManNiiAvatarControllerByPerceptionNeuron::onAction(ActionEvent &evt)
 	return 1.0;
 }
 
+///@brief Receive Message.
 void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 {
 	try
@@ -56,13 +56,14 @@ void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 		if(sensorDataMap[MSG_KEY_DEV_TYPE][0]     !=this->perceptionNeuronDeviceManager.deviceType    ){ return; }
 		if(sensorDataMap[MSG_KEY_DEV_UNIQUE_ID][0]!=this->perceptionNeuronDeviceManager.deviceUniqueID){ return; }
 
+		// Make sensor data.
 		PerceptionNeuronSensorData sensorData;
 
 		sensorData.setSensorData(sensorDataMap);
 
 		ManBvhPosture posture = PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(sensorData);
 
-		// Set SIGVerse quaternions and positions
+		// Set the posture to avatar.
 		SimObj *obj = getObj(myname());
 		this->perceptionNeuronDeviceManager.setPosture2ManBvh(obj, posture);
 	}
@@ -84,7 +85,6 @@ void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-///@return When couldn't read parameter file, return false;
 void ManNiiAvatarControllerByPerceptionNeuron::readIniFileAndInitialize()
 {
 	try

@@ -14,7 +14,7 @@
 #define MAX_RIGIDBODIES         1000    // maximum number of RigidBodies
 
 
-///@brief Posture class for using OptiTrack device.
+///@brief Sensor data class for using OptiTrack device.
 class OptiTrackSensorData : public SensorData
 {
 public:

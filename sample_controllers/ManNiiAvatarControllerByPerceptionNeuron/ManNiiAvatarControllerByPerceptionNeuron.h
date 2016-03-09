@@ -25,12 +25,13 @@ public:
 	///@brief Movement of the robot.
 	double onAction(ActionEvent &evt);
 
-	///@brief Message heard by the robot.
+	///@brief Receive Message.
 	void onRecvMsg(RecvMsgEvent &evt);
 
 	///@brief Initialize this controller.
 	void onInit(InitEvent &evt);
 
+	///@brief Read parameter file.
 	void readIniFileAndInitialize();
 
 	PerceptionNeuronDeviceManager perceptionNeuronDeviceManager;

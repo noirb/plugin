@@ -16,7 +16,7 @@
 #define MSG_KEY_HAND_STATE  "HandState"
 
 
-///@brief Posture class for using kinect v2 device.
+///@brief Sensor data class for using kinect v2 device.
 class KinectV2SensorData : public SensorData
 {
 public:

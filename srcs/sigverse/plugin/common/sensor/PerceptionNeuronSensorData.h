@@ -8,7 +8,7 @@
 #include <sstream>
 #include <iomanip>
 
-///@brief Posture class for using Perception Neuron device.
+///@brief Sensor data class for using Perception Neuron device.
 class PerceptionNeuronSensorData : public SensorData
 {
 public:
@@ -85,7 +85,7 @@ public:
 		SigCmn::Vector3  rotation;
 	} PerceptionNeuronJointRotation;
 
-	enum BvhItemEnum
+	enum MsgItemEnum
 	{
 		AvatarIndex = 0,
 		AvatarName,
@@ -108,8 +108,8 @@ public:
 	} BvhData;
 
 private:
-	std::map<BvhItemEnum, std::string> mapItemEnum2Str;
-	std::map<std::string, BvhItemEnum> mapItemStr2Enum;
+	std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
+	std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
 
 public:
 
@@ -118,23 +118,21 @@ public:
 	///@brief Constructor.
 	PerceptionNeuronSensorData();
 
-	std::string getBvhItemName(BvhItemEnum bvhItemEnum) const;
-	BvhItemEnum getBvhItemEnum(std::string itemName) const;
-
 	///@brief Convert sensor information to string.
 	///@param itemsDelim Symbol to split items.
 	///@param keyValueDelim Symbol to split KEY and VALUE.
 	///@param valuesDelim Symbol to split each component of VALUE. When VALUE is multidimensional data, you use this symbol.
 	std::string encodeSensorData(const std::string &itemsDelim = ITEMS_DELIMITER, const std::string &keyValueDelim = KEY_AND_VALUE_DELIMITER, const std::string &valuesDelim = VALUES_DELIMITER) const;
 
+	///@brief Get data string for sending message.
 	std::string getDataString(const std::string &valuesDelim = VALUES_DELIMITER) const;
 
 	///@brief Set to sensor data.
 	///@param Map of sensor data;
 	bool setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
-	///@brief Set to sensor data.
-	///@param Map of sensor data;
+	///@brief Set to sensor data (Joint rotations).
+	///@param Map of sensor data (Joint rotations);
 	bool setSensorDataJointRotation(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
 	///@brief Root body position.

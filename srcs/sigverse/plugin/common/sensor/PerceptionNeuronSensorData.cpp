@@ -1,60 +1,46 @@
 #include <map>
 #include <sigverse/plugin/common/sensor/PerceptionNeuronSensorData.h>
 
-//PerceptionNeuronSensorData::SensorDataMode PerceptionNeuronSensorData::sensorDataMode;
-
 ///@brief Constructor.
 PerceptionNeuronSensorData::PerceptionNeuronSensorData()
 {
-	// Make Enum list.
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(AvatarIndex,   "AVATAR_INDEX"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(AvatarName,    "AVATAR_NAME"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(WithDisp,      "WITH_DISP"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(WithReference, "WITH_REFERENCE"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(FrameIndex,    "FRAME_INDEX"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(DataCount,     "DATA_COUNT"));
-	this->mapItemEnum2Str.insert(std::map<BvhItemEnum, std::string>::value_type(Data,          "DATA"));
+	// Make a map for translating Enum to string.
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(AvatarIndex,   "AVATAR_INDEX"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(AvatarName,    "AVATAR_NAME"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(WithDisp,      "WITH_DISP"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(WithReference, "WITH_REFERENCE"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(FrameIndex,    "FRAME_INDEX"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(DataCount,     "DATA_COUNT"));
+	this->mapMsgItemEnum2Str.insert(std::map<MsgItemEnum, std::string>::value_type(Data,          "DATA"));
 
-	std::map<BvhItemEnum, std::string>::const_iterator it;
+	// Make a map for translating string to Enum.
+	std::map<MsgItemEnum, std::string>::const_iterator it;
 
-	for (it = this->mapItemEnum2Str.begin(); it != this->mapItemEnum2Str.end(); it++)
+	for (it = this->mapMsgItemEnum2Str.begin(); it != this->mapMsgItemEnum2Str.end(); it++)
 	{
-		this->mapItemStr2Enum.insert(std::map<std::string, BvhItemEnum>::value_type((*it).second, (*it).first));
+		this->mapMsgItemStr2Enum.insert(std::map<std::string, MsgItemEnum>::value_type((*it).second, (*it).first));
 	}
 }
 
 
-/// @brief Return the name of BVH item.
-std::string PerceptionNeuronSensorData::getBvhItemName(BvhItemEnum bvhItemEnum) const
-{
-	return this->mapItemEnum2Str.at(bvhItemEnum);
-}
-
-/// @brief 
-PerceptionNeuronSensorData::BvhItemEnum PerceptionNeuronSensorData::getBvhItemEnum(std::string itemName) const
-{
-	return this->mapItemStr2Enum.at(itemName);
-}
-
-
-
-///@brief Generate message by posture.
+///@brief Generate a message string by posture.
 std::string PerceptionNeuronSensorData::encodeSensorData(const std::string &itemsDelim, const std::string &keyValueDelim, const std::string &valuesDelim) const
 {
 	std::stringstream ss;
 
-	ss  << this->mapItemEnum2Str.at(AvatarIndex)   << keyValueDelim << this->bvhData.avatarIndex   << itemsDelim
-		<< this->mapItemEnum2Str.at(AvatarName)    << keyValueDelim << this->bvhData.avatarName    << itemsDelim
-		<< this->mapItemEnum2Str.at(WithDisp)      << keyValueDelim << this->bvhData.withDisp      << itemsDelim
-		<< this->mapItemEnum2Str.at(WithReference) << keyValueDelim << this->bvhData.withReference << itemsDelim
-		<< this->mapItemEnum2Str.at(FrameIndex)    << keyValueDelim << this->bvhData.frameIndex    << itemsDelim
-		<< this->mapItemEnum2Str.at(DataCount)     << keyValueDelim << this->bvhData.dataCount     << itemsDelim
-		<< this->mapItemEnum2Str.at(Data)          << keyValueDelim << this->getDataString();
+	ss  << this->mapMsgItemEnum2Str.at(AvatarIndex)   << keyValueDelim << this->bvhData.avatarIndex   << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(AvatarName)    << keyValueDelim << this->bvhData.avatarName    << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(WithDisp)      << keyValueDelim << this->bvhData.withDisp      << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(WithReference) << keyValueDelim << this->bvhData.withReference << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(FrameIndex)    << keyValueDelim << this->bvhData.frameIndex    << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(DataCount)     << keyValueDelim << this->bvhData.dataCount     << itemsDelim
+		<< this->mapMsgItemEnum2Str.at(Data)          << keyValueDelim << this->getDataString();
 
 	return(ss.str());
 }
 
 
+///@brief Get data string for sending message.
 std::string PerceptionNeuronSensorData::getDataString(const std::string &valuesDelim) const
 {
 	std::stringstream ss;
@@ -74,15 +60,15 @@ std::string PerceptionNeuronSensorData::getDataString(const std::string &valuesD
 ///@param Map of sensor data;
 bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap)
 {
-	// For Header.
 	std::map<std::string, std::vector<std::string> >::const_iterator it;
 
+	// For Header.
 	for (it = sensorDataMap.begin(); it != sensorDataMap.end(); it++)
 	{
 		if((*it).first==MSG_KEY_DEV_TYPE)     { continue; }
 		if((*it).first==MSG_KEY_DEV_UNIQUE_ID){ continue; }
 
-		BvhItemEnum bvhItemEnum = this->mapItemStr2Enum.at((*it).first);
+		MsgItemEnum bvhItemEnum = this->mapMsgItemStr2Enum.at((*it).first);
 
 		switch (bvhItemEnum)
 		{
@@ -123,16 +109,16 @@ bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::
 		}
 	}
 
+	// For Data (Joint rotations).
 	return this->setSensorDataJointRotation(sensorDataMap);
 }
 
 
-///@brief Set to sensor data.
-///@param Map of sensor data;
+///@brief Set to sensor data (Joint rotations).
+///@param Map of sensor data (Joint rotations);
 bool PerceptionNeuronSensorData::setSensorDataJointRotation(const std::map<std::string, std::vector<std::string> > &sensorDataMap)
 {
-	// For Data.
-	std::string keyStrData = this->mapItemEnum2Str.at(BvhItemEnum::Data);
+	std::string keyStrData = this->mapMsgItemEnum2Str.at(MsgItemEnum::Data);
 
 	if (sensorDataMap.find(keyStrData) != sensorDataMap.end())
 	{
@@ -140,7 +126,6 @@ bool PerceptionNeuronSensorData::setSensorDataJointRotation(const std::map<std::
 
 		for(int i = 0; i < BVHBonesTypeCount; ++i)
 		{
-			// calculate data index for selected bone
 			int dataIndex = 0;
 
 			if (this->bvhData.withDisp)
@@ -152,6 +137,7 @@ bool PerceptionNeuronSensorData::setSensorDataJointRotation(const std::map<std::
 					dataIndex += 6;
 				}
 
+				// Hips has a position.
 				if (i == BVHBonesType::Hips)
 				{
 					this->rootPosition.x = std::stof(dataList[dataIndex + 0]);
@@ -175,6 +161,7 @@ bool PerceptionNeuronSensorData::setSensorDataJointRotation(const std::map<std::
 						dataIndex += 6;
 					}
 
+					// Hips has a position.
 					this->rootPosition.x = std::stof(dataList[dataIndex + 0]);
 					this->rootPosition.y = std::stof(dataList[dataIndex + 1]);
 					this->rootPosition.z = std::stof(dataList[dataIndex + 2]);

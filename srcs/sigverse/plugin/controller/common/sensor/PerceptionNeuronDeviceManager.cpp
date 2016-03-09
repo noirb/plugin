@@ -12,8 +12,6 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include <cmath>
 
-
-const double PerceptionNeuronDeviceManager::normalization_range = 0.1;
 #define DEG2RAD(DEG) ( (M_PI) * (DEG) / 180.0 )
 
 PerceptionNeuronDeviceManager::PerceptionNeuronDeviceManager()
@@ -38,14 +36,18 @@ PerceptionNeuronDeviceManager::PerceptionNeuronDeviceManager(std::string &name, 
 	this->started = false;
 }
 
-void PerceptionNeuronDeviceManager::initPositionAndRotation(SimObj *myself)
+
+///@brief Get initial positions and rotations.
+void PerceptionNeuronDeviceManager::getInitialPositionAndRotation(SimObj *myself)
 {
+	// Get initial positions.
 	Vector3d tmpPos;
 	myself->getPosition(tmpPos);
 	this->iniPos.x = tmpPos.x();
 	this->iniPos.y = tmpPos.y();
 	this->iniPos.z = tmpPos.z();
 
+	// Get initial rotations.
 	Rotation rot;
 	myself->getRotation(rot);
 	double qw = rot.qw();
@@ -75,7 +77,6 @@ void PerceptionNeuronDeviceManager::setPosition2ManBvh(SimObj *obj, const ManBvh
 }
 
 
-// for ManNiiAvatar
 void PerceptionNeuronDeviceManager::setJointAngle2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType)
 {
 //	if(manBvhJointType==ManBvhPosture::HIP_JOINT)
@@ -95,7 +96,6 @@ void PerceptionNeuronDeviceManager::setJointAngle2ManBvh(SimObj *obj, const ManB
 }
 
 
-// for ManNiiAvatar
 void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture)
 {
 	//Save start position
@@ -113,8 +113,10 @@ void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhP
 		this->started = true;
 	}
 
+	// Set position.
 	this->setPosition2ManBvh(obj, manBvhPosture);
 
+	// Set angles.
 	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::HIP_JOINT);
 	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::WAIST_JOINT);
 	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::NECK_JOINT);
@@ -135,7 +137,6 @@ void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhP
 }
 
 
-// for ManNiiAvatar
 ManBvhPosture PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(const PerceptionNeuronSensorData &sensorData)
 {
 	ManBvhPosture manBvhPosture;

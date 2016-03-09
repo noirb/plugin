@@ -64,7 +64,6 @@ void ManNiiAvatarControllerByOculusDK2::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-///@return When couldn't read parameter file, return false;
 void ManNiiAvatarControllerByOculusDK2::readIniFileAndInitialize()
 {
 	std::ifstream ifs(parameterFileName.c_str());

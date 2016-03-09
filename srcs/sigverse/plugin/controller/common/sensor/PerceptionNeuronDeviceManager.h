@@ -17,12 +17,11 @@
 class PerceptionNeuronDeviceManager
 {
 public:
-	static const double normalization_range;
-
 	PerceptionNeuronDeviceManager();
 	PerceptionNeuronDeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID);
 
-	void initPositionAndRotation(SimObj *myself);
+	///@brief Get initial positions and rotations.
+	void getInitialPositionAndRotation(SimObj *myself);
 
 private:
 	void setPosition2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
