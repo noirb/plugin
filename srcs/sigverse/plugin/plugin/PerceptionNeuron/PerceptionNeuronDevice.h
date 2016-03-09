@@ -32,11 +32,13 @@ public:
 	///@brief Execute Preception Neuron device.
 	int run();
 
-
+	///@brief Callback function for receiving BVH data.
 	static void __stdcall bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
 
+	///@brief Callback function for receiving Socket status.
 	static void __stdcall socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message);
 
+	///@brief Send BVH data.
 	void sendBvhData(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
 };
 

@@ -28,22 +28,18 @@ PerceptionNeuronDevice::PerceptionNeuronDevice()
 ///@brief Constructor
 PerceptionNeuronDevice::PerceptionNeuronDevice(int argc, char **argv)
 {
-	if (argc == 1) 
+	if (argc == 3) 
 	{
-		// When it works without SIGVerse.
-		fprintf(stdout, "Work stand alone.\n");
-		this->sendMessageFlag = false;
-		this->serverAddress = "";
-		this->portNumber = -1;
-	}
-	else if (argc == 3) 
-	{
-		// Work with SIGVerse.
-		fprintf(stdout, "SIGServer IP address: %s\n", argv[1]);
-		fprintf(stdout, "Port number: %s\n", argv[2]);
+		std::cout << "SIGServer IP address:" << argv[1] << std::endl;
+		std::cout << "Port number: " << argv[2] << std::endl;
 		this->sendMessageFlag = true;
 		this->serverAddress = argv[1];
 		this->portNumber = atoi(argv[2]);
+	}
+	else
+	{
+		std::cout << "Please set the arguments (IP address, port number)." << std::endl;
+		exit(-1);
 	}
 }
 
@@ -53,14 +49,15 @@ PerceptionNeuronDevice::~PerceptionNeuronDevice()
 }
 
 
-///@brief Execute kinect v2 device.
+///@brief Execute Preception Neuron device.
 int PerceptionNeuronDevice::run()
 {
 	try 
 	{
-		// Prepare to use SIGService.
+		// Read the initialize file.
 		this->readIniFile();
 
+		// Prepare to use SIGService.
 		this->sigService.setName(this->serviceName);
 		this->initializeSigService(sigService);
 
@@ -77,19 +74,20 @@ int PerceptionNeuronDevice::run()
 
 		sockTCPRef = BRConnectTo(neuronIpAddressChar, this->neuronPort);
 
-		// if success, change the title of button
 		if (sockTCPRef)
 		{
 			std::cout << "Connection is OK" << std::endl;
 		}
 		else
 		{
-			// if failed, show message
 			std::cout << "Connection is NG" << std::endl;
+			return;
 		}
 
+		// Receive BVH data by the callback function.
 		BRRegisterFrameDataCallback(this, this->bvhFrameDataReceived);
 
+		// Receive Socket status by the callback function.
 		BRRegisterSocketStatusCallback(this, this->socketStatusChanged);
 			
 		delete neuronIpAddressChar;
@@ -102,6 +100,7 @@ int PerceptionNeuronDevice::run()
 				while (_kbhit() != 0){ _getch(); }
 				break;
 			}
+			Sleep(100);
 		}
 
 		// close socket
