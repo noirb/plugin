@@ -81,7 +81,7 @@ int PerceptionNeuronDevice::run()
 		else
 		{
 			std::cout << "Connection is NG" << std::endl;
-			return;
+			return -1;
 		}
 
 		// Receive BVH data by the callback function.
