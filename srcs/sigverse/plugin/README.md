@@ -16,5 +16,5 @@ This directory include common sources.
 Common sources are used by plugin and common library(sigplugin.so).  
 
 Notes are the following.
-* Using both Windows and Ubuntu.
+* Build in both Windows and Ubuntu.
 * Have to install boost.
