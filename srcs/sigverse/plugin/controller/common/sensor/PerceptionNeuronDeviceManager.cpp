@@ -12,8 +12,6 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include <cmath>
 
-#define DEG2RAD(DEG) ( (M_PI) * (DEG) / 180.0 )
-
 PerceptionNeuronDeviceManager::PerceptionNeuronDeviceManager()
 {
 	this->service        = NULL;
@@ -21,7 +19,7 @@ PerceptionNeuronDeviceManager::PerceptionNeuronDeviceManager()
 	this->deviceType     = "";
 	this->deviceUniqueID = "";
 
-	this->yrot = 0.0;
+//	this->yrot = 0.0;
 	this->started = false;
 }
 
@@ -32,7 +30,7 @@ PerceptionNeuronDeviceManager::PerceptionNeuronDeviceManager(std::string &name, 
 	this->deviceType     = deviceType;
 	this->deviceUniqueID = deviceUniqueID;
 
-	this->yrot = 0.0;
+//	this->yrot = 0.0;
 	this->started = false;
 }
 
@@ -47,13 +45,13 @@ void PerceptionNeuronDeviceManager::getInitialPositionAndRotation(SimObj *myself
 	this->iniPos.y = tmpPos.y();
 	this->iniPos.z = tmpPos.z();
 
-	// Get initial rotations.
-	Rotation rot;
-	myself->getRotation(rot);
-	double qw = rot.qw();
-	double qy = rot.qy();
-	this->yrot = acos(fabs(qw))*2.0;
-	if (qw*qy > 0){ this->yrot = -1.0*this->yrot; }
+//	// Get initial rotations.
+//	Rotation rot;
+//	myself->getRotation(rot);
+//	double qw = rot.qw();
+//	double qy = rot.qy();
+//	this->yrot = acos(fabs(qw))*2.0;
+//	if (qw*qy > 0){ this->yrot = -1.0*this->yrot; }
 }
 
 
@@ -69,50 +67,28 @@ void PerceptionNeuronDeviceManager::setPosition2ManBvh(SimObj *obj, const ManBvh
 	double dy = movingDistance.y;
 	double dz = movingDistance.z;
 
-	double gx = std::cos(this->yrot)*dx - std::sin(this->yrot)*dz;
-	double gz = std::sin(this->yrot)*dx + std::cos(this->yrot)*dz;
+//	double gx = std::cos(this->yrot)*dx - std::sin(this->yrot)*dz;
+//	double gz = std::sin(this->yrot)*dx + std::cos(this->yrot)*dz;
 
-//	obj->setPosition(this->iniPos.x + gx,this->iniPos.y + dy,this->iniPos.z + gz);
-	obj->setPosition(this->iniPos.x + dx,this->iniPos.y + dy,this->iniPos.z + dz);
+	float yrot = SigCmn::deg2rad<float>(this->startRot.x);
+
+	double gx = std::cos(yrot)*dx - std::sin(yrot)*dz;
+	double gz = std::sin(yrot)*dx + std::cos(yrot)*dz;
+
+	obj->setPosition(this->iniPos.x + gx,this->iniPos.y + dy,this->iniPos.z + gz);
 }
 
 
 void PerceptionNeuronDeviceManager::setJointAngle2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType)
 {
-//	if(manBvhJointType==ManBvhPosture::HIP_JOINT)
-//	{
-////		printf("Start rotation   X : %f ------ Y : %f   ---- Z : %f   ---- end \n", this->startRot.x, this->startRot.y, this->startRot.z);
-////		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), DEG2RAD(-this->startRot.z));
-//		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.y-this->startRot.y));
-//		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.z-this->startRot.z));
-//		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.x-this->startRot.x));
-//	}
-//	else
-//	{
-		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.y));
-		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.z));
-		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), DEG2RAD(manBvhPosture.joint[manBvhJointType].angle.x));
-//	}
+	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.x));
+	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.y));
+	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.z));
 }
 
 
 void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture)
 {
-	//Save start position
-	if (this->started == false)
-	{
-		this->startpos.x = manBvhPosture.rootPosision.x;
-		this->startpos.y = manBvhPosture.rootPosision.y;
-		this->startpos.z = manBvhPosture.rootPosision.z;
-		printf("Start position   X : %f ------ Y : %f   ---- Z : %f   ---- end \n", this->startpos.x, this->startpos.y, this->startpos.z);
-
-		this->startRot.x = manBvhPosture.joint[ManBvhPosture::HIP_JOINT].angle.x;
-		this->startRot.y = manBvhPosture.joint[ManBvhPosture::HIP_JOINT].angle.y;
-		this->startRot.z = manBvhPosture.joint[ManBvhPosture::HIP_JOINT].angle.z;
-
-		this->started = true;
-	}
-
 	// Set position.
 	this->setPosition2ManBvh(obj, manBvhPosture);
 
@@ -139,13 +115,35 @@ void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhP
 
 ManBvhPosture PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(const PerceptionNeuronSensorData &sensorData)
 {
+	//Save start position
+	if (this->started == false)
+	{
+		this->startpos.x = sensorData.rootPosition.x;
+		this->startpos.y = sensorData.rootPosition.y;
+		this->startpos.z = sensorData.rootPosition.z;
+		printf("Start position   X : %f ------ Y : %f   ---- Z : %f   ---- end \n", this->startpos.x, this->startpos.y, this->startpos.z);
+
+		this->startRot.x = sensorData.jointRotations[PerceptionNeuronSensorData::Hips  ].rotation.x;
+		this->startRot.y = sensorData.jointRotations[PerceptionNeuronSensorData::Hips  ].rotation.y;
+		this->startRot.z = sensorData.jointRotations[PerceptionNeuronSensorData::Hips  ].rotation.z;
+
+		this->started = true;
+	}
+
 	ManBvhPosture manBvhPosture;
 
 	manBvhPosture.rootPosision = sensorData.rootPosition;
 
-	manBvhPosture.joint[ManBvhPosture::HIP_JOINT  ].angle = sensorData.jointRotations[PerceptionNeuronSensorData::Hips  ].rotation;
-	manBvhPosture.joint[ManBvhPosture::WAIST_JOINT].angle = sensorData.jointRotations[PerceptionNeuronSensorData::Spine1].rotation;
-	manBvhPosture.joint[ManBvhPosture::NECK_JOINT ].angle = sensorData.jointRotations[PerceptionNeuronSensorData::Neck  ].rotation;
+	//TODO Have to adjust Hip,Waist,Neck.
+	SigCmn::Vector3 hipAngle = sensorData.jointRotations[PerceptionNeuronSensorData::Hips].rotation;
+	hipAngle.x -= this->startRot.x;
+
+	SigCmn::Vector3 waistAngle = sensorData.jointRotations[PerceptionNeuronSensorData::Spine1].rotation;
+	SigCmn::Vector3 neckAngle = sensorData.jointRotations[PerceptionNeuronSensorData::Head].rotation;
+
+	manBvhPosture.joint[ManBvhPosture::HIP_JOINT  ].angle = hipAngle;
+	manBvhPosture.joint[ManBvhPosture::WAIST_JOINT].angle = waistAngle;
+	manBvhPosture.joint[ManBvhPosture::NECK_JOINT ].angle = neckAngle;
 
 	manBvhPosture.joint[ManBvhPosture::LSHOULDER_JOINT].angle = sensorData.jointRotations[PerceptionNeuronSensorData::LeftArm     ].rotation;
 	manBvhPosture.joint[ManBvhPosture::LELBOW_JOINT   ].angle = sensorData.jointRotations[PerceptionNeuronSensorData::LeftForeArm ].rotation;

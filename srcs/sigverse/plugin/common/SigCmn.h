@@ -74,7 +74,12 @@ public:
 	static bool diffVec(SigCmn::Vector3 &rvec, const SigCmn::Vector3 &jvec, const SigCmn::Vector3 &kvec);
 
 	///@brief Translate degree to radian.
-	static const double deg2rad(const double deg);
+	template <typename T>
+	static T deg2rad(T deg)
+	{
+		return (M_PI * deg / 180.0);
+	}
+
 };
 
 #endif /* SIGVERSE_SIG_CMN_H */

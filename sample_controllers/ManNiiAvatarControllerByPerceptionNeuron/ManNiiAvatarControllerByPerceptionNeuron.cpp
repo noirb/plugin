@@ -61,7 +61,7 @@ void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 
 		sensorData.setSensorData(sensorDataMap);
 
-		ManBvhPosture posture = PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(sensorData);
+		ManBvhPosture posture = this->perceptionNeuronDeviceManager.convertSensorData2ManBvhPosture(sensorData);
 
 		// Set the posture to avatar.
 		SimObj *obj = getObj(myname());

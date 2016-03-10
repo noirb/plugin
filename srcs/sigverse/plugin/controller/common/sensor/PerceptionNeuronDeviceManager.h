@@ -30,7 +30,7 @@ public:
 	void setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
 
 	///@brief Convert Perception Neuron joint rotation to avatar posture structure.
-	static ManBvhPosture convertSensorData2ManBvhPosture(const PerceptionNeuronSensorData &sensorData);
+	ManBvhPosture convertSensorData2ManBvhPosture(const PerceptionNeuronSensorData &sensorData);
 
 	BaseService *service;
 	std::string serviceName;
@@ -38,8 +38,6 @@ public:
 	std::string deviceUniqueID;
 
 	SigCmn::Vector3 iniPos;
-	double yrot;
-
 	SigCmn::Vector3 startpos, startRot;
 	bool started;
 };

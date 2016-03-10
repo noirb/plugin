@@ -27,11 +27,3 @@ bool SigCmn::diffVec(SigCmn::Vector3 &rvec, const SigCmn::Vector3 &jvec, const S
 	return true;
 }
 
-
-/*!
- * @brief Translate degree to radian.
- */
-const double SigCmn::deg2rad(const double deg)
-{
-	return (M_PI * deg / 180.0);
-}
