@@ -116,6 +116,12 @@ void AvatarControllerByPerceptionNeuron::readIniFileAndInitialize()
 	catch (boost::exception &ex)
 	{
 		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		exit(-1);
+	}
+	catch (...)
+	{
+		std::cout << "Some exception occurred in readIniFileAndInitialize()." << std::endl;
+		exit(-1);
 	}
 }
 

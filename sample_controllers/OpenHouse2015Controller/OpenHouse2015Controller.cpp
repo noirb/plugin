@@ -344,69 +344,66 @@ void OpenHouse2015Controller::setReverseModeAndDelayTime(const std::map<std::str
 ///@return When couldn't read parameter file, return false;
 void OpenHouse2015Controller::readIniFileAndInitialize()
 {
-	std::ifstream ifs(parameterFileName.c_str());
-
-	std::string kinectV2ServiceName;
-	std::string kinectV2DeviceType;
-	std::string kinectV2DeviceUniqueID;
-	double      scaleRatio;
-	std::string sensorDataModeStr;
-
-	std::string oculusDK1ServiceName;
-	std::string oculusDK1DeviceType;
-	std::string oculusDK1DeviceUniqueID;
-
-	// Parameter file is "not" exists.
-	if (ifs.fail())
-	{
-		std::cout << "Not exist : " << parameterFileName << std::endl;
-		exit(-1);
-	}
-	// Parameter file is exists.
 	try
 	{
+		std::ifstream ifs(parameterFileName.c_str());
+
+		// Parameter file is "not" exists.
+		if (ifs.fail())
+		{
+			std::cout << "Not exist : " << parameterFileName << std::endl;
+			exit(-1);
+		}
+
+		// Parameter file is exists.
 		std::cout << "Read " << parameterFileName << std::endl;
 		boost::property_tree::ptree pt;
 		boost::property_tree::read_ini(parameterFileName, pt);
 
-		kinectV2ServiceName    = pt.get<std::string>(paramFileKeyKinectV2ServiceName);
-		kinectV2DeviceType     = pt.get<std::string>(paramFileKeyKinectV2Devicetype);
-		kinectV2DeviceUniqueID = pt.get<std::string>(paramFileKeyKinectV2DeviceUniqueID);
+		std::string kinectV2ServiceName    = pt.get<std::string>(paramFileKeyKinectV2ServiceName);
+		std::string kinectV2DeviceType     = pt.get<std::string>(paramFileKeyKinectV2Devicetype);
+		std::string kinectV2DeviceUniqueID = pt.get<std::string>(paramFileKeyKinectV2DeviceUniqueID);
 
-		sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
-		scaleRatio        = pt.get<double>     (paramFileKeyKinectV2ScaleRatio);
+		std::string sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+		double      scaleRatio        = pt.get<double>     (paramFileKeyKinectV2ScaleRatio);
 
-		oculusDK1ServiceName    = pt.get<std::string>(paramFileKeyOculusDK1ServiceName);
-		oculusDK1DeviceType     = pt.get<std::string>(paramFileKeyOculusDK1Devicetype);
-		oculusDK1DeviceUniqueID = pt.get<std::string>(paramFileKeyOculusDK1DeviceUniqueID);
+		std::string oculusDK1ServiceName    = pt.get<std::string>(paramFileKeyOculusDK1ServiceName);
+		std::string oculusDK1DeviceType     = pt.get<std::string>(paramFileKeyOculusDK1Devicetype);
+		std::string oculusDK1DeviceUniqueID = pt.get<std::string>(paramFileKeyOculusDK1DeviceUniqueID);
 
 		this->guiServiceName = pt.get<std::string>(paramFileKeyChangeAvatarGUIServiceName);
+
+		std::cout << paramFileKeyKinectV2ServiceName    << ":" << kinectV2ServiceName    << std::endl;
+		std::cout << paramFileKeyKinectV2Devicetype     << ":" << kinectV2DeviceType     << std::endl;
+		std::cout << paramFileKeyKinectV2DeviceUniqueID << ":" << kinectV2DeviceUniqueID << std::endl;
+
+		std::cout << paramFileKeyKinectV2SensorDataMode << ":" << sensorDataModeStr << std::endl;
+		std::cout << paramFileKeyKinectV2ScaleRatio     << ":" << scaleRatio << std::endl;
+
+		std::cout << paramFileKeyOculusDK1ServiceName    << ":" << oculusDK1ServiceName    << std::endl;
+		std::cout << paramFileKeyOculusDK1Devicetype     << ":" << oculusDK1DeviceType     << std::endl;
+		std::cout << paramFileKeyOculusDK1DeviceUniqueID << ":" << oculusDK1DeviceUniqueID << std::endl;
+
+		std::cout << paramFileKeyChangeAvatarGUIServiceName << ":" << this->guiServiceName << std::endl;
+
+
+		this->kinectV2DeviceManager = KinectV2DeviceManager(kinectV2ServiceName, kinectV2DeviceType, kinectV2DeviceUniqueID, scaleRatio);
+
+		// Set sensor data mode.
+		KinectV2SensorData::setSensorDataMode(sensorDataModeStr);
+
+		this->oculusDK1DeviceManager = OculusDK1DeviceManager(oculusDK1ServiceName, oculusDK1DeviceType, oculusDK1DeviceUniqueID);
 	}
 	catch (boost::exception &ex)
 	{
 		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		exit(-1);
 	}
-
-	std::cout << paramFileKeyKinectV2ServiceName    << ":" << kinectV2ServiceName    << std::endl;
-	std::cout << paramFileKeyKinectV2Devicetype     << ":" << kinectV2DeviceType     << std::endl;
-	std::cout << paramFileKeyKinectV2DeviceUniqueID << ":" << kinectV2DeviceUniqueID << std::endl;
-
-	std::cout << paramFileKeyKinectV2SensorDataMode << ":" << sensorDataModeStr << std::endl;
-	std::cout << paramFileKeyKinectV2ScaleRatio     << ":" << scaleRatio << std::endl;
-
-	std::cout << paramFileKeyOculusDK1ServiceName    << ":" << oculusDK1ServiceName    << std::endl;
-	std::cout << paramFileKeyOculusDK1Devicetype     << ":" << oculusDK1DeviceType     << std::endl;
-	std::cout << paramFileKeyOculusDK1DeviceUniqueID << ":" << oculusDK1DeviceUniqueID << std::endl;
-
-	std::cout << paramFileKeyChangeAvatarGUIServiceName << ":" << this->guiServiceName << std::endl;
-
-
-	this->kinectV2DeviceManager = KinectV2DeviceManager(kinectV2ServiceName, kinectV2DeviceType, kinectV2DeviceUniqueID, scaleRatio);
-
-	// Set sensor data mode.
-	KinectV2SensorData::setSensorDataMode(sensorDataModeStr);
-
-	this->oculusDK1DeviceManager = OculusDK1DeviceManager(oculusDK1ServiceName, oculusDK1DeviceType, oculusDK1DeviceUniqueID);
+	catch (...)
+	{
+		std::cout << "Some exception occurred in readIniFileAndInitialize()." << std::endl;
+		exit(-1);
+	}
 }
 
 

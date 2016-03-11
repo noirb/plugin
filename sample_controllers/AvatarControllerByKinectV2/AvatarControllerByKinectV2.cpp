@@ -79,49 +79,50 @@ void AvatarControllerByKinectV2::onRecvMsg(RecvMsgEvent &evt)
 ///@brief Read parameter file.
 void AvatarControllerByKinectV2::readIniFileAndInitialize()
 {
-	std::ifstream ifs(parameterFileName.c_str());
-
-	std::string serviceName;
-	std::string deviceType;
-	std::string deviceUniqueID;
-	double      scaleRatio;
-	std::string sensorDataModeStr;
-
-	// Parameter file is "not" exists.
-	if (ifs.fail())
-	{
-		std::cout << "Not exist : " << parameterFileName << std::endl;
-		exit(-1);
-	}
-	// Parameter file is exists.
 	try
 	{
+		std::ifstream ifs(parameterFileName.c_str());
+
+		// Parameter file is "not" exists.
+		if (ifs.fail())
+		{
+			std::cout << "Not exist : " << parameterFileName << std::endl;
+			exit(-1);
+		}
+
+		// Parameter file is exists.
 		std::cout << "Read " << parameterFileName << std::endl;
 		boost::property_tree::ptree pt;
 		boost::property_tree::read_ini(parameterFileName, pt);
 
-		serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-		deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-		deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+		std::string serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		std::string deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		std::string deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
 
-		scaleRatio        = pt.get<double>(paramFileKeyKinectV2ScaleRatio);
-		sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+		double      scaleRatio        = pt.get<double>(paramFileKeyKinectV2ScaleRatio);
+		std::string sensorDataModeStr = pt.get<std::string>(paramFileKeyKinectV2SensorDataMode);
+
+		std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << deviceType     << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << deviceUniqueID << std::endl;
+		std::cout << paramFileKeyKinectV2SensorDataMode << ":" << sensorDataModeStr << std::endl;
+		std::cout << paramFileKeyKinectV2ScaleRatio     << ":" << scaleRatio << std::endl;
+
+		this->kinectV2DeviceManager = KinectV2DeviceManager(serviceName, deviceType, deviceUniqueID, scaleRatio);
+
+		// Set sensor data mode.
+		KinectV2SensorData::setSensorDataMode(sensorDataModeStr);
 	}
 	catch (boost::exception &ex)
 	{
 		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		exit(-1);
 	}
-
-	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << deviceType     << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << deviceUniqueID << std::endl;
-	std::cout << paramFileKeyKinectV2SensorDataMode << ":" << sensorDataModeStr << std::endl;
-	std::cout << paramFileKeyKinectV2ScaleRatio     << ":" << scaleRatio << std::endl;
-
-	this->kinectV2DeviceManager = KinectV2DeviceManager(serviceName, deviceType, deviceUniqueID, scaleRatio);
-
-	// Set sensor data mode.
-	KinectV2SensorData::setSensorDataMode(sensorDataModeStr);
+	catch (...)
+	{
+		std::cout << "Some exception occurred in readIniFileAndInitialize()." << std::endl;
+		exit(-1);
+	}
 }
 
 
