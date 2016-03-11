@@ -11,7 +11,7 @@ ManNiiPosture::ManNiiPosture()
 {
 	for (int i = 0; i < ManNiiJointType_Count; i++)
 	{
-		this->joint[i].jointType  = i;
+		this->joint[i].jointType  = (ManNiiJointType)i;
 		this->joint[i].quaternion = Quaternion(0.0, 0.0, 0.0, 0.0);
 		this->joint[i].isValid    = false;
 	}

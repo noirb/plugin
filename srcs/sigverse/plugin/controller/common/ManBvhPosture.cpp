@@ -11,7 +11,7 @@ ManBvhPosture::ManBvhPosture()
 {
 	for (int i = 0; i < ManBvhJointType_Count; i++)
 	{
-		this->joint[i].jointType = i;
+		this->joint[i].jointType = (ManBvhJointType)i;
 		this->joint[i].angle.x = 0.0;
 		this->joint[i].angle.y = 0.0;
 		this->joint[i].angle.z = 0.0;
