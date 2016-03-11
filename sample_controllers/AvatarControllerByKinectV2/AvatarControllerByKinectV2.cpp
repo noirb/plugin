@@ -1,5 +1,5 @@
 /*
- * ManNiiAvatarController.cpp
+ * AvatarControllerByKinectV2
  *
  *  Created on: 2015/03/12
  *      Author: Nozaki
@@ -10,10 +10,10 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include <sigverse/plugin/common/sensor/SensorData.h>
 #include <cmath>
-#include "ManNiiAvatarControllerByKinectV2.h"
+#include "AvatarControllerByKinectV2.h"
 
 ///@brief Initialize this controller.
-void ManNiiAvatarControllerByKinectV2::onInit(InitEvent &evt)
+void AvatarControllerByKinectV2::onInit(InitEvent &evt)
 {
 	this->readIniFileAndInitialize();
 
@@ -24,7 +24,7 @@ void ManNiiAvatarControllerByKinectV2::onInit(InitEvent &evt)
 
 
 ///@brief Movement of the robot.
-double ManNiiAvatarControllerByKinectV2::onAction(ActionEvent &evt)
+double AvatarControllerByKinectV2::onAction(ActionEvent &evt)
 {
 	bool kinectV2Available = checkService(this->kinectV2DeviceManager.serviceName);
 
@@ -40,7 +40,7 @@ double ManNiiAvatarControllerByKinectV2::onAction(ActionEvent &evt)
 	return 1.0;
 }
 
-void ManNiiAvatarControllerByKinectV2::onRecvMsg(RecvMsgEvent &evt)
+void AvatarControllerByKinectV2::onRecvMsg(RecvMsgEvent &evt)
 {
 	try
 	{
@@ -77,7 +77,7 @@ void ManNiiAvatarControllerByKinectV2::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-void ManNiiAvatarControllerByKinectV2::readIniFileAndInitialize()
+void AvatarControllerByKinectV2::readIniFileAndInitialize()
 {
 	std::ifstream ifs(parameterFileName.c_str());
 
@@ -127,7 +127,7 @@ void ManNiiAvatarControllerByKinectV2::readIniFileAndInitialize()
 
 extern "C" Controller * createController()
 {
-	return new ManNiiAvatarControllerByKinectV2;
+	return new AvatarControllerByKinectV2;
 }
 
 

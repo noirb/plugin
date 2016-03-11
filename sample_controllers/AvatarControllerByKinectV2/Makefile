@@ -1,8 +1,8 @@
 # target file (.so)
-TARGET = ./ManNiiAvatarControllerByOptiTrack.so
+TARGET = ./AvatarControllerByKinectV2.so
 
 # sources
-SRCS = ManNiiAvatarControllerByOptiTrack.cpp \
+SRCS = AvatarControllerByKinectV2.cpp \
 
 # compiler
 CXX = g++

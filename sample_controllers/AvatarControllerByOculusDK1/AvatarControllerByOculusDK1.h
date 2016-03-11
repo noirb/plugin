@@ -1,11 +1,11 @@
 /*
- * ManNiiAvatarControllerByOculusDK1.h
+ * AvatarControllerByOculusDK1
  *
  *  Created on: 2015/03/12
  *      Author: Nozaki
  */
-#ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
-#define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
+#ifndef SIGVERSE_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
+#define SIGVERSE_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
 
 #include <sigverse/commonlib/Controller.h>
 #include <sigverse/commonlib/ControllerEvent.h>
@@ -16,7 +16,7 @@
 #include <sigverse/plugin/common/sensor/OculusRiftDK1SensorData.h>
 
 
-class ManNiiAvatarControllerByOculusDK1 : public ManNiiAvatarController
+class AvatarControllerByOculusDK1 : public ManNiiAvatarController
 {
 public:
 	///@brief Parameter file name.
@@ -39,6 +39,6 @@ public:
 };
 
 ///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByOculusDK1::parameterFileName = "OculusRiftDK1.ini";
+const std::string AvatarControllerByOculusDK1::parameterFileName = "OculusRiftDK1.ini";
 
-#endif // SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OCULUS_DK1_H
+#endif // SIGVERSE_AVATAR_CONTROLLER_BY_OCULUS_DK1_H

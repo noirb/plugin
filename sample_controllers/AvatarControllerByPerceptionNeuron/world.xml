@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<world name="OculusRiftDK2World">
+<?xml version="1.0" encoding="utf8"?>
+<world name="PerceptionNeuronWorld">
 
 	<!--Gravity-->
 	<gravity x="0.0" y="-980.7" z="0.0"/>
 
 	<!--Agent "Man-nii"-->
-	<instanciate class="Man-nii.xml">
-
+	<instanciate class="Man-bvh_yxz.xml">
+		
 		<!--Agent name-->
-		<set-attr-value name="name" value="oculus_man"/>
+		<set-attr-value name="name" value="perception_neuron_man"/>
 
 		<!--C++-->
 		<set-attr-value name="language" value="c++"/>
 
-		<!--Object file "oculusController.so"-->
-		<set-attr-value name="implementation" value="./ManNiiAvatarControllerByOculusDK2.so"/>
+		<!--Object file -->
+		<set-attr-value name="implementation" value="./AvatarControllerByPerceptionNeuron.so"/>
 
-		<!--Kineticsset as false-->
+		<!--Kinetics set as false-->
 		<set-attr-value name="dynamics" value="false"/>
 
 		<!--Agent position(x,y,z)-->

@@ -1,11 +1,11 @@
 /*
- * ManNiiAvatarControllerByOptiTrack.h
+ * AvatarControllerByOptiTrack
  *
  *  Created on: 2015/03/12
  *      Author: Nozaki
  */
-#ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H
-#define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H
+#ifndef SIGVERSE_AVATAR_CONTROLLER_BY_OPTITRACK_H
+#define SIGVERSE_AVATAR_CONTROLLER_BY_OPTITRACK_H
 
 #include <sigverse/commonlib/Controller.h>
 #include <sigverse/commonlib/ControllerEvent.h>
@@ -16,7 +16,7 @@
 #include <sigverse/plugin/common/sensor/OptiTrackSensorData.h>
 
 
-class ManNiiAvatarControllerByOptiTrack : public ManNiiAvatarController
+class AvatarControllerByOptiTrack : public ManNiiAvatarController
 {
 public:
 	///@brief Parameter file name.
@@ -45,6 +45,6 @@ public:
 
 
 ///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByOptiTrack::parameterFileName = "OptiTrack.ini";
+const std::string AvatarControllerByOptiTrack::parameterFileName = "OptiTrack.ini";
 
-#endif // SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_OPTITRACK_H
+#endif // SIGVERSE_AVATAR_CONTROLLER_BY_OPTITRACK_H

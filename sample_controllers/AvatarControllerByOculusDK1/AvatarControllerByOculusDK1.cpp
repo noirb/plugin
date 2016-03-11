@@ -1,70 +1,70 @@
 /*
- * ManNiiAvatarControllerByOculusDK2.cpp
+ * AvatarControllerByOculusDK1
  *
- *  Created on: 2015/07/30
- *      Author: Wada
+ *  Created on: 2015/03/12
+ *      Author: Nozaki
  */
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include <sigverse/plugin/common/sensor/OculusRiftDK2SensorData.h>
+#include <sigverse/plugin/common/sensor/OculusRiftDK1SensorData.h>
 #include <cmath>
-#include "ManNiiAvatarControllerByOculusDK2.h"
+#include "AvatarControllerByOculusDK1.h"
 
 ///@brief Initialize this controller.
-void ManNiiAvatarControllerByOculusDK2::onInit(InitEvent &evt)
+void AvatarControllerByOculusDK1::onInit(InitEvent &evt)
 {
 	readIniFileAndInitialize();
-	
+
 	//For initialize.
 	getObj(myname());
 }
 
 
 ///@brief Movement of the robot.
-double ManNiiAvatarControllerByOculusDK2::onAction(ActionEvent &evt)
+double AvatarControllerByOculusDK1::onAction(ActionEvent &evt)
 {
-	bool oculusDK2Available = checkService(this->oculusDK2DeviceManager.serviceName);
+	bool oculusDK1Available = checkService(this->oculusDK1DeviceManager.serviceName);
 
-	if (oculusDK2Available && this->oculusDK2DeviceManager.service == NULL)
+	if (oculusDK1Available && this->oculusDK1DeviceManager.service == NULL)
 	{
-		this->oculusDK2DeviceManager.service = connectToService(this->oculusDK2DeviceManager.serviceName);
+		this->oculusDK1DeviceManager.service = connectToService(this->oculusDK1DeviceManager.serviceName);
 	}
-	else if (!oculusDK2Available && this->oculusDK2DeviceManager.service != NULL)
+	else if (!oculusDK1Available && this->oculusDK1DeviceManager.service != NULL)
 	{
-		this->oculusDK2DeviceManager.service = NULL;
+		this->oculusDK1DeviceManager.service = NULL;
 	}
 
 	return 1.0;
 }
 
-void ManNiiAvatarControllerByOculusDK2::onRecvMsg(RecvMsgEvent &evt)
+void AvatarControllerByOculusDK1::onRecvMsg(RecvMsgEvent &evt)
 {
 	const std::string allMsg = evt.getMsg();
 
 	//std::cout << allMsg << std::endl;
 
-	std::map<std::string, std::vector<std::string> > sensorDataMap = OculusRiftDK2SensorData::decodeSensorData(allMsg);
+	std::map<std::string, std::vector<std::string> > sensorDataMap = OculusRiftDK1SensorData::decodeSensorData(allMsg);
 
 	if (sensorDataMap.find(MSG_KEY_DEV_TYPE) == sensorDataMap.end()){ return; }
 
-	if(sensorDataMap[MSG_KEY_DEV_TYPE][0]     !=this->oculusDK2DeviceManager.deviceType    ){ return; }
-	if(sensorDataMap[MSG_KEY_DEV_UNIQUE_ID][0]!=this->oculusDK2DeviceManager.deviceUniqueID){ return; }
+	if(sensorDataMap[MSG_KEY_DEV_TYPE][0]     !=this->oculusDK1DeviceManager.deviceType    ){ return; }
+	if(sensorDataMap[MSG_KEY_DEV_UNIQUE_ID][0]!=this->oculusDK1DeviceManager.deviceUniqueID){ return; }
 
-	OculusRiftDK2SensorData sensorData;
+	OculusRiftDK1SensorData sensorData;
 	sensorData.setSensorData(sensorDataMap);
 
-	ManNiiPosture posture = OculusDK2DeviceManager::convertQuaternion2ManNiiPosture(sensorData.getQuaternion());
+	ManNiiPosture posture = OculusDK1DeviceManager::convertEulerAngle2ManNiiPosture(sensorData.getEulerAngle());
 
 	SimObj *obj = getObj(myname());
-	OculusDK2DeviceManager::setJointQuaternions2ManNii(obj, posture);
+	OculusDK1DeviceManager::setJointQuaternions2ManNii(obj, posture);
 }
 
 
 
 ///@brief Read parameter file.
-void ManNiiAvatarControllerByOculusDK2::readIniFileAndInitialize()
+void AvatarControllerByOculusDK1::readIniFileAndInitialize()
 {
 	std::ifstream ifs(parameterFileName.c_str());
 
@@ -98,13 +98,13 @@ void ManNiiAvatarControllerByOculusDK2::readIniFileAndInitialize()
 	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << deviceType     << std::endl;
 	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << deviceUniqueID << std::endl;
 
-	this->oculusDK2DeviceManager = OculusDK2DeviceManager(serviceName, deviceType, deviceUniqueID);
+	this->oculusDK1DeviceManager = OculusDK1DeviceManager(serviceName, deviceType, deviceUniqueID);
 }
 
 
 extern "C" Controller * createController()
 {
-	return new ManNiiAvatarControllerByOculusDK2;
+	return new AvatarControllerByOculusDK1;
 }
 
 

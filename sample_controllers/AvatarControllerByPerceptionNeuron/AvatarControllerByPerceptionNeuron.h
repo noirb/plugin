@@ -1,11 +1,11 @@
 /*
- * ManNiiAvatarControllerByPerceptionNeuron.h
+ * AvatarControllerByPerceptionNeuron
  *
  *  Created on: 2016/03/02
  *      Author: Yamada
  */
-#ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H
-#define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H
+#ifndef SIGVERSE_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H
+#define SIGVERSE_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H
 
 #include <sigverse/commonlib/Controller.h>
 #include <sigverse/commonlib/ControllerEvent.h>
@@ -16,7 +16,7 @@
 #include <sigverse/plugin/common/sensor/PerceptionNeuronSensorData.h>
 
 
-class ManNiiAvatarControllerByPerceptionNeuron : public ManNiiAvatarController
+class AvatarControllerByPerceptionNeuron : public AvatarController
 {
 public:
 	///@brief Parameter file name.
@@ -38,6 +38,6 @@ public:
 };
 
 ///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByPerceptionNeuron::parameterFileName = "PerceptionNeuron.ini";
+const std::string AvatarControllerByPerceptionNeuron::parameterFileName = "PerceptionNeuron.ini";
 
-#endif //SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H
+#endif //SIGVERSE_AVATAR_CONTROLLER_BY_PERCEPTION_NEURON_H

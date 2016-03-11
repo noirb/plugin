@@ -1,5 +1,5 @@
 /*
- * ManNiiAvatarController.cpp
+ * AvatarControllerByOptiTrack
  *
  *  Created on: 2015/03/12
  *      Author: Nozaki
@@ -10,11 +10,11 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <sigverse/plugin/common/SigCmn.h>
-#include "ManNiiAvatarControllerByOptiTrack.h"
+#include "AvatarControllerByOptiTrack.h"
 
 
 ///@brief Initialize this controller.
-void ManNiiAvatarControllerByOptiTrack::onInit(InitEvent &evt)
+void AvatarControllerByOptiTrack::onInit(InitEvent &evt)
 {
 	this->readIniFileAndInitialize();
 
@@ -36,7 +36,7 @@ void ManNiiAvatarControllerByOptiTrack::onInit(InitEvent &evt)
 
 
 ///@brief Movement of the robot.
-double ManNiiAvatarControllerByOptiTrack::onAction(ActionEvent &evt)
+double AvatarControllerByOptiTrack::onAction(ActionEvent &evt)
 {
 	bool optiTrackAvailable = checkService(this->optiTrackDeviceManager.serviceName);
 
@@ -52,7 +52,7 @@ double ManNiiAvatarControllerByOptiTrack::onAction(ActionEvent &evt)
 	return 1.0;
 }
 
-void ManNiiAvatarControllerByOptiTrack::onRecvMsg(RecvMsgEvent &evt)
+void AvatarControllerByOptiTrack::onRecvMsg(RecvMsgEvent &evt)
 {
 	try
 	{
@@ -87,7 +87,7 @@ void ManNiiAvatarControllerByOptiTrack::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-void ManNiiAvatarControllerByOptiTrack::readIniFileAndInitialize()
+void AvatarControllerByOptiTrack::readIniFileAndInitialize()
 {
 	std::ifstream ifs(parameterFileName.c_str());
 
@@ -127,5 +127,5 @@ void ManNiiAvatarControllerByOptiTrack::readIniFileAndInitialize()
 
 extern "C" Controller * createController()
 {
-	return new ManNiiAvatarControllerByOptiTrack;
+	return new AvatarControllerByOptiTrack;
 }

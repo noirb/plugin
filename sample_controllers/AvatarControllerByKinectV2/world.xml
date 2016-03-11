@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf8"?>
-<world name="OculusRiftDK1World">
+<world name="KinectV2World">
 
 	<!--Gravity-->
 	<gravity x="0.0" y="-980.7" z="0.0"/>
 
 	<!--Agent "Man-nii"-->
 	<instanciate class="Man-nii.xml">
-
+		
 		<!--Agent name-->
-		<set-attr-value name="name" value="oculus_man"/>
+		<set-attr-value name="name" value="kinect_man"/>
 
 		<!--C++-->
 		<set-attr-value name="language" value="c++"/>
 
 		<!--Object file "kinectController.so"-->
-		<set-attr-value name="implementation" value="./ManNiiAvatarControllerByOculusDK1.so"/>
+		<set-attr-value name="implementation" value="./AvatarControllerByKinectV2.so"/>
 
 		<!--Kineticsset as false-->
 		<set-attr-value name="dynamics" value="false"/>

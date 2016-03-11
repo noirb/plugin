@@ -1,11 +1,11 @@
 /*
- * ManNiiAvatarControllerByPerceptionNeuron.cpp
+ * AvatarControllerByPerceptionNeuron
  *
  *  Created on: 2016/03/02
  *      Author: Yamada
  */
 
-#include "ManNiiAvatarControllerByPerceptionNeuron.h"
+#include "AvatarControllerByPerceptionNeuron.h"
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -14,7 +14,7 @@
 #include <cmath>
 
 ///@brief Initialize this controller.
-void ManNiiAvatarControllerByPerceptionNeuron::onInit(InitEvent &evt)
+void AvatarControllerByPerceptionNeuron::onInit(InitEvent &evt)
 {
 	this->readIniFileAndInitialize();
 
@@ -24,7 +24,7 @@ void ManNiiAvatarControllerByPerceptionNeuron::onInit(InitEvent &evt)
 }
 
 
-double ManNiiAvatarControllerByPerceptionNeuron::onAction(ActionEvent &evt)
+double AvatarControllerByPerceptionNeuron::onAction(ActionEvent &evt)
 {
 	bool perceptionNeuronAvailable = checkService(this->perceptionNeuronDeviceManager.serviceName);
 
@@ -41,7 +41,7 @@ double ManNiiAvatarControllerByPerceptionNeuron::onAction(ActionEvent &evt)
 }
 
 ///@brief Receive Message.
-void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
+void AvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 {
 	try
 	{
@@ -85,7 +85,7 @@ void ManNiiAvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 
 
 ///@brief Read parameter file.
-void ManNiiAvatarControllerByPerceptionNeuron::readIniFileAndInitialize()
+void AvatarControllerByPerceptionNeuron::readIniFileAndInitialize()
 {
 	try
 	{
@@ -122,6 +122,6 @@ void ManNiiAvatarControllerByPerceptionNeuron::readIniFileAndInitialize()
 
 extern "C" Controller * createController()
 {
-	return new ManNiiAvatarControllerByPerceptionNeuron;
+	return new AvatarControllerByPerceptionNeuron;
 }
 

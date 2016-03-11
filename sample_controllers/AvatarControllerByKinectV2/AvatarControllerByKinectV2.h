@@ -1,11 +1,11 @@
 /*
- * ManNiiAvatarController.h
+ * AvatarControllerByKinectV2
  *
  *  Created on: 2015/03/12
  *      Author: Nozaki
  */
-#ifndef SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H
-#define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H
+#ifndef SIGVERSE_AVATAR_CONTROLLER_BY_KINECT_V2_H
+#define SIGVERSE_AVATAR_CONTROLLER_BY_KINECT_V2_H
 
 #include <sigverse/commonlib/Controller.h>
 #include <sigverse/commonlib/ControllerEvent.h>
@@ -16,7 +16,7 @@
 #include <sigverse/plugin/common/sensor/KinectV2SensorData.h>
 
 
-class ManNiiAvatarControllerByKinectV2 : public ManNiiAvatarController
+class AvatarControllerByKinectV2 : public ManNiiAvatarController
 {
 public:
 	///@brief Parameter file name.
@@ -41,10 +41,10 @@ public:
 };
 
 ///@brief Parameter file name.
-const std::string ManNiiAvatarControllerByKinectV2::parameterFileName = "KinectV2.ini";
+const std::string AvatarControllerByKinectV2::parameterFileName = "KinectV2.ini";
 
 //Parameter file information
-const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
-const std::string ManNiiAvatarControllerByKinectV2::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
+const std::string AvatarControllerByKinectV2::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
+const std::string AvatarControllerByKinectV2::paramFileKeyKinectV2ScaleRatio     = "KinectV2.scale_ratio";
 
-#endif //__MAN_NII_AVATAR_CONTROLLER_BY_KINECT_V2_H
+#endif //SIGVERSE_AVATAR_CONTROLLER_BY_KINECT_V2_H
