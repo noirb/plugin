@@ -10,7 +10,7 @@
 #include <sigverse/commonlib/Controller.h>
 #include <sigverse/commonlib/ControllerEvent.h>
 
-#include <sigverse/plugin/controller/common/ManNiiAvatarController.h>
+#include <sigverse/plugin/controller/common/AvatarController.h>
 #include <sigverse/plugin/controller/common/ManBvhPosture.h>
 #include <sigverse/plugin/controller/common/sensor/PerceptionNeuronDeviceManager.h>
 #include <sigverse/plugin/common/sensor/PerceptionNeuronSensorData.h>
