@@ -4,7 +4,7 @@
 	<!--Gravity-->
 	<gravity x="0.0" y="-980.7" z="0.0"/>
 
-	<!--Agent "Man-nii"-->
+	<!--Agent -->
 	<instanciate class="Man-bvh_yxz.xml">
 		
 		<!--Agent name-->
