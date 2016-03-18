@@ -1,4 +1,5 @@
 #include <sigverse/plugin/plugin/PerceptionNeuron/PerceptionNeuronDevice.h>
+#include <sigverse/plugin/common/sensor/PerceptionNeuronSensorData.h>
 #include <sigverse/plugin/plugin/common/CheckRecvSIGServiceData.h>
 
 #include <iostream>
@@ -15,8 +16,11 @@
 const std::string PerceptionNeuronDevice::parameterFileName = "PerceptionNeuron.ini";
 
 //Parameter file information
-const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronIpAddress    = "PerceptionNeuron.ip_address";
-const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronPort         = "PerceptionNeuron.port";
+const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronDataType        = "PerceptionNeuron.data_type";
+const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronBvhIpAddress    = "PerceptionNeuron.bvh_ip_address";
+const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronBvhPort         = "PerceptionNeuron.bvh_port";
+const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronCalcIpAddress   = "PerceptionNeuron.calc_ip_address";
+const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronCalcPort        = "PerceptionNeuron.calc_port";
 
 
 ///@brief Default Constructor
@@ -66,31 +70,20 @@ int PerceptionNeuronDevice::run()
 		boost::thread thCheckRecvData(&CheckRecvSIGServiceData::run, &checkRecvSIGServiceData, &this->sigService);
 
 		// connect to Perception Neuron
-		SOCKET_REF sockTCPRef = NULL;
+		SOCKET_REF sockRefBvh  = NULL;
+		SOCKET_REF sockRefCalc = NULL;
 
-		int neuronIpAddressLen = this->neuronIpAddress.length();
-		char* neuronIpAddressChar = new char[neuronIpAddressLen+1];
-		memcpy(neuronIpAddressChar, this->neuronIpAddress.c_str(), neuronIpAddressLen+1);
-
-		sockTCPRef = BRConnectTo(neuronIpAddressChar, this->neuronPort);
-
-		if (sockTCPRef)
+		if (this->dataType == STR(BVH))
 		{
-			std::cout << "Connection is OK" << std::endl;
+			this->connect4Bvh(sockRefBvh);
 		}
-		else
+		else if (this->dataType == STR(CALC))
 		{
-			std::cout << "Connection is NG" << std::endl;
-			return -1;
+			this->connect4Calc(sockRefCalc);
 		}
-
-		// Receive BVH data by the callback function.
-		BRRegisterFrameDataCallback(this, this->bvhFrameDataReceived);
 
 		// Receive Socket status by the callback function.
 		BRRegisterSocketStatusCallback(this, this->socketStatusChanged);
-			
-		delete neuronIpAddressChar;
 
 		while (true)
 		{
@@ -104,7 +97,14 @@ int PerceptionNeuronDevice::run()
 		}
 
 		// close socket
-		BRCloseSocket(sockTCPRef);
+		if (this->dataType == STR(BVH))
+		{
+			BRCloseSocket(sockRefBvh);
+		}
+		else if (this->dataType == STR(CALC))
+		{
+			BRCloseSocket(sockRefCalc);
+		}
 
 		sigService.disconnect();
 	}
@@ -115,6 +115,55 @@ int PerceptionNeuronDevice::run()
 	}
 
 	return 0;
+}
+
+
+void PerceptionNeuronDevice::connect4Bvh(SOCKET_REF sockRef)
+{
+	int ipAddressLen = this->neuronBvhIpAddress.length();
+	char* ipAddressChar = new char[ipAddressLen+1];
+	memcpy(ipAddressChar, this->neuronBvhIpAddress.c_str(), ipAddressLen+1);
+
+	sockRef = BRConnectTo(ipAddressChar, this->neuronBvhPort);
+
+	if (sockRef)
+	{
+		std::cout << "Connection for BVH is OK" << std::endl;
+	}
+	else
+	{
+		std::cout << "Connection for BVH is NG" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	// Receive BVH data by the callback function.
+	BRRegisterFrameDataCallback(this, this->bvhFrameDataReceived);
+			
+	delete ipAddressChar;
+}
+
+void PerceptionNeuronDevice::connect4Calc(SOCKET_REF sockRef)
+{
+	int ipAddressLen = this->neuronCalcIpAddress.length();
+	char* ipAddressChar = new char[ipAddressLen+1];
+	memcpy(ipAddressChar, this->neuronCalcIpAddress.c_str(), ipAddressLen+1);
+
+	sockRef = BRConnectTo(ipAddressChar, this->neuronCalcPort);
+
+	if (sockRef)
+	{
+		std::cout << "Connection for Calculation is OK" << std::endl;
+	}
+	else
+	{
+		std::cout << "Connection for Calculation is NG" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	// Receive Calculation data by the callback function.
+	BRRegisterCalculationDataCallback(this, this->calcDataReceived);
+	
+	delete ipAddressChar;
 }
 
 
@@ -140,11 +189,39 @@ void PerceptionNeuronDevice::sendBvhData(void* customedObj, SOCKET_REF sender, B
 	this->sendMessage(pthis->sigService, message);
 }
 
+void PerceptionNeuronDevice::sendCalcData(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data)
+{
+	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
+
+	//Execute smoothing 
+	PerceptionNeuronSensorData sensorData;
+
+	sensorData.calcData.avatarIndex   = header->AvatarIndex;
+	sensorData.calcData.avatarName    = std::string((char*)header->AvatarName);
+	sensorData.calcData.frameIndex    = header->FrameIndex;
+	sensorData.calcData.dataCount     = header->DataCount;
+	sensorData.calcData.data          = data;
+
+	// Send message to SigServer.
+	std::string messageHeader = this->generateMessageHeader();
+	std::string sensorDataMessage = sensorData.encodeSensorData();
+	std::string message = messageHeader + sensorDataMessage;
+	this->sendMessage(pthis->sigService, message);
+}
+
+
 void __stdcall PerceptionNeuronDevice::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data)
 {
 	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
 	pthis->sendBvhData(customedObj, sender, header, data);
 }
+
+void __stdcall PerceptionNeuronDevice::calcDataReceived(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data)
+{
+	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
+	pthis->sendCalcData(customedObj, sender, header, data);
+}
+
 
 void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message)
 {
@@ -152,23 +229,21 @@ void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SO
 	{
 		case CS_Running:
 		{
-			std::cout << "Socket is working correctly." << std::endl;
+			std::cout << "Socket is working correctly. msg=" << message << std::endl;
 			break;
 		}
 		case CS_Starting:
 		{
-			std::cout << "Is trying to start service." << std::endl;
+			std::cout << "Is trying to start service. msg=" << message << std::endl;
 			break;
 		}
 		case CS_OffWork:
 		{
-			std::cout << "Not working." << std::endl;
+			std::cout << "Not working. msg=" << message << std::endl;
 			break;
 		}
 	}
 }
-
-
 
 
 ///@brief Read parameter file.
@@ -194,15 +269,25 @@ void PerceptionNeuronDevice::readIniFile()
 		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
 		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
 
-		this->neuronIpAddress = pt.get<std::string>(paramFileKeyPerceptionNeuronIpAddress);
-		this->neuronPort      = pt.get<int>        (paramFileKeyPerceptionNeuronPort);
-
+		this->dataType            = pt.get<std::string>(paramFileKeyPerceptionNeuronDataType);
+		this->neuronBvhIpAddress  = pt.get<std::string>(paramFileKeyPerceptionNeuronBvhIpAddress);
+		this->neuronBvhPort       = pt.get<int>        (paramFileKeyPerceptionNeuronBvhPort);
+		this->neuronCalcIpAddress = pt.get<std::string>(paramFileKeyPerceptionNeuronCalcIpAddress);
+		this->neuronCalcPort      = pt.get<int>        (paramFileKeyPerceptionNeuronCalcPort);
 	
-		std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << this->serviceName       << std::endl;
-		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType        << std::endl;
-		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID    << std::endl;
-		std::cout << paramFileKeyPerceptionNeuronIpAddress       << ":" << this->neuronIpAddress   << std::endl;
-		std::cout << paramFileKeyPerceptionNeuronPort            << ":" << this->neuronPort        << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << this->serviceName        << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType         << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID     << std::endl;
+
+		std::cout << paramFileKeyPerceptionNeuronBvhIpAddress    << ":" << this->neuronBvhIpAddress  << std::endl;
+		std::cout << paramFileKeyPerceptionNeuronBvhPort         << ":" << this->neuronBvhPort       << std::endl;
+		std::cout << paramFileKeyPerceptionNeuronCalcIpAddress   << ":" << this->neuronCalcIpAddress << std::endl;
+		std::cout << paramFileKeyPerceptionNeuronCalcPort        << ":" << this->neuronCalcPort      << std::endl;
+
+		if (this->dataType != STR(BVH) && this->dataType == STR(CALC))
+		{
+			throw std::string("Illegal data type : "+this->dataType);
+		}
 	}
 	catch (std::string &ex)
 	{

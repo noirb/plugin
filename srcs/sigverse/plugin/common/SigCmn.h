@@ -12,6 +12,8 @@
 #include <sstream>
 #include <cmath>
 
+#define STR(val) #val
+
 
 class SigCmn
 {

@@ -8,13 +8,11 @@
 #include <sstream>
 #include <iomanip>
 
-///@brief Sensor data class for using Perception Neuron device.
-class PerceptionNeuronSensorData : public SensorData
+namespace BVH
 {
-public:
-	enum BVHBonesType
+	enum BonesType
 	{
-		Hips          = 0,
+		Hips,
 		RightUpLeg,
 		RightLeg,
 		RightFoot,
@@ -76,18 +74,73 @@ public:
 		LeftHandPinky2,
 		LeftHandPinky3,
 
-		BVHBonesTypeCount = LeftHandPinky3 + 1
+		BonesTypeCount,  // Number of Enum. It must be the last enum item.
 	};
-	
-	typedef struct _PerceptionNeuronJointRotation
+};
+
+namespace Calc
+{
+	enum BonesType
 	{
-		BVHBonesType     jointType;
+		Hips,
+		RightUpLeg,
+		RightLeg,
+		RightFoot,
+		LeftUpLeg,
+		LeftLeg,
+		LeftFoot,
+
+		RightShoulder,
+		RightArm,
+		RightForeArm,
+		RightHand,
+
+		LeftShoulder,
+		LeftArm,
+		LeftForeArm,
+		LeftHand,
+
+		Head,
+		Neck,
+		Spine3,
+		Spine2,
+		Spine1,
+		Spine,
+
+		BonesTypeCount,  // Number of Enum. It must be the last enum item.
+	};
+};
+
+
+///@brief Sensor data class for using Perception Neuron device.
+class PerceptionNeuronSensorData : public SensorData
+{
+public:
+	enum DataTypeEnum
+	{
+		BVH,
+		CALC,
+	};
+
+	
+
+	typedef struct _PerceptionNeuronBVHJoint
+	{
+		BVH::BonesType   jointType;
 		SigCmn::Vector3  rotation;
-	} PerceptionNeuronJointRotation;
+	} PerceptionNeuronBVHJoint;
+
+	typedef struct _PerceptionNeuronCalcJoint
+	{
+		Calc::BonesType jointType;
+		Quaternion      quaternion;
+	} PerceptionNeuronCalcJoint;
+
 
 	enum MsgItemEnum
 	{
-		AvatarIndex = 0,
+		DataType,
+		AvatarIndex,
 		AvatarName,
 		WithDisp,
 		WithReference,
@@ -107,13 +160,26 @@ public:
 		float          *data;
 	} BvhData;
 
+	typedef struct _CalcData
+	{
+		unsigned int   avatarIndex;
+		std::string    avatarName;
+		unsigned int   frameIndex;
+		unsigned short dataCount;
+		float          *data;
+	} CalcData;
+
+
+
 private:
 	std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
 	std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
 
 public:
+	DataTypeEnum dataType;
 
-	BvhData bvhData;
+	BvhData  bvhData;
+	CalcData calcData;
 
 	///@brief Constructor.
 	PerceptionNeuronSensorData();
@@ -125,21 +191,28 @@ public:
 	std::string encodeSensorData(const std::string &itemsDelim = ITEMS_DELIMITER, const std::string &keyValueDelim = KEY_AND_VALUE_DELIMITER, const std::string &valuesDelim = VALUES_DELIMITER) const;
 
 	///@brief Get data string for sending message.
-	std::string getDataString(const std::string &valuesDelim = VALUES_DELIMITER) const;
+	std::string getDataString(const unsigned short dataCount, const float *data, const std::string &valuesDelim = VALUES_DELIMITER) const;
 
 	///@brief Set to sensor data.
 	///@param Map of sensor data;
 	bool setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
-	///@brief Set to sensor data (Joint rotations).
-	///@param Map of sensor data (Joint rotations);
-	bool setSensorDataJointRotation(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
+	///@brief Set to sensor data (for BVH).
+	///@param Map of sensor data;
+	bool setSensorData4Bvh(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
+
+	///@brief Set to sensor data (for Calclation).
+	///@param Map of sensor data;
+	bool setSensorData4Calc(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
 	///@brief Root body position.
 	SigCmn::Vector3 rootPosition;
 
-	///@brief Whole body joint rotation.
-	PerceptionNeuronJointRotation jointRotations[BVHBonesTypeCount];
+	///@brief Whole body BVH joint info.
+	PerceptionNeuronBVHJoint bvhJoints[BVH::BonesTypeCount];
+
+	///@brief Whole body Calculation joint info
+	PerceptionNeuronCalcJoint calcJoints[Calc::BonesTypeCount];
 };
 
 #endif // SIGVERSE_PERCEPTION_NEURON_SENSOR_DATA_H
