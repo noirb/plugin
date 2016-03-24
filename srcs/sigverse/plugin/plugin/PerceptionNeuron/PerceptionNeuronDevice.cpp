@@ -133,6 +133,7 @@ void PerceptionNeuronDevice::connect4Bvh(SOCKET_REF sockRef)
 	else
 	{
 		std::cout << "Connection for BVH is NG" << std::endl;
+		Sleep(15*1000);
 		exit(EXIT_FAILURE);
 	}
 
@@ -157,6 +158,7 @@ void PerceptionNeuronDevice::connect4Calc(SOCKET_REF sockRef)
 	else
 	{
 		std::cout << "Connection for Calculation is NG" << std::endl;
+		Sleep(15*1000);
 		exit(EXIT_FAILURE);
 	}
 
