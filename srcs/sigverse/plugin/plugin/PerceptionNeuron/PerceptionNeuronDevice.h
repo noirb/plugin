@@ -45,7 +45,7 @@ public:
 	static void __stdcall bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data);
 
 	///@brief Callback function for receiving Calculation data.
-	static void __stdcall calcDataReceived(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data);
+	static void __stdcall calcFrameDataReceived(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data);
 
 	///@brief Callback function for receiving Socket status.
 	static void __stdcall socketStatusChanged(void* customedObj, SOCKET_REF sender, SocketStatus status, char* message);

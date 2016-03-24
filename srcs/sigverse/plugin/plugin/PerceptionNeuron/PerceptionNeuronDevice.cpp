@@ -137,7 +137,7 @@ void PerceptionNeuronDevice::connect4Bvh(SOCKET_REF sockRef)
 	}
 
 	// Receive BVH data by the callback function.
-	BRRegisterFrameDataCallback(this, this->bvhFrameDataReceived);
+	BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived);
 			
 	delete ipAddressChar;
 }
@@ -161,7 +161,8 @@ void PerceptionNeuronDevice::connect4Calc(SOCKET_REF sockRef)
 	}
 
 	// Receive Calculation data by the callback function.
-	BRRegisterCalculationDataCallback(this, this->calcDataReceived);
+	BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived); // This line is necessary because the API(ver b15) have a bug 
+	BRRegisterCalculationDataCallback(this, PerceptionNeuronDevice::calcFrameDataReceived);
 	
 	delete ipAddressChar;
 }
@@ -171,8 +172,9 @@ void PerceptionNeuronDevice::sendBvhData(void* customedObj, SOCKET_REF sender, B
 {
 	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
 
-	//Execute smoothing 
 	PerceptionNeuronSensorData sensorData;
+
+	sensorData.setDataType(PerceptionNeuronSensorData::DataTypeEnum::BVH);
 
 	sensorData.bvhData.avatarIndex   = header->AvatarIndex;
 	sensorData.bvhData.avatarName    = std::string((char*)header->AvatarName);
@@ -183,18 +185,19 @@ void PerceptionNeuronDevice::sendBvhData(void* customedObj, SOCKET_REF sender, B
 	sensorData.bvhData.data          = data;
 
 	// Send message to SigServer.
-	std::string messageHeader = this->generateMessageHeader();
+	std::string messageHeader = pthis->generateMessageHeader();
 	std::string sensorDataMessage = sensorData.encodeSensorData();
 	std::string message = messageHeader + sensorDataMessage;
-	this->sendMessage(pthis->sigService, message);
+	pthis->sendMessage(pthis->sigService, message);
 }
 
 void PerceptionNeuronDevice::sendCalcData(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data)
 {
 	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
 
-	//Execute smoothing 
 	PerceptionNeuronSensorData sensorData;
+
+	sensorData.setDataType(PerceptionNeuronSensorData::DataTypeEnum::CALC);
 
 	sensorData.calcData.avatarIndex   = header->AvatarIndex;
 	sensorData.calcData.avatarName    = std::string((char*)header->AvatarName);
@@ -203,22 +206,24 @@ void PerceptionNeuronDevice::sendCalcData(void* customedObj, SOCKET_REF sender, 
 	sensorData.calcData.data          = data;
 
 	// Send message to SigServer.
-	std::string messageHeader = this->generateMessageHeader();
+	std::string messageHeader = pthis->generateMessageHeader();
 	std::string sensorDataMessage = sensorData.encodeSensorData();
 	std::string message = messageHeader + sensorDataMessage;
-	this->sendMessage(pthis->sigService, message);
+	pthis->sendMessage(pthis->sigService, message);
 }
 
 
 void __stdcall PerceptionNeuronDevice::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data)
 {
 	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
+
 	pthis->sendBvhData(customedObj, sender, header, data);
 }
 
-void __stdcall PerceptionNeuronDevice::calcDataReceived(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data)
+void __stdcall PerceptionNeuronDevice::calcFrameDataReceived(void* customedObj, SOCKET_REF sender, CalcDataHeader* header, float* data)
 {
 	PerceptionNeuronDevice* pthis = (PerceptionNeuronDevice*)customedObj;
+
 	pthis->sendCalcData(customedObj, sender, header, data);
 }
 
@@ -279,12 +284,13 @@ void PerceptionNeuronDevice::readIniFile()
 		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType         << std::endl;
 		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID     << std::endl;
 
+		std::cout << paramFileKeyPerceptionNeuronDataType        << ":" << this->dataType            << std::endl;
 		std::cout << paramFileKeyPerceptionNeuronBvhIpAddress    << ":" << this->neuronBvhIpAddress  << std::endl;
 		std::cout << paramFileKeyPerceptionNeuronBvhPort         << ":" << this->neuronBvhPort       << std::endl;
 		std::cout << paramFileKeyPerceptionNeuronCalcIpAddress   << ":" << this->neuronCalcIpAddress << std::endl;
 		std::cout << paramFileKeyPerceptionNeuronCalcPort        << ":" << this->neuronCalcPort      << std::endl;
 
-		if (this->dataType != STR(BVH) && this->dataType == STR(CALC))
+		if (this->dataType != STR(BVH) && this->dataType != STR(CALC))
 		{
 			throw std::string("Illegal data type : "+this->dataType);
 		}

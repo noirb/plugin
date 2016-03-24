@@ -70,6 +70,12 @@ std::string PerceptionNeuronSensorData::getDataString(const unsigned short dataC
 }
 
 
+void PerceptionNeuronSensorData::setDataType(DataTypeEnum dataTypeEnum)
+{
+	this->dataType = dataTypeEnum;
+}
+
+
 ///@brief Set to sensor data.
 ///@param Map of sensor data;
 bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap)

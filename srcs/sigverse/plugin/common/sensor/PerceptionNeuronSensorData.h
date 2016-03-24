@@ -122,8 +122,6 @@ public:
 		CALC,
 	};
 
-	
-
 	typedef struct _PerceptionNeuronBVHJoint
 	{
 		BVH::BonesType   jointType;
@@ -192,6 +190,8 @@ public:
 
 	///@brief Get data string for sending message.
 	std::string getDataString(const unsigned short dataCount, const float *data, const std::string &valuesDelim = VALUES_DELIMITER) const;
+
+	void setDataType(DataTypeEnum dataTypeEnum);
 
 	///@brief Set to sensor data.
 	///@param Map of sensor data;
