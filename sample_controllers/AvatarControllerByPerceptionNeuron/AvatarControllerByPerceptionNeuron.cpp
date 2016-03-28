@@ -65,7 +65,7 @@ void AvatarControllerByPerceptionNeuron::onRecvMsg(RecvMsgEvent &evt)
 
 		// Set the posture to avatar.
 		SimObj *obj = getObj(myname());
-		this->perceptionNeuronDeviceManager.setPosture2ManBvh(obj, posture);
+		this->perceptionNeuronDeviceManager.setPosture2ManBvhYXZ(obj, posture);
 	}
 	catch(SimObj::Exception &err)
 	{
