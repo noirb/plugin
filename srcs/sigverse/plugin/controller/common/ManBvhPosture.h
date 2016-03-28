@@ -23,11 +23,11 @@ public:
 		WAIST_JOINT,
 		NECK_JOINT,
 
-		LCHEST_JOINT,
+		LCHEST_JOINT,   //It's for Perception Neuron.
 		LSHOULDER_JOINT,
 		LELBOW_JOINT,
 		LWRIST_JOINT,
-		RCHEST_JOINT,
+		RCHEST_JOINT,   //It's for Perception Neuron.
 		RSHOULDER_JOINT,
 		RELBOW_JOINT,
 		RWRIST_JOINT,

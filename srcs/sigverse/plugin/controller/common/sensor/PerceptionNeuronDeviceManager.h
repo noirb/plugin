@@ -25,8 +25,8 @@ public:
 
 private:
 	void setPosition2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
+	void setJointAngle2ManBvhYXZ(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType);
 public:
-	void setJointAngle2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType);
 	void setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture);
 
 	///@brief Convert Perception Neuron joint rotation to avatar posture structure.
@@ -38,7 +38,7 @@ public:
 	std::string deviceUniqueID;
 
 	SigCmn::Vector3 iniPos;
-	SigCmn::Vector3 startpos, startRot;
+	SigCmn::Vector3 sensorStartPos, sensorStartRot;
 	bool started;
 };
 
