@@ -12,7 +12,7 @@
 #include <sigverse/plugin/controller/common/Posture.h>
 #include <string>
 #include <sstream>
-
+#include <iostream>
 
 class ManBvhPosture : public Posture
 {
@@ -23,9 +23,11 @@ public:
 		WAIST_JOINT,
 		NECK_JOINT,
 
+		LCHEST_JOINT,
 		LSHOULDER_JOINT,
 		LELBOW_JOINT,
 		LWRIST_JOINT,
+		RCHEST_JOINT,
 		RSHOULDER_JOINT,
 		RELBOW_JOINT,
 		RWRIST_JOINT,

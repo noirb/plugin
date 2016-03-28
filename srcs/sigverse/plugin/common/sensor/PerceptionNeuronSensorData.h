@@ -8,7 +8,7 @@
 #include <sstream>
 #include <iomanip>
 
-namespace BVH
+namespace NeuronBVH
 {
 	enum BonesType
 	{
@@ -78,7 +78,7 @@ namespace BVH
 	};
 };
 
-namespace Calc
+namespace NeuronCalc
 {
 	enum BonesType
 	{
@@ -124,14 +124,14 @@ public:
 
 	typedef struct _PerceptionNeuronBVHJoint
 	{
-		BVH::BonesType   jointType;
-		SigCmn::Vector3  rotation;
+		NeuronBVH::BonesType jointType;
+		SigCmn::Vector3      rotation;
 	} PerceptionNeuronBVHJoint;
 
 	typedef struct _PerceptionNeuronCalcJoint
 	{
-		Calc::BonesType jointType;
-		Quaternion      quaternion;
+		NeuronCalc::BonesType jointType;
+		Quaternion            quaternion;
 	} PerceptionNeuronCalcJoint;
 
 
@@ -191,6 +191,7 @@ public:
 	///@brief Get data string for sending message.
 	std::string getDataString(const unsigned short dataCount, const float *data, const std::string &valuesDelim = VALUES_DELIMITER) const;
 
+	///@brief Set data type(BVH or Calculation).
 	void setDataType(DataTypeEnum dataTypeEnum);
 
 	///@brief Set to sensor data.
@@ -201,7 +202,7 @@ public:
 	///@param Map of sensor data;
 	bool setSensorData4Bvh(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
-	///@brief Set to sensor data (for Calclation).
+	///@brief Set to sensor data (for Calculation).
 	///@param Map of sensor data;
 	bool setSensorData4Calc(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 
@@ -209,10 +210,10 @@ public:
 	SigCmn::Vector3 rootPosition;
 
 	///@brief Whole body BVH joint info.
-	PerceptionNeuronBVHJoint bvhJoints[BVH::BonesTypeCount];
+	PerceptionNeuronBVHJoint bvhJoints[NeuronBVH::BonesTypeCount];
 
 	///@brief Whole body Calculation joint info
-	PerceptionNeuronCalcJoint calcJoints[Calc::BonesTypeCount];
+	PerceptionNeuronCalcJoint calcJoints[NeuronCalc::BonesTypeCount];
 };
 
 #endif // SIGVERSE_PERCEPTION_NEURON_SENSOR_DATA_H

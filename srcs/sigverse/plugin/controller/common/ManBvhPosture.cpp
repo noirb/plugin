@@ -26,9 +26,11 @@ std::string ManBvhPosture::manBvhJointTypeStr(ManBvhJointType e)
 		case HIP_JOINT       : { return("HIP_JOINT" ); }
 		case WAIST_JOINT     : { return("WAIST_JOINT" ); }
 		case NECK_JOINT      : { return("NECK_JOINT" ); }
+		case LCHEST_JOINT    : { return("LCHEST_JOINT" ); }
 		case LSHOULDER_JOINT : { return("LSHOULDER_JOINT" ); }
 		case LELBOW_JOINT    : { return("LELBOW_JOINT" ); }
 		case LWRIST_JOINT    : { return("LWRIST_JOINT" ); }
+		case RCHEST_JOINT    : { return("RCHEST_JOINT" ); }
 		case RSHOULDER_JOINT : { return("RSHOULDER_JOINT" ); }
 		case RELBOW_JOINT    : { return("RELBOW_JOINT" ); }
 		case RWRIST_JOINT    : { return("RWRIST_JOINT" ); }
@@ -38,7 +40,11 @@ std::string ManBvhPosture::manBvhJointTypeStr(ManBvhJointType e)
 		case RHIP_JOINT      : { return("RHIP_JOINT" ); }
 		case RKNEE_JOINT     : { return("RKNEE_JOINT" ); }
 		case RANKLE_JOINT    : { return("RANKLE_JOINT" ); }
-		//default: { return("illegal"); }
+		default:
+		{
+			std::cout << "illegal JointType error in manBvhJointTypeStr(ManBvhJointType e)." << std::endl;
+			exit(EXIT_FAILURE);
+		}
 	}
 }
 

@@ -21,6 +21,8 @@ PerceptionNeuronSensorData::PerceptionNeuronSensorData()
 	{
 		this->mapMsgItemStr2Enum.insert(std::map<std::string, MsgItemEnum>::value_type((*it).second, (*it).first));
 	}
+
+	this->dataType = DataTypeEnum::BVH;
 }
 
 
@@ -70,6 +72,7 @@ std::string PerceptionNeuronSensorData::getDataString(const unsigned short dataC
 }
 
 
+///@brief Set data type(BVH or Calculation).
 void PerceptionNeuronSensorData::setDataType(DataTypeEnum dataTypeEnum)
 {
 	this->dataType = dataTypeEnum;
@@ -80,19 +83,29 @@ void PerceptionNeuronSensorData::setDataType(DataTypeEnum dataTypeEnum)
 ///@param Map of sensor data;
 bool PerceptionNeuronSensorData::setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap)
 {
-	if (sensorDataMap.find(STR(BVH)) != sensorDataMap.end())
+	if (sensorDataMap.find(this->mapMsgItemEnum2Str.at(DataType)) != sensorDataMap.end())
 	{
-		this->dataType = DataTypeEnum::BVH;
-		return this->setSensorData4Bvh(sensorDataMap);
-	}
-	else if (sensorDataMap.find(STR(CALC)) != sensorDataMap.end())
-	{
-		this->dataType = DataTypeEnum::CALC;
-		return this->setSensorData4Calc(sensorDataMap);
+		std::string dataType = sensorDataMap.at(this->mapMsgItemEnum2Str.at(DataType))[0];
+
+		if(dataType==STR(BVH))
+		{
+			this->dataType = DataTypeEnum::BVH;
+			return this->setSensorData4Bvh(sensorDataMap);
+		}
+		else if (dataType==STR(CALC))
+		{
+			this->dataType = DataTypeEnum::CALC;
+			return this->setSensorData4Calc(sensorDataMap);
+		}
+		else
+		{
+			std::cout << "Illegal Data type. dataType=" << dataType << std::endl;
+			exit(-1);
+		}
 	}
 	else
 	{
-		std::cout << "Illegal Data type error.(in setSensorData)" << std::endl;
+		std::cout << "DataType does not exits.(in setSensorData) " << std::endl;
 		exit(-1);
 	}
 
@@ -159,7 +172,7 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 	{
 		std::vector<std::string> dataList = sensorDataMap.at(keyStrData);
 
-		for(int i = 0; i < BVH::BonesTypeCount; ++i)
+		for(int i = 0; i < NeuronBVH::BonesTypeCount; ++i)
 		{
 			int dataIndex = 0;
 
@@ -173,21 +186,21 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 				}
 
 				// Hips has a position.
-				if (i == BVH::BonesType::Hips)
+				if (i == NeuronBVH::BonesType::Hips)
 				{
 					this->rootPosition.x = std::stof(dataList[dataIndex + 0]);
 					this->rootPosition.y = std::stof(dataList[dataIndex + 1]);
 					this->rootPosition.z = std::stof(dataList[dataIndex + 2]);
 				}
 
-				this->bvhJoints[i].jointType  = (BVH::BonesType)i;
+				this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
 				this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 3]);
 				this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 4]);
 				this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 5]);
 			}
 			else
 			{
-				if (i == BVH::BonesType::Hips)
+				if (i == NeuronBVH::BonesType::Hips)
 				{
 					dataIndex = 0;
 
@@ -201,7 +214,7 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 					this->rootPosition.y = std::stof(dataList[dataIndex + 1]);
 					this->rootPosition.z = std::stof(dataList[dataIndex + 2]);
 
-					this->bvhJoints[i].jointType  = (BVH::BonesType)i;
+					this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
 					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 3]);
 					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 4]);
 					this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 5]);
@@ -215,7 +228,7 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 						dataIndex += 6;
 					}
 
-					this->bvhJoints[i].jointType  = (BVH::BonesType)i;
+					this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
 					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 0]);
 					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 1]);
 					this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 2]);
@@ -230,7 +243,7 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 
 
 
-///@brief Set to sensor data (for Calclation).
+///@brief Set to sensor data (for Calculation).
 ///@param Map of sensor data;
 bool PerceptionNeuronSensorData::setSensorData4Calc(const std::map<std::string, std::vector<std::string> > &sensorDataMap)
 {
@@ -280,9 +293,9 @@ bool PerceptionNeuronSensorData::setSensorData4Calc(const std::map<std::string, 
 	{
 		std::vector<std::string> dataList = sensorDataMap.at(keyStrData);
 
-		for(int i = 0; i < Calc::BonesTypeCount; ++i)
+		for(int i = 0; i < NeuronCalc::BonesTypeCount; ++i)
 		{
-			if (i == Calc::BonesType::Hips)
+			if (i == NeuronCalc::BonesType::Hips)
 			{
 				this->rootPosition.x = std::stof(dataList[i*16 + 0]);
 				this->rootPosition.y = std::stof(dataList[i*16 + 1]);
@@ -291,7 +304,7 @@ bool PerceptionNeuronSensorData::setSensorData4Calc(const std::map<std::string, 
 
 			// Velocity 3-5
 
-			this->calcJoints[i].jointType  = (Calc::BonesType)i;
+			this->calcJoints[i].jointType  = (NeuronCalc::BonesType)i;
 			this->calcJoints[i].quaternion.w = std::stof(dataList[i*16 + 6]);
 			this->calcJoints[i].quaternion.x = std::stof(dataList[i*16 + 7]);
 			this->calcJoints[i].quaternion.y = std::stof(dataList[i*16 + 8]);
