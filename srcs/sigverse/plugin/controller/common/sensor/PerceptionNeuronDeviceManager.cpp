@@ -70,31 +70,31 @@ void PerceptionNeuronDeviceManager::setJointAngle2ManBvhYXZ(SimObj *obj, const M
 }
 
 
-void PerceptionNeuronDeviceManager::setPosture2ManBvh(SimObj *obj, const ManBvhPosture &manBvhPosture)
+void PerceptionNeuronDeviceManager::setPosture2ManBvhYXZ(SimObj *obj, const ManBvhPosture &manBvhPosture)
 {
 	// Set position.
 	this->setPosition2ManBvh(obj, manBvhPosture);
 
 	// Set angles.
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::HIP_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::WAIST_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::NECK_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::HIP_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::WAIST_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::NECK_JOINT);
 
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LCHEST_JOINT);  //It's for Perception Neuron.
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LSHOULDER_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LELBOW_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LWRIST_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RCHEST_JOINT);  //It's for Perception Neuron.
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RSHOULDER_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RELBOW_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RWRIST_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LCHEST_JOINT);  //It's for Perception Neuron.
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LSHOULDER_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LELBOW_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LWRIST_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RCHEST_JOINT);  //It's for Perception Neuron.
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RSHOULDER_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RELBOW_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RWRIST_JOINT);
 
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LHIP_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LKNEE_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::LANKLE_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RHIP_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RKNEE_JOINT);
-	this->setJointAngle2ManBvh(obj, manBvhPosture, ManBvhPosture::RANKLE_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LHIP_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LKNEE_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LANKLE_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RHIP_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RKNEE_JOINT);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RANKLE_JOINT);
 }
 
 
