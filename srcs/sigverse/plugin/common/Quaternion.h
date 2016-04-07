@@ -31,14 +31,19 @@ public:
 	void getQuaternion(double &w, double &x, double &y, double &z) const;
 	void setQuaternion(const double w, const double x, const double y, const double z);
 
-	///@param[in] q Input quaternion.
-	///@param[in] r Input quaternion.
+	///@param[in] qa Input quaternion.
+	///@param[in] qb Input quaternion.
 	///@return Cross product of two input quaternions.
-	static const Quaternion calcCrossProduct(const Quaternion &q, const Quaternion &r);
+	static const Quaternion calcCrossProduct(const Quaternion &qa, const Quaternion &qb);
+	static const Quaternion multiplyNN(const Quaternion &qa, const Quaternion &qb);
+	static const Quaternion multiplyNI(const Quaternion &qa, const Quaternion &qb);
+	static const Quaternion multiplyIN(const Quaternion &qa, const Quaternion &qb);
+	static const Quaternion multiplyII(const Quaternion &qa, const Quaternion &qb);
 
 	static const Quaternion calcInverse(const Quaternion &q);
 
 	static const Quaternion calcQuaternionFromVector(const SigCmn::Vector3 &kvec, const SigCmn::Vector3 &svec);
+
 	static void rotVec(SigCmn::Vector3 &v, const Quaternion &q);
 };
 

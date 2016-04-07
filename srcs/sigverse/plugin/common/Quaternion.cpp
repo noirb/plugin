@@ -56,18 +56,74 @@ void Quaternion::setQuaternion(const double w, const double x, const double y, c
 	this->z = z;
 }
 
-///@param[in] q Input quaternion.
-///@param[in] r Input quaternion.
+///@param[in] qa Input quaternion.
+///@param[in] qb Input quaternion.
 ///@return Cross product of two input quaternions.
-const Quaternion Quaternion::calcCrossProduct(const Quaternion &q, const Quaternion &r)
+const Quaternion Quaternion::calcCrossProduct(const Quaternion &qa, const Quaternion &qb)
 {
 	Quaternion tmp;
-	tmp.w = q.w * r.w - q.x * r.x - q.y * r.y - q.z * r.z;
-	tmp.x = q.w * r.x + q.x * r.w + q.y * r.z - q.z * r.y;
-	tmp.y = q.w * r.y - q.x * r.z + q.y * r.w + q.z * r.x;
-	tmp.z = q.w * r.z + q.x * r.y - q.y * r.x + q.z * r.w;
+
+	tmp.w = + qa.w * qb.w - qa.x * qb.x - qa.y * qb.y - qa.z * qb.z;
+	tmp.x = + qa.w * qb.x + qa.x * qb.w + qa.y * qb.z - qa.z * qb.y;
+	tmp.y = + qa.w * qb.y + qa.y * qb.w + qa.z * qb.x - qa.x * qb.z;
+	tmp.z = + qa.w * qb.z + qa.z * qb.w + qa.x * qb.y - qa.y * qb.x;
+
 	return tmp;
 };
+
+///@param[in] qa Input quaternion.
+///@param[in] qb Input quaternion.
+///@return rotate by qb, then qa.
+const Quaternion Quaternion::multiplyNN(const Quaternion &qa, const Quaternion &qb)
+{
+	return calcCrossProduct(qa, qb);
+};
+
+///@param[in] qa Input quaternion.
+///@param[in] qb Input quaternion.
+///@return rotate by qb, then inverse of qa.
+const Quaternion Quaternion::multiplyNI(const Quaternion &qa, const Quaternion &qb)
+{
+	Quaternion tmp;
+
+	tmp.w = + qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z;
+	tmp.x = + qa.w * qb.x - qa.x * qb.w - qa.y * qb.z + qa.z * qb.y;
+	tmp.y = + qa.w * qb.y - qa.y * qb.w - qa.z * qb.x + qa.x * qb.z;
+	tmp.z = + qa.w * qb.z - qa.z * qb.w - qa.x * qb.y + qa.y * qb.x;
+
+	return tmp;
+};
+
+///@param[in] qa Input quaternion.
+///@param[in] qb Input quaternion.
+///@return rotate by inverse of qb, then qa.
+const Quaternion Quaternion::multiplyIN(const Quaternion &qa, const Quaternion &qb)
+{
+	Quaternion tmp;
+
+	tmp.w = + qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z;
+	tmp.x = - qa.w * qb.x + qa.x * qb.w - qa.y * qb.z + qa.z * qb.y;
+	tmp.y = - qa.w * qb.y + qa.y * qb.w - qa.z * qb.x + qa.x * qb.z;
+	tmp.z = - qa.w * qb.z + qa.z * qb.w - qa.x * qb.y + qa.y * qb.x;
+
+	return tmp;
+};
+
+///@param[in] qa Input quaternion.
+///@param[in] qb Input quaternion.
+///@return rotate by inverse of qb, then inverse of qa.
+const Quaternion Quaternion::multiplyII(const Quaternion &qa, const Quaternion &qb)
+{
+	Quaternion tmp;
+
+	tmp.w = + qa.w * qb.w - qa.x * qb.x - qa.y * qb.y - qa.z * qb.z;
+	tmp.x = - qa.w * qb.x - qa.x * qb.w + qa.y * qb.z - qa.z * qb.y;
+	tmp.y = - qa.w * qb.y - qa.y * qb.w + qa.z * qb.x - qa.x * qb.z;
+	tmp.z = - qa.w * qb.z - qa.z * qb.w + qa.x * qb.y - qa.y * qb.x;
+
+	return tmp;
+};
+
 
 
 const Quaternion Quaternion::calcInverse(const Quaternion &q)
@@ -119,6 +175,7 @@ const Quaternion Quaternion::calcQuaternionFromVector(const SigCmn::Vector3 &kve
 
 	return q;
 }
+
 
 /*
  * Rotate Vector by Quaternion
