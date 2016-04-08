@@ -8,9 +8,6 @@
 
 #undef new
 
-// Parameter file name. Must be defined.
-#define PARAM_FILE_NAME_OCULUS_RIFT_DK2_INI  ("OculusRiftDK2.ini")
-
 using namespace OVR;
 
 class OculusRiftDK2Device :
@@ -24,10 +21,6 @@ private:
 	ovrHmd             HMD;
 	ovrEyeRenderDesc   EyeRenderDesc[2];
 	ovrRecti           EyeRenderViewport[2];
-
-	///@brief Read parameter file.
-	///@return Success flag to read parameter.
-	void readIniFile();
 
 public:
 	OculusRiftDK2Device(){};

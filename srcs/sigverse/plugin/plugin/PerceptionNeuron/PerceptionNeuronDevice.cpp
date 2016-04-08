@@ -13,7 +13,7 @@
 
 
 ///@brief Parameter file name.
-const std::string PerceptionNeuronDevice::parameterFileName = "PerceptionNeuron.ini";
+const std::string Device::parameterFileName = "PerceptionNeuron.ini";
 
 //Parameter file information
 const std::string PerceptionNeuronDevice::paramFileKeyPerceptionNeuronDataType        = "PerceptionNeuron.data_type";

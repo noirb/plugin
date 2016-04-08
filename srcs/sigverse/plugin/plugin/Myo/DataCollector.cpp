@@ -13,7 +13,7 @@
 
 DataCollector::DataCollector() : onArm(false), roll(0), pitch(0), yaw(0), currentPose()
 {
-	this->emgData.resize(EMG_SENSOR_NUM);
+	this->emgData.resize(MyoSensorData::EMG_SENSOR_NUM);
 }
 
 // onUnpair() is called whenever the Myo is disconnected from Myo Connect by the user.
@@ -72,7 +72,7 @@ void DataCollector::onArmUnsync(myo::Myo* myo, uint64_t timestamp)
 // onEmgData() is called whenever a paired Myo has provided new EMG data, and EMG streaming is enabled.
 void DataCollector::onEmgData(myo::Myo* myo, uint64_t timestamp, const int8_t* emg)
 {
-	for (int i = 0; i < EMG_SENSOR_NUM; i++) 
+	for (int i = 0; i < MyoSensorData::EMG_SENSOR_NUM; i++)
 	{
 		this->emgData[i] = emg[i];
 	}
@@ -83,7 +83,6 @@ MyoSensorData DataCollector::getSensorData()
 {
 	MyoSensorData sensorData;
 
-	sensorData.onArm   = this->onArm;
 	sensorData.roll    = this->roll;
 	sensorData.pitch   = this->pitch;
 	sensorData.yaw     = this->yaw;

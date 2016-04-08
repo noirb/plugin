@@ -13,6 +13,9 @@
 ///@brief NatNet client instance
 NatNetClient *natNetClient;
 
+///@brief Parameter file name.
+const std::string Device::parameterFileName = "OptiTrack.ini";
+
 /**
  * @brief constructer
  */
@@ -32,8 +35,6 @@ OptiTrackDevice::OptiTrackDevice(int argc, char **argv)
 		std::cout << "Please execute with SIGServer address and port number." << std::endl;
 		exit(1);
 	}
-
-	this->parameterFileName = PARAM_FILE_NAME_OPTITRACK_INI;
 }
 
 
@@ -360,39 +361,5 @@ void OptiTrackDevice::sendMessage(const std::string &message)
 		std::cout << "catch (...) in OptiTrackDevice::sendMessage" << std::endl;
 		Sleep(20000);
 	}
-}
-
-
-///@brief Read parameter file.
-///@return When couldn't read parameter file, return false;
-void OptiTrackDevice::readIniFile()
-{
-	std::ifstream ifs(this->parameterFileName);
-
-	// Parameter file is "not" exists.
-	if (ifs.fail()) 
-	{
-		std::cout << "Not exist : " << this->parameterFileName << std::endl;
-		exit(-1);
-	}
-	// Parameter file is exists.
-	try 
-	{
-		std::cout << "Read " << this->parameterFileName << std::endl;
-		boost::property_tree::ptree pt;
-		boost::property_tree::read_ini(this->parameterFileName, pt);
-
-		this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-	}
-	catch (boost::exception &ex) 
-	{
-		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-	}
-
-	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << this->serviceName    << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType     << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID << std::endl;
 }
 

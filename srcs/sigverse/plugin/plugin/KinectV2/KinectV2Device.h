@@ -29,9 +29,6 @@ public:
 		WMA,
 	};
 
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 	//Parameter file info (key)
 	static const std::string paramFileKeyKinectV2SensorDataMode;
 	static const std::string paramFileKeyKinectV2SendHandState;

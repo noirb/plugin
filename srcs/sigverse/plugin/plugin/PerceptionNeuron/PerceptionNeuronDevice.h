@@ -8,9 +8,6 @@
 class PerceptionNeuronDevice : public Device
 {
 public:
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 	//Parameter file info (key)
 	static const std::string paramFileKeyPerceptionNeuronDataType;
 	static const std::string paramFileKeyPerceptionNeuronBvhIpAddress;

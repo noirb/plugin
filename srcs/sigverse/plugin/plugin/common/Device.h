@@ -8,7 +8,12 @@
 
 class Device
 {
+public:
+	///@brief Parameter file name.
+	static const std::string parameterFileName;
+
 protected:
+
 	///@brief Device type.
 	std::string deviceType;
 
@@ -26,9 +31,6 @@ protected:
 
 	///@brief Flag of send message to server.
 	bool sendMessageFlag;
-
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
 
 	///@brief Read parameter file.
 	void readIniFile();

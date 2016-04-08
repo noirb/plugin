@@ -8,6 +8,10 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 
+///@brief Parameter file name.
+const std::string Device::parameterFileName = "OculusRiftDK2.ini";
+
+
 OculusRiftDK2Device::OculusRiftDK2Device(int argc, char **argv)
 {
 	if (argc == 3) {
@@ -21,7 +25,6 @@ OculusRiftDK2Device::OculusRiftDK2Device(int argc, char **argv)
 		std::cout << "Please execute with SIGServer address and port number." << std::endl;
 		exit(1);
 	}
-	this->parameterFileName = PARAM_FILE_NAME_OCULUS_RIFT_DK2_INI;
 }
 
 OculusRiftDK2Device::~OculusRiftDK2Device()
@@ -134,35 +137,3 @@ void OculusRiftDK2Device::run()
 	Sleep(2000);
 }
 
-///@brief Read parameter file.
-///@return When couldn't read parameter file, return false;
-void OculusRiftDK2Device::readIniFile()
-{
-	std::ifstream ifs(this->parameterFileName);
-
-	// Parameter file is "not" exists.
-	if (ifs.fail())
-	{
-		std::cout << "Not exist : " << this->parameterFileName << std::endl;
-		exit(-1);
-	}
-	// Parameter file is exists.
-	try
-	{
-		std::cout << "Read " << this->parameterFileName << std::endl;
-		boost::property_tree::ptree pt;
-		boost::property_tree::read_ini(this->parameterFileName, pt);
-
-		this->serviceName = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-		this->deviceType = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-	}
-	catch (boost::exception &ex)
-	{
-		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-	}
-
-	std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME << ":" << this->serviceName << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE << ":" << this->deviceType << std::endl;
-	std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID << std::endl;
-}

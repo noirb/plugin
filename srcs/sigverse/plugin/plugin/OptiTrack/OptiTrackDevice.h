@@ -8,9 +8,6 @@
 #include <NatNetTypes.h>
 #include <NatNetClient.h>
 
-// Parameter file name. Must be defined.
-#define PARAM_FILE_NAME_OPTITRACK_INI  "OptiTrack.ini"
-
 // Default buffer size for IP adrress.
 #define BUFFER_SIZE_FOR_IP_ADDRESS 128
 
@@ -26,18 +23,11 @@ void __cdecl DataHandler(sFrameOfMocapData* data, void* pUserData);
 class OptiTrackDevice : public Device
 {
 private:
-	///@brief Parameter file name.
-	std::string parameterFileName;
-
 	///@brief NatNet connection type
 	int natNetConnectionType;
 
 	char szMyIPAddress    [BUFFER_SIZE_FOR_IP_ADDRESS];
 	char szServerIPAddress[BUFFER_SIZE_FOR_IP_ADDRESS];
-
-	///@brief Read parameter file.
-	///@return Success flag to read parameter.
-	void readIniFile();
 
 public:
 	OptiTrackDevice(int argc, char **argv);

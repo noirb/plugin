@@ -8,25 +8,15 @@
 
 #undef new
 
-// Parameter file name. Must be defined.
-#define PARAM_FILE_NAME_OCULUS_RIFT_DK1_INI  ("OculusRiftDK1.ini")
-
 class OculusRiftDK1Device : public Device
 {
 private:
-	///@brief Parameter file name.
-	std::string parameterFileName;
-
 	OVR::Ptr<OVR::DeviceManager>  pManager;
 	OVR::Ptr<OVR::HMDDevice>      pHMD;
 	OVR::Ptr<OVR::SensorDevice>   pSensor;
 	OVR::SensorFusion*            pFusionResult;
 	OVR::HMDInfo                  Info;
 	bool                          InfoLoaded;
-
-	///@brief Read parameter file.
-	///@return Success flag to read parameter.
-	void readIniFile();
 
 public:
 	OculusRiftDK1Device(){};

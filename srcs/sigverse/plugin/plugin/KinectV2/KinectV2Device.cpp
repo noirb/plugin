@@ -12,7 +12,7 @@
 
 
 ///@brief Parameter file name.
-const std::string KinectV2Device::parameterFileName = "KinectV2.ini";
+const std::string Device::parameterFileName = "KinectV2.ini";
 
 //Parameter file information
 const std::string KinectV2Device::paramFileKeyKinectV2SensorDataMode        = "KinectV2.sensor_data_mode";

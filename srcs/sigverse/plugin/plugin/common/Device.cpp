@@ -7,7 +7,6 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 
-
 /**
  * @brief Initialize SIGService.
  */

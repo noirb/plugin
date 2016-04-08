@@ -14,9 +14,6 @@
 
 class DataCollector : public myo::DeviceListener 
 {
-private:
-	static const int EMG_SENSOR_NUM = 8;
-
 public:
 	DataCollector();
 
