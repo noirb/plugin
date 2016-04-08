@@ -19,9 +19,6 @@
 class AvatarControllerByOculusDK2 : public ManNiiAvatarController
 {
 public:
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 	///@brief Movement of the robot.
 	double onAction(ActionEvent &evt);
 
@@ -31,14 +28,12 @@ public:
 	///@brief Initialize this controller.
 	void onInit(InitEvent &evt);
 
-	void readIniFileAndInitialize();
-
 	OculusDK2DeviceManager oculusDK2DeviceManager;
 
 	ManNiiPosture posture;
 };
 
 ///@brief Parameter file name.
-const std::string AvatarControllerByOculusDK2::parameterFileName = "OculusRiftDK2.ini";
+const std::string AgentController::parameterFileName = "OculusRiftDK2.ini";
 
 #endif // SIGVERSE_AVATAR_CONTROLLER_BY_OCULUS_DK2_H

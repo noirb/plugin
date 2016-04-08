@@ -9,13 +9,13 @@
 #define SIGVERSE_MAN_NII_AVATAR_CONTROLLER_H
 
 #include <sigverse/plugin/controller/common/Posture.h>
-#include <sigverse/plugin/controller/common/AvatarController.h>
+#include <sigverse/plugin/controller/common/AgentController.h>
 #include <sigverse/plugin/common/SigCmn.h>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-class ManNiiAvatarController : public AvatarController
+class ManNiiAvatarController : public AgentController
 {
 protected:
 };

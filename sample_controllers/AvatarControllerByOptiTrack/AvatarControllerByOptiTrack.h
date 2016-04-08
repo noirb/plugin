@@ -18,10 +18,6 @@
 
 class AvatarControllerByOptiTrack : public ManNiiAvatarController
 {
-public:
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 private:
 	void setRigidBody2ManNiiJoint(ManNiiPosture::ManNiiJoint &manNiiJoint, const OptiTrackSensorData::sRigidBodyDataSgv &rigidBodySgv);
 
@@ -36,8 +32,6 @@ public:
 	///@brief Initialize this controller.
 	void onInit(InitEvent &evt);
 
-	void readIniFileAndInitialize();
-
 	OptiTrackDeviceManager optiTrackDeviceManager;
 
 	ManNiiPosture posture;
@@ -45,6 +39,6 @@ public:
 
 
 ///@brief Parameter file name.
-const std::string AvatarControllerByOptiTrack::parameterFileName = "OptiTrack.ini";
+const std::string AgentController::parameterFileName = "OptiTrack.ini";
 
 #endif // SIGVERSE_AVATAR_CONTROLLER_BY_OPTITRACK_H

@@ -14,7 +14,9 @@
 class MyoSensorData : public SensorData
 {
 public:
-	enum PoseType 
+	static const int EMG_SENSOR_NUM = 8;
+
+	enum PoseType
 	{
 		Rest,
 		Fist,
@@ -27,18 +29,16 @@ public:
 
 	enum MsgItemEnum
 	{
-		Pose,
 		Orientation,
+		Pose,
 		EmgData,
 	};
-	
 
-private:
-	std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
-	std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
+	static std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
+	static std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
+	static std::map<PoseType,std::string> mapPoseType2Str;
 
 public:
-	bool onArm;
 	float roll, pitch, yaw;
 	std::string poseStr;
 	std::vector<int> emgData;
@@ -55,18 +55,9 @@ public:
 	///@brief Get a Emg data string for sending message.
 	std::string getEmgDataString(const std::vector<int> &data, const std::string &valuesDelim = VALUES_DELIMITER) const;
 
-	/////@brief Set to sensor data.
-	/////@param Map of sensor data;
-	//bool setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
-
-	/////@brief Set to sensor data (for BVH).
-	/////@param Map of sensor data;
-	//bool setSensorData4Bvh(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
-
-	/////@brief Set to sensor data (for Calculation).
-	/////@param Map of sensor data;
-	//bool setSensorData4Calc(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
-
+	///@brief Set to sensor data.
+	///@param Map of sensor data;
+	bool setSensorData(const std::map<std::string, std::vector<std::string> > &sensorDataMap);
 };
 
 #endif // SIGVERSE_MYO_SENSOR_DATA_H

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf8"?>
+<world name="MyoWorld">
+
+	<!--Gravity-->
+	<gravity x="0.0" y="-980.7" z="0.0"/>
+
+	<instanciate class="mobile_base.xml">
+
+		<set-attr-value name="name" value="myo_car"/>
+		<set-attr-value name="language" value="c++"/>
+		<set-attr-value name="implementation" value="./WheelControllerByMyo.so"/>
+		<set-attr-value name="dynamics" value="true"/>
+		<set-attr-value name="collision" value="true"/>  
+
+		<!-- position(x,y,z)-->
+		<set-attr-value name="x" value="0.0"/>
+		<set-attr-value name="y" value="7.5"/>
+		<set-attr-value name="z" value="0.0"/>
+		
+	</instanciate>
+</world>

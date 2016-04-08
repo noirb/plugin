@@ -17,6 +17,8 @@ void AvatarControllerByOculusDK1::onInit(InitEvent &evt)
 {
 	readIniFileAndInitialize();
 
+	this->oculusDK1DeviceManager = OculusDK1DeviceManager(this->serviceName, this->deviceType, this->deviceUniqueID);
+
 	//For initialize.
 	getObj(myname());
 }
@@ -59,49 +61,6 @@ void AvatarControllerByOculusDK1::onRecvMsg(RecvMsgEvent &evt)
 
 	SimObj *obj = getObj(myname());
 	OculusDK1DeviceManager::setJointQuaternions2ManNii(obj, posture);
-}
-
-
-
-///@brief Read parameter file.
-void AvatarControllerByOculusDK1::readIniFileAndInitialize()
-{
-	try
-	{
-		std::ifstream ifs(parameterFileName.c_str());
-
-		// Parameter file is "not" exists.
-		if (ifs.fail())
-		{
-			std::cout << "Not exist : " << parameterFileName << std::endl;
-			exit(-1);
-		}
-
-		// Parameter file is exists.
-		std::cout << "Read " << parameterFileName << std::endl;
-		boost::property_tree::ptree pt;
-		boost::property_tree::read_ini(parameterFileName, pt);
-
-		std::string serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
-		std::string deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
-		std::string deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
-
-		std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << serviceName    << std::endl;
-		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << deviceType     << std::endl;
-		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << deviceUniqueID << std::endl;
-
-		this->oculusDK1DeviceManager = OculusDK1DeviceManager(serviceName, deviceType, deviceUniqueID);
-	}
-	catch (boost::exception &ex)
-	{
-		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
-		exit(-1);
-	}
-	catch (...)
-	{
-		std::cout << "Some exception occurred in readIniFileAndInitialize()." << std::endl;
-		exit(-1);
-	}
 }
 
 

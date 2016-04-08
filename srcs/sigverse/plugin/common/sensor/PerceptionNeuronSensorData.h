@@ -167,11 +167,8 @@ public:
 		float          *data;
 	} CalcData;
 
-
-
-private:
-	std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
-	std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
+	static std::map<MsgItemEnum, std::string> mapMsgItemEnum2Str;
+	static std::map<std::string, MsgItemEnum> mapMsgItemStr2Enum;
 
 public:
 	DataTypeEnum dataType;
