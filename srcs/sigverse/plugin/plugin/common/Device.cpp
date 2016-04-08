@@ -59,3 +59,44 @@ const void Device::sendMessage(sigverse::SIGService &sigService, const std::stri
 		Sleep(20000);
 	}
 }
+
+
+///@brief Read parameter file.
+void Device::readIniFile()
+{
+	try 
+	{
+		std::ifstream ifs(this->parameterFileName.c_str());
+
+		// Parameter file is "not" exists.
+		if (ifs.fail()) 
+		{
+			std::cout << "Not exist : " << this->parameterFileName << std::endl;
+			exit(-1);
+		}
+
+		// Parameter file is exists.
+		std::cout << "Read " << this->parameterFileName << std::endl;
+		boost::property_tree::ptree pt;
+		boost::property_tree::read_ini(this->parameterFileName, pt);
+
+		this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
+		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
+		this->deviceUniqueID = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID);
+
+		std::cout << PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME     << ":" << this->serviceName        << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE      << ":" << this->deviceType         << std::endl;
+		std::cout << PARAMETER_FILE_KEY_GENERAL_DEVICE_UNIQUE_ID << ":" << this->deviceUniqueID     << std::endl;
+	}
+	catch (std::string &ex)
+	{
+		std::cout << ex << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	catch (boost::exception &ex) 
+	{
+		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+

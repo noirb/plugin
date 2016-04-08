@@ -27,8 +27,14 @@ protected:
 	///@brief Flag of send message to server.
 	bool sendMessageFlag;
 
-public:
+	///@brief Parameter file name.
+	static const std::string parameterFileName;
 
+	///@brief Read parameter file.
+	void readIniFile();
+
+
+public:
 	virtual ~Device() {};
 
 	///@brief Initialize SIGService.
