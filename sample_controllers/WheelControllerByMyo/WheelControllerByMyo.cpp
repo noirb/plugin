@@ -68,16 +68,19 @@ void WheelControllerByMyo::onRecvMsg(RecvMsgEvent &evt)
 
 	double rvel=0.0, lvel=0.0;
 
+	// Turn left.
 	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::WaveIn))
 	{
 		rvel = 3.0*vel;
 		lvel = 0.05*vel;
 	}
+	// Turn right.
 	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::WaveOut))
 	{
 		rvel = 0.05*vel;
 		lvel = 3.0*vel;
 	}
+	// Brake.
 	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::Fist))
 	{
 		rvel = -3.0*vel;
