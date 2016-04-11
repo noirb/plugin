@@ -42,18 +42,20 @@ void WheelControllerByMyo::onRecvMsg(RecvMsgEvent &evt)
 {
 	const std::string allMsg = evt.getMsg();
 
-	//std::cout << allMsg << std::endl;
+//	std::cout << allMsg << std::endl;
 
 	std::map<std::string, std::vector<std::string> > sensorDataMap = MyoSensorData::decodeSensorData(allMsg);
 
 	if (sensorDataMap.find(MSG_KEY_DEV_TYPE) == sensorDataMap.end()){ return; }
 
-	if(sensorDataMap[MSG_KEY_DEV_TYPE][0]	 !=this->myoDeviceManager.deviceType	){ return; }
+	if(sensorDataMap[MSG_KEY_DEV_TYPE][0]     !=this->myoDeviceManager.deviceType    ){ return; }
 	if(sensorDataMap[MSG_KEY_DEV_UNIQUE_ID][0]!=this->myoDeviceManager.deviceUniqueID){ return; }
 
 	MyoSensorData sensorData;
 	sensorData.setSensorData(sensorDataMap);
 
+//	std::cout << "roll=" << sensorData.roll << ",pitch=" << sensorData.pitch << ",yaw=" << sensorData.yaw << ",pose=" << sensorData.poseStr << std::endl;
+//	std::cout << "emg1=" << sensorData.emgData[0] << ",emg2=" << sensorData.emgData[1] << ", emg3=" << sensorData.emgData[2] << std::endl;
 
 	SimObj *obj = getObj(myname());
 
@@ -64,17 +66,28 @@ void WheelControllerByMyo::onRecvMsg(RecvMsgEvent &evt)
 		vel += std::abs(sensorData.emgData[i]);
 	}
 
-	double lvel = +vel;
-	double rvel = -vel;
+	double rvel=0.0, lvel=0.0;
 
+	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::WaveIn))
+	{
+		rvel = 3.0*vel;
+		lvel = 0.05*vel;
+	}
+	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::WaveOut))
+	{
+		rvel = 0.05*vel;
+		lvel = 3.0*vel;
+	}
 	if(sensorData.poseStr==MyoSensorData::mapPoseType2Str.at(MyoSensorData::Fist))
 	{
-		lvel *= -1.0;
-		rvel *= -1.0;
+		rvel = -3.0*vel;
+		lvel = -3.0*vel;
 	}
 
-	obj->setJointVelocity("JOINT_LWHEEL", lvel, 500.0);
+//	std::cout << "rvel=" << rvel << ",lvel=" << lvel << std::endl;
+
 	obj->setJointVelocity("JOINT_RWHEEL", rvel, 500.0);
+	obj->setJointVelocity("JOINT_LWHEEL", lvel, 500.0);
 }
 
 

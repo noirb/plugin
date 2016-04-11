@@ -96,6 +96,8 @@ bool MyoSensorData::setSensorData(const std::map<std::string, std::vector<std::s
 			}
 			case EmgData:
 			{
+				this->emgData.resize(EMG_SENSOR_NUM);
+
 				for(int i=0; i<EMG_SENSOR_NUM; i++)
 				{
 					this->emgData[i] = std::stoi((*it).second[i]);

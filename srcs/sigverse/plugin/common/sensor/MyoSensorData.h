@@ -9,7 +9,6 @@
 #include <sstream>
 #include <iomanip>
 
-
 ///@brief Sensor data class for using a Myo device.
 class MyoSensorData : public SensorData
 {
