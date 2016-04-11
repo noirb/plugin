@@ -11,7 +11,6 @@
 #include <sigverse/commonlib/ControllerEvent.h>
 #include <sigverse/commonlib/comm/controller/Controller.h>
 
-#include <sigverse/plugin/controller/common/AvatarController.h>
 #include <sigverse/plugin/controller/common/ManNiiPosture.h>
 #include <sigverse/plugin/controller/common/ManNiiAvatarController.h>
 #include <sigverse/plugin/controller/common/sensor/KinectV2DeviceManager.h>
@@ -22,9 +21,6 @@
 class OpenHouse2015Controller_OculusDK2 : public ManNiiAvatarController
 {
 public:
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 	//Parameter file key name.
 	static const std::string paramFileKeyKinectV2ServiceName;
 	static const std::string paramFileKeyKinectV2Devicetype;
@@ -130,7 +126,7 @@ public:
 };
 
 
-const std::string OpenHouse2015Controller_OculusDK2::parameterFileName = "OpenHouse2015_OculusDK2.ini";
+const std::string AgentController::parameterFileName = "OpenHouse2015_OculusDK2.ini";
 
 const std::string OpenHouse2015Controller_OculusDK2::paramFileKeyKinectV2ServiceName    = "KinectV2.service_name";
 const std::string OpenHouse2015Controller_OculusDK2::paramFileKeyKinectV2Devicetype     = "KinectV2.device_type";
