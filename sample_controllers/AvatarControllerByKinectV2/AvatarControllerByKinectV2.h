@@ -19,9 +19,6 @@
 class AvatarControllerByKinectV2 : public ManNiiAvatarController
 {
 public:
-	///@brief Parameter file name.
-	static const std::string parameterFileName;
-
 	//Parameter file information
 	static const std::string paramFileKeyKinectV2SensorDataMode;
 	static const std::string paramFileKeyKinectV2ScaleRatio;
@@ -41,7 +38,7 @@ public:
 };
 
 ///@brief Parameter file name.
-const std::string AvatarControllerByKinectV2::parameterFileName = "KinectV2.ini";
+const std::string AgentController::parameterFileName = "KinectV2.ini";
 
 //Parameter file information
 const std::string AvatarControllerByKinectV2::paramFileKeyKinectV2SensorDataMode = "KinectV2.sensor_data_mode";
