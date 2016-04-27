@@ -1,5 +1,7 @@
 How to Use
 -----------------
+Please install "NeuronDataReader SDK b15" into "C:\SIGVerse\ext\NeuronDataReader_SDK_b15".
+
 Before performing the plugin, please launch Axis Neuron and connect Perception Neuron.
 
 Please set the following Axis Neuron settings.
