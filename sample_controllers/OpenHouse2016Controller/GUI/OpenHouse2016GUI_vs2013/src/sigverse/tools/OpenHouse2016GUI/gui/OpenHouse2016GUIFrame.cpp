@@ -128,7 +128,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxString lm_choice_grasp_modeChoices[] = { wxT("SANDWICH"), wxT("GRASP_RIGHT"), wxT("GRASP_LEFT") };
 	int lm_choice_grasp_modeNChoices = sizeof( lm_choice_grasp_modeChoices ) / sizeof( wxString );
 	lm_choice_grasp_mode = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, lm_choice_grasp_modeNChoices, lm_choice_grasp_modeChoices, 0 );
-	lm_choice_grasp_mode->SetSelection( 0 );
+	lm_choice_grasp_mode->SetSelection( 1 );
 	fgSizer22->Add( lm_choice_grasp_mode, 0, wxALL, 5 );
 	
 	lm_staticText_reverse_mode = new wxStaticText( this, wxID_ANY, wxT("Reverse Mode"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -138,7 +138,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxString lm_choice_reverse_modeChoices[] = { wxT("Right to Left"), wxT("Left to Right"), wxT("Not reverse") };
 	int lm_choice_reverse_modeNChoices = sizeof( lm_choice_reverse_modeChoices ) / sizeof( wxString );
 	lm_choice_reverse_mode = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, lm_choice_reverse_modeNChoices, lm_choice_reverse_modeChoices, 0 );
-	lm_choice_reverse_mode->SetSelection( 0 );
+	lm_choice_reverse_mode->SetSelection( 2 );
 	fgSizer22->Add( lm_choice_reverse_mode, 0, wxALL, 5 );
 	
 	lm_staticText_fixed_waist = new wxStaticText( this, wxID_ANY, wxT("Fixed Waist"), wxDefaultPosition, wxDefaultSize, 0 );

@@ -50,8 +50,21 @@
     <ClInclude Include="..\..\..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\OpenHouse2016GUI.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OpenHouse2016GUI_vs2013.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>

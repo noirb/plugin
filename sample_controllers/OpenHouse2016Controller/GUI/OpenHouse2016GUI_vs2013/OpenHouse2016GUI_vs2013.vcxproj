@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\srcs\sigverse\plugin\plugin\common\CheckRecvSIGServiceData.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\sigverse\tools\OpenHouse2016GUI\gui\OpenHouse2016GUIFrame.h" />
     <ClInclude Include="src\sigverse\tools\OpenHouse2016GUI\gui\OpenHouse2016GUIMainFrame.h" />
     <ClInclude Include="src\sigverse\tools\OpenHouse2016GUI\AvatarController.h" />
@@ -91,6 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config\OpenHouse2016GUI.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OpenHouse2016GUI_vs2013.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
