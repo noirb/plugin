@@ -92,7 +92,7 @@ void KinectV2DeviceManager::setRootPosition(SimObj *obj, const SigCmn::Vector3 &
 // for ManNiiAvatar
 void KinectV2DeviceManager::setJointQuaternion2ManNii(SimObj *obj, const ManNiiPosture::ManNiiJoint &joint)
 {
-	if(joint.quaternion.w==1.0){ return; }
+	if(joint.jointType!=ManNiiPosture::ManNiiJointType::ROOT_JOINT0 && joint.quaternion.w==1.0){ return; }
 
 	double angle = acos(joint.quaternion.w)*2.0;
 	double tmp = sin(angle/2.0);
