@@ -95,6 +95,40 @@ void PerceptionNeuronDeviceManager::setPosture2ManBvhYXZ(SimObj *obj, const ManB
 	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RHIP_JOINT);
 	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RKNEE_JOINT);
 	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RANKLE_JOINT);
+
+	// left hand
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_T1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_T2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_T3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_I1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_I2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_I3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_M1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_M2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_M3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_R1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_R2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_R3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_P1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_P2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::LeftH_P3);
+
+	// Right hand
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_T1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_T2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_T3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_I1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_I2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_I3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_M1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_M2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_M3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_R1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_R2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_R3);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_P1);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_P2);
+	this->setJointAngle2ManBvhYXZ(obj, manBvhPosture, ManBvhPosture::RightH_P3);
 }
 
 
@@ -146,6 +180,38 @@ ManBvhPosture PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(con
 	manBvhPosture.joint[ManBvhPosture::RHIP_JOINT  ].angle = sensorData.bvhJoints[NeuronBVH::RightUpLeg].rotation;
 	manBvhPosture.joint[ManBvhPosture::RKNEE_JOINT ].angle = sensorData.bvhJoints[NeuronBVH::RightLeg  ].rotation;
 	manBvhPosture.joint[ManBvhPosture::RANKLE_JOINT].angle = sensorData.bvhJoints[NeuronBVH::RightFoot ].rotation;
+
+	manBvhPosture.joint[ManBvhPosture::LeftH_T1].angle = sensorData.bvhJoints[NeuronBVH::LeftHandThumb1].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_T2].angle = sensorData.bvhJoints[NeuronBVH::LeftHandThumb2].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_T3].angle = sensorData.bvhJoints[NeuronBVH::LeftHandThumb3].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_I1].angle = sensorData.bvhJoints[NeuronBVH::LeftHandIndex1].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_I2].angle = sensorData.bvhJoints[NeuronBVH::LeftHandIndex2].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_I3].angle = sensorData.bvhJoints[NeuronBVH::LeftHandIndex3].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_M1].angle = sensorData.bvhJoints[NeuronBVH::LeftHandMiddle1].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_M2].angle = sensorData.bvhJoints[NeuronBVH::LeftHandMiddle2].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_M3].angle = sensorData.bvhJoints[NeuronBVH::LeftHandMiddle3].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_R1].angle = sensorData.bvhJoints[NeuronBVH::LeftHandRing1].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_R2].angle = sensorData.bvhJoints[NeuronBVH::LeftHandRing2].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_R3].angle = sensorData.bvhJoints[NeuronBVH::LeftHandRing3].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_P1].angle = sensorData.bvhJoints[NeuronBVH::LeftHandPinky1].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_P2].angle = sensorData.bvhJoints[NeuronBVH::LeftHandPinky2].rotation;
+	manBvhPosture.joint[ManBvhPosture::LeftH_P3].angle = sensorData.bvhJoints[NeuronBVH::LeftHandPinky3].rotation;
+
+	manBvhPosture.joint[ManBvhPosture::RightH_T1].angle = sensorData.bvhJoints[NeuronBVH::RightHandThumb1].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_T2].angle = sensorData.bvhJoints[NeuronBVH::RightHandThumb2].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_T3].angle = sensorData.bvhJoints[NeuronBVH::RightHandThumb3].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_I1].angle = sensorData.bvhJoints[NeuronBVH::RightHandIndex1].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_I2].angle = sensorData.bvhJoints[NeuronBVH::RightHandIndex2].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_I3].angle = sensorData.bvhJoints[NeuronBVH::RightHandIndex3].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_M1].angle = sensorData.bvhJoints[NeuronBVH::RightHandMiddle1].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_M2].angle = sensorData.bvhJoints[NeuronBVH::RightHandMiddle2].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_M3].angle = sensorData.bvhJoints[NeuronBVH::RightHandMiddle3].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_R1].angle = sensorData.bvhJoints[NeuronBVH::RightHandRing1].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_R2].angle = sensorData.bvhJoints[NeuronBVH::RightHandRing2].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_R3].angle = sensorData.bvhJoints[NeuronBVH::RightHandRing3].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_P1].angle = sensorData.bvhJoints[NeuronBVH::RightHandPinky1].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_P2].angle = sensorData.bvhJoints[NeuronBVH::RightHandPinky2].rotation;
+	manBvhPosture.joint[ManBvhPosture::RightH_P3].angle = sensorData.bvhJoints[NeuronBVH::RightHandPinky3].rotation;
 
 	return manBvhPosture;
 }

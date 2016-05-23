@@ -5,7 +5,7 @@
 	<gravity x="0.0" y="-980.7" z="0.0"/>
 
 	<!--Agent -->
-	<instanciate class="Man-bvh_yxz.xml">
+	<instanciate class="Man-bvh_yxz_finger_real.xml">
 		
 		<!--Agent name-->
 		<set-attr-value name="name" value="perception_neuron_man"/>
