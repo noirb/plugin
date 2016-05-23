@@ -64,8 +64,8 @@ void PerceptionNeuronDeviceManager::setPosition2ManBvh(SimObj *obj, const ManBvh
 
 void PerceptionNeuronDeviceManager::setJointAngle2ManBvhYXZ(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType)
 {
-	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.x));
-	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.y));
+	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.y));
+	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.x));
 	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.z));
 }
 
