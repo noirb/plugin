@@ -15,7 +15,7 @@ public:
 	static const std::string paramFileKeyPerceptionNeuronCalcIpAddress;
 	static const std::string paramFileKeyPerceptionNeuronCalcPort;
 
-private:
+protected:
 	sigverse::SIGService sigService;
 
 	std::string dataType;
@@ -26,6 +26,7 @@ private:
 
 	///@brief Read parameter file.
 	void readIniFile();
+	void readIniFile(const std::string &parameterFileName);
 
 public:
 	PerceptionNeuronDevice();

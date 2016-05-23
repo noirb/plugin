@@ -34,7 +34,7 @@ protected:
 
 	///@brief Read parameter file.
 	void readIniFile();
-
+	void readIniFile(const std::string &parameterFileName);
 
 public:
 	virtual ~Device() {};

@@ -76,10 +76,17 @@ int PerceptionNeuronDevice::run()
 		if (this->dataType == STR(BVH))
 		{
 			this->connect4Bvh(sockRefBvh);
+
+			// Receive BVH data by the callback function.
+			BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived);
 		}
 		else if (this->dataType == STR(CALC))
 		{
 			this->connect4Calc(sockRefCalc);
+
+			// Receive Calculation data by the callback function.
+			BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived); // This line is necessary because the API(ver b15) have a bug 
+			BRRegisterCalculationDataCallback(this, PerceptionNeuronDevice::calcFrameDataReceived);
 		}
 
 		// Receive Socket status by the callback function.
@@ -137,9 +144,6 @@ void PerceptionNeuronDevice::connect4Bvh(SOCKET_REF sockRef)
 		exit(EXIT_FAILURE);
 	}
 
-	// Receive BVH data by the callback function.
-	BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived);
-			
 	delete ipAddressChar;
 }
 
@@ -162,10 +166,6 @@ void PerceptionNeuronDevice::connect4Calc(SOCKET_REF sockRef)
 		exit(EXIT_FAILURE);
 	}
 
-	// Receive Calculation data by the callback function.
-	BRRegisterFrameDataCallback(this, PerceptionNeuronDevice::bvhFrameDataReceived); // This line is necessary because the API(ver b15) have a bug 
-	BRRegisterCalculationDataCallback(this, PerceptionNeuronDevice::calcFrameDataReceived);
-	
 	delete ipAddressChar;
 }
 
@@ -256,21 +256,28 @@ void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SO
 ///@brief Read parameter file.
 void PerceptionNeuronDevice::readIniFile()
 {
+	this->readIniFile(this->parameterFileName);
+}
+
+
+///@brief Read parameter file.
+void PerceptionNeuronDevice::readIniFile(const std::string &parameterFileName)
+{
 	try 
 	{
-		std::ifstream ifs(this->parameterFileName.c_str());
+		std::ifstream ifs(parameterFileName.c_str());
 
 		// Parameter file is "not" exists.
 		if (ifs.fail()) 
 		{
-			std::cout << "Not exist : " << this->parameterFileName << std::endl;
+			std::cout << "Not exist : " << parameterFileName << std::endl;
 			exit(-1);
 		}
 
 		// Parameter file is exists.
-		std::cout << "Read " << this->parameterFileName << std::endl;
+		std::cout << "Read " << parameterFileName << std::endl;
 		boost::property_tree::ptree pt;
-		boost::property_tree::read_ini(this->parameterFileName, pt);
+		boost::property_tree::read_ini(parameterFileName, pt);
 
 		this->serviceName    = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_SERVICE_NAME);
 		this->deviceType     = pt.get<std::string>(PARAMETER_FILE_KEY_GENERAL_DEVICE_TYPE);
@@ -304,7 +311,7 @@ void PerceptionNeuronDevice::readIniFile()
 	}
 	catch (boost::exception &ex) 
 	{
-		std::cout << this->parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
