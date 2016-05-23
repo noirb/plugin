@@ -200,8 +200,8 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 				}
 
 				this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
-				this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 3]);
-				this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 4]);
+				this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 3]);
+				this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 4]);
 				this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 5]);
 			}
 			else
@@ -221,8 +221,8 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 					this->rootPosition.z = std::stof(dataList[dataIndex + 2]);
 
 					this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
-					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 3]);
-					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 4]);
+					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 3]);
+					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 4]);
 					this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 5]);
 				}
 				else
@@ -235,8 +235,8 @@ bool PerceptionNeuronSensorData::setSensorData4Bvh(const std::map<std::string, s
 					}
 
 					this->bvhJoints[i].jointType  = (NeuronBVH::BonesType)i;
-					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 0]);
-					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 1]);
+					this->bvhJoints[i].rotation.y = std::stof(dataList[dataIndex + 0]);
+					this->bvhJoints[i].rotation.x = std::stof(dataList[dataIndex + 1]);
 					this->bvhJoints[i].rotation.z = std::stof(dataList[dataIndex + 2]);
 				}
 			}
