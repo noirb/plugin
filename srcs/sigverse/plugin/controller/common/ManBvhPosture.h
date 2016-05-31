@@ -78,7 +78,10 @@ public:
 
 	typedef struct _ManBvhJoint
 	{
+		_ManBvhJoint() { isValid   = true; };
+
 		ManBvhJointType jointType;
+		bool            isValid;
 		SigCmn::Vector3 angle;
 	} ManBvhJoint;
 

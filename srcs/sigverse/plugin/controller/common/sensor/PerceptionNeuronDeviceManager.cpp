@@ -53,7 +53,7 @@ void PerceptionNeuronDeviceManager::setPosition2ManBvh(SimObj *obj, const ManBvh
 	double dy = +(manBvhPosture.rootPosision.y - this->sensorStartPos.y);
 	double dz = +(manBvhPosture.rootPosision.z - this->sensorStartPos.z);
 
-	float yrot = SigCmn::deg2rad<float>(this->sensorStartRot.x);
+	float yrot = SigCmn::deg2rad<float>(this->sensorStartRot.y);
 
 	double gx = std::cos(yrot)*dx - std::sin(yrot)*dz;
 	double gz = std::sin(yrot)*dx + std::cos(yrot)*dz;
@@ -64,9 +64,12 @@ void PerceptionNeuronDeviceManager::setPosition2ManBvh(SimObj *obj, const ManBvh
 
 void PerceptionNeuronDeviceManager::setJointAngle2ManBvhYXZ(SimObj *obj, const ManBvhPosture &manBvhPosture, const ManBvhPosture::ManBvhJointType &manBvhJointType)
 {
-	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.y));
-	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.x));
-	obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.z));
+	if(manBvhPosture.joint[manBvhJointType].isValid)
+	{
+		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Y").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.y));
+		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_X").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.x));
+		obj->setJointAngle((ManBvhPosture::manBvhJointTypeStr(manBvhJointType)+"_Z").c_str(), SigCmn::deg2rad<float>(manBvhPosture.joint[manBvhJointType].angle.z));
+	}
 }
 
 
@@ -155,7 +158,7 @@ ManBvhPosture PerceptionNeuronDeviceManager::convertSensorData2ManBvhPosture(con
 
 	//TODO Have to adjust Hip,Waist,Neck.
 	SigCmn::Vector3 hipAngle = sensorData.bvhJoints[NeuronBVH::Hips].rotation;
-	hipAngle.x -= this->sensorStartRot.x;
+	hipAngle.y -= this->sensorStartRot.y;
 
 	SigCmn::Vector3 waistAngle = sensorData.bvhJoints[NeuronBVH::Spine1].rotation;
 	SigCmn::Vector3 neckAngle = sensorData.bvhJoints[NeuronBVH::Head].rotation;
