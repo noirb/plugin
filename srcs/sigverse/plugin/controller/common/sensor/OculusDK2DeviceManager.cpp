@@ -13,6 +13,8 @@
 #include <cmath>
 
 
+const double OculusDK2DeviceManager::normalization_range = 0.1;
+
 const dQuaternion OculusDK2DeviceManager::defaultHeadJoint0Quaternion = { 1.0, 0.0, 0.0, 0.0 };
 
 
@@ -36,7 +38,29 @@ void OculusDK2DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNi
 {
 	ManNiiPosture::ManNiiJoint joint = posture.joint[ManNiiPosture::HEAD_JOINT0];
 
+	double angle = acos(joint.quaternion.w)*2.0;
+	double tmp = sin(angle/2.0);
+	double vx = joint.quaternion.x/tmp;
+	double vy = joint.quaternion.y/tmp;
+	double vz = joint.quaternion.z/tmp;
+	double len = sqrt(vx*vx + vy*vy + vz*vz);
+	if (len < (1.0-normalization_range) || (1+normalization_range) < len){ return; }
+
 	obj->setJointQuaternion(ManNiiPosture::manNiiJointTypeStr(joint.jointType).c_str(), joint.quaternion.w, joint.quaternion.x, joint.quaternion.y, joint.quaternion.z);
+}
+
+
+void OculusDK2DeviceManager::setJointQuaternion(SimObj *obj, const std::string &jointName, const Quaternion &quaternion)
+{
+	double angle = acos(quaternion.w)*2.0;
+	double tmp = sin(angle/2.0);
+	double vx = quaternion.x/tmp;
+	double vy = quaternion.y/tmp;
+	double vz = quaternion.z/tmp;
+	double len = sqrt(vx*vx + vy*vy + vz*vz);
+	if (len < (1.0-normalization_range) || (1+normalization_range) < len){ return; }
+
+	obj->setJointQuaternion(jointName.c_str(), quaternion.w, quaternion.x, quaternion.y, quaternion.z);
 }
 
 
@@ -45,9 +69,9 @@ ManNiiPosture OculusDK2DeviceManager::convertQuaternion2ManNiiPosture(const SigC
 	ManNiiPosture posture;
 
 	dQuaternion tmpQ1;
-	tmpQ1[0] = quaternion.w;
+	tmpQ1[0] = +quaternion.w;
 	tmpQ1[1] = -quaternion.x;
-	tmpQ1[2] = quaternion.y;
+	tmpQ1[2] = +quaternion.y;
 	tmpQ1[3] = -quaternion.z;
 
 	dQuaternion tmpQ2;
