@@ -236,17 +236,17 @@ void __stdcall PerceptionNeuronDevice::socketStatusChanged(void* customedObj, SO
 	{
 		case CS_Running:
 		{
-			std::cout << "Socket is working correctly. msg=" << message << std::endl;
+			std::cout << "(Perception Neuron status) Socket is working correctly. msg=" << message << std::endl;
 			break;
 		}
 		case CS_Starting:
 		{
-			std::cout << "Is trying to start service. msg=" << message << std::endl;
+			std::cout << "(Perception Neuron status) Is trying to start service. msg=" << message << std::endl;
 			break;
 		}
 		case CS_OffWork:
 		{
-			std::cout << "Not working. msg=" << message << std::endl;
+			std::cout << "(Perception Neuron status) Not working. msg=" << message << std::endl;
 			break;
 		}
 	}
