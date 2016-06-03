@@ -311,7 +311,7 @@ void PerceptionNeuronDevice::readIniFile(const std::string &parameterFileName)
 	}
 	catch (boost::exception &ex) 
 	{
-		std::cout << parameterFileName << " ERR :" << *boost::diagnostic_information_what(ex) << std::endl;
+		std::cout << parameterFileName << " ERR :" << boost::diagnostic_information_what(ex) << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
