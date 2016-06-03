@@ -306,13 +306,13 @@ void PerceptionNeuronDevice::readIniFile(const std::string &parameterFileName)
 	}
 	catch (std::string &ex)
 	{
-		std::cout << ex << std::endl;
-		exit(EXIT_FAILURE);
+		std::cout << parameterFileName << " ERR :" << ex << std::endl;
+		throw ex;
 	}
-	catch (boost::exception &ex) 
+	catch(const boost::property_tree::ptree_error &ex)
 	{
-		std::cout << parameterFileName << " ERR :" << boost::diagnostic_information_what(ex) << std::endl;
-		exit(EXIT_FAILURE);
+		std::cout << parameterFileName << " ERR :" << ex.what() << std::endl;
+		throw ex;
 	}
 }
 
