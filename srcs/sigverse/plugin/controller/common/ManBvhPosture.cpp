@@ -19,9 +19,9 @@ ManBvhPosture::ManBvhPosture()
 }
 
 
-std::string ManBvhPosture::manBvhJointTypeStr(ManBvhJointType e)
+std::string ManBvhPosture::manBvhJointTypeStr(ManBvhJointType type)
 {
-	switch(e)
+	switch(type)
 	{
 		case HIP_JOINT       : { return("HIP_JOINT" ); }
 		case WAIST_JOINT     : { return("WAIST_JOINT" ); }
@@ -87,3 +87,17 @@ std::string ManBvhPosture::manBvhJointTypeStr(ManBvhJointType e)
 	}
 }
 
+std::string ManBvhPosture::manBvhJointTypeStrX(ManBvhJointType type)
+{
+	return ManBvhPosture::manBvhJointTypeStr(type) + "_X";
+}
+
+std::string ManBvhPosture::manBvhJointTypeStrY(ManBvhJointType type)
+{
+	return ManBvhPosture::manBvhJointTypeStr(type) + "_Y";
+}
+
+std::string ManBvhPosture::manBvhJointTypeStrZ(ManBvhJointType type)
+{
+	return ManBvhPosture::manBvhJointTypeStr(type) + "_Z";
+}

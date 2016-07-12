@@ -88,7 +88,10 @@ public:
 
 	ManBvhPosture();
 
-	static std::string manBvhJointTypeStr(ManBvhJointType e);
+	static std::string manBvhJointTypeStr(ManBvhJointType type);
+	static std::string manBvhJointTypeStrX(ManBvhJointType type);
+	static std::string manBvhJointTypeStrY(ManBvhJointType type);
+	static std::string manBvhJointTypeStrZ(ManBvhJointType type);
 
 	SigCmn::Vector3 rootPosision;
 	ManBvhJoint joint[ManBvhJointType_Count];
