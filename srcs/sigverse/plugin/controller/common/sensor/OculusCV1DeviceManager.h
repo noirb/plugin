@@ -1,11 +1,10 @@
 /*
- * OculusDK2DeviceManager.h
+ * OculusCV1DeviceManager.h
  *
- *  Created on: 2015/07/30
- *      Author: Wada
- */
-#ifndef SIGVERSE_OCULUS_DK2_DEVICE_MANAGER_H
-#define SIGVERSE_OCULUS_DK2_DEVICE_MANAGER_H
+ *  Created on: 2016/08/09
+  */
+#ifndef SIGVERSE_OCULUS_CV1_DEVICE_MANAGER_H
+#define SIGVERSE_OCULUS_CV1_DEVICE_MANAGER_H
 
 #include <sigverse/commonlib/SimObj.h>
 #include <sigverse/commonlib/ControllerImpl.h>
@@ -14,7 +13,7 @@
 #include <sigverse/plugin/controller/common/ManBvhPosture.h>
 #include <sigverse/plugin/common/sensor/SensorData.h>
 
-class OculusDK2DeviceManager
+class OculusCV1DeviceManager
 {
 public:
 	static const double normalization_range;
@@ -27,8 +26,8 @@ public:
 	std::string deviceType;
 	std::string deviceUniqueID;
 
-	OculusDK2DeviceManager();
-	OculusDK2DeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID);
+	OculusCV1DeviceManager();
+	OculusCV1DeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID);
 
 	///@brief Convert euler angle to avatar posture structure.
 	static ManNiiPosture convertQuaternion2ManNiiPosture(const SigCmn::Vector4 &quaternion);
@@ -37,4 +36,4 @@ public:
 	static void setJointQuaternion(SimObj *obj, const std::string &jointName, const Quaternion &quaternion);
 };
 
-#endif //SIGVERSE_OCULUS_DK2_DEVICE_MANAGER_H
+#endif //SIGVERSE_OCULUS_CV1_DEVICE_MANAGER_H

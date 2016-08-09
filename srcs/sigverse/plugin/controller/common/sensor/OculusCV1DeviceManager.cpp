@@ -1,11 +1,10 @@
 /*
- * OculusDK2DeviceManager.cpp
+ * OculusCV1DeviceManager.cpp
  *
- *  Created on: 2015/07/30
- *      Author: Wada
- */
+ *  Created on: 2016/08/09
+  */
 
-#include <sigverse/plugin/controller/common/sensor/OculusDK2DeviceManager.h>
+#include <sigverse/plugin/controller/common/sensor/OculusCV1DeviceManager.h>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -13,12 +12,12 @@
 #include <cmath>
 
 
-const double OculusDK2DeviceManager::normalization_range = 0.1;
+const double OculusCV1DeviceManager::normalization_range = 0.1;
 
-const dQuaternion OculusDK2DeviceManager::defaultHeadJoint0Quaternion = { 1.0, 0.0, 0.0, 0.0 };
+const dQuaternion OculusCV1DeviceManager::defaultHeadJoint0Quaternion = { 1.0, 0.0, 0.0, 0.0 };
 
 
-OculusDK2DeviceManager::OculusDK2DeviceManager()
+OculusCV1DeviceManager::OculusCV1DeviceManager()
 {
 	this->service        = NULL;
 	this->serviceName    = "";
@@ -26,7 +25,7 @@ OculusDK2DeviceManager::OculusDK2DeviceManager()
 	this->deviceUniqueID = "";
 }
 
-OculusDK2DeviceManager::OculusDK2DeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID)
+OculusCV1DeviceManager::OculusCV1DeviceManager(std::string &name, std::string &deviceType, std::string &deviceUniqueID)
 {
 	this->service        = NULL;
 	this->serviceName    = name;
@@ -34,7 +33,7 @@ OculusDK2DeviceManager::OculusDK2DeviceManager(std::string &name, std::string &d
 	this->deviceUniqueID = deviceUniqueID;
 }
 
-void OculusDK2DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNiiPosture &posture)
+void OculusCV1DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNiiPosture &posture)
 {
 	ManNiiPosture::ManNiiJoint joint = posture.joint[ManNiiPosture::HEAD_JOINT0];
 
@@ -50,7 +49,7 @@ void OculusDK2DeviceManager::setJointQuaternions2ManNii(SimObj *obj, const ManNi
 }
 
 
-void OculusDK2DeviceManager::setJointQuaternion(SimObj *obj, const std::string &jointName, const Quaternion &quaternion)
+void OculusCV1DeviceManager::setJointQuaternion(SimObj *obj, const std::string &jointName, const Quaternion &quaternion)
 {
 	double angle = acos(quaternion.w)*2.0;
 	double tmp = sin(angle/2.0);
@@ -64,7 +63,7 @@ void OculusDK2DeviceManager::setJointQuaternion(SimObj *obj, const std::string &
 }
 
 
-ManNiiPosture OculusDK2DeviceManager::convertQuaternion2ManNiiPosture(const SigCmn::Vector4 &quaternion)
+ManNiiPosture OculusCV1DeviceManager::convertQuaternion2ManNiiPosture(const SigCmn::Vector4 &quaternion)
 {
 	ManNiiPosture posture;
 
