@@ -122,6 +122,10 @@ void OculusRiftCV1Device::run()
     ovrSessionStatus sessionStatus;
 	while (1) {
         ovrResult res = ovr_GetSessionStatus(Session, &sessionStatus);
+        if (!OVR_SUCCESS(res))
+        {
+            std::cerr << "ERROR: Could not retrieve OVR Session Status!" << std::endl;
+        }
 
 		if (_kbhit()){
 			int key = _getch();
@@ -130,19 +134,13 @@ void OculusRiftCV1Device::run()
 			}
 		}
 
-        
-        if (!OVR_SUCCESS(res))
-        {
-            std::cerr << "ERROR: Could not retrieve OVR Session Status!" << std::endl;
-            return;
-        }
-
         if (sessionStatus.ShouldRecenter)
         {
             resetView();
         }
         if (sessionStatus.ShouldQuit)
         {
+            std::cout << "OVRSession requested shutdown -- quitting..." << std::endl;
             break;
         }
         if (sessionStatus.DisplayLost)
