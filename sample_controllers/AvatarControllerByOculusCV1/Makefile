@@ -8,7 +8,7 @@ SRCS = AvatarControllerByOculusCV1.cpp \
 CXX = g++
 
 # compile option
-CFLAGS  = -std=c++11 -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIGVERSE_PATH)/include  -fPIC -shared 
+CFLAGS  = -std=c++11 -DCONTROLLER -DNDEBUG -DUSE_ODE -DdDOUBLE -I$(SIGVERSE_PATH)/include -I../../srcs/  -fPIC -shared 
 LDFLAGS = -Wl,-rpath=$(SIGVERSE_PATH)/lib -L$(SIGVERSE_PATH)/lib -lsigplugin
 
 # generate intermediate object file from sources.
