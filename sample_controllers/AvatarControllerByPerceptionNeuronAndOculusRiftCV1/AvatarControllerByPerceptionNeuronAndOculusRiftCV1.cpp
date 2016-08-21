@@ -20,6 +20,8 @@ void AvatarControllerByPerceptionNeuronAndOculusRiftCV1::onInit(InitEvent &evt)
 	SimObj *myself = getObj(myname());
 
 	this->perceptionNeuronDeviceManager.getInitialPositionAndRotation(myself);
+
+	std::cout << "PerceptionNeuron + Oculus controller started" << std::endl;
 }
 
 
@@ -176,7 +178,7 @@ void AvatarControllerByPerceptionNeuronAndOculusRiftCV1::readIniFileAndInitializ
 		}
 
 		// Parameter file is exists.
-		std::cout << "Read " << parameterFileName << std::endl;
+		std::cout << "PerceptionNeuron+Oculus controller reading: " << parameterFileName << std::endl;
 		boost::property_tree::ptree pt;
 		boost::property_tree::read_ini(parameterFileName, pt);
 

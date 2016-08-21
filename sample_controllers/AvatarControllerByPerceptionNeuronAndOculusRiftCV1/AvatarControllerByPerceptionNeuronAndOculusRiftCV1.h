@@ -53,7 +53,7 @@ const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileK
 const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileKeyPerceptionNeuronDeviceUniqueID= "PerceptionNeuron.device_unique_id";
 
 const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileKeyOculusCV1ServiceName   = "OculusCV1.service_name";
-const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileKeyOculusCV1Devicetype    = "OculusCv1.device_type";
+const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileKeyOculusCV1Devicetype    = "OculusCV1.device_type";
 const std::string AvatarControllerByPerceptionNeuronAndOculusRiftCV1::paramFileKeyOculusCV1DeviceUniqueID= "OculusCV1.device_unique_id";
 
 
