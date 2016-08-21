@@ -1,6 +1,7 @@
 #pragma once
 #include <SIGService.h>
 #include <sigverse/plugin/plugin/common/Device.h>
+#include <sigverse/plugin/common/sensor/OculusRiftCV1SensorData.h>
 #include <OVR_CAPI.h>
 #include <d3d11.h>
 #include <conio.h>
@@ -10,38 +11,38 @@
 
 
 class OculusRiftCV1Device :
-	public Device
+    public Device
 {
 private:
-	///@brief Parameter file name.
-	std::string parameterFileName;
+    ///@brief Parameter file name.
+    std::string parameterFileName;
 
-	//Structures for the application
-	ovrSession		   Session;
+    //Structures for the application
+    ovrSession         Session;
     ovrGraphicsLuid    Luid;
     ovrHmdDesc         HmdDesc;
     ovrPosef           EyeRenderPose[2];
-	ovrEyeRenderDesc   EyeRenderDesc[2];
-	ovrRecti           EyeRenderViewport[2];
+    ovrEyeRenderDesc   EyeRenderDesc[2];
+    ovrRecti           EyeRenderViewport[2];
 
 public:
-	OculusRiftCV1Device(){};
-	OculusRiftCV1Device(int argc, char **argv);
-	~OculusRiftCV1Device();
+    OculusRiftCV1Device(){};
+    OculusRiftCV1Device(int argc, char **argv);
+    ~OculusRiftCV1Device();
 
-	void Process(ovrQuatf* Q);
+    void Process(OculusRiftCV1SensorData* sensorData);
 
-	void Release();
+    void Release();
 
-	///@brief Set service name.
-	//void setSigServiceName();
+    ///@brief Set service name.
+    //void setSigServiceName();
 
-	///@brief 
-	void init();
+    ///@brief 
+    void init();
 
     ///@breif Resets HMD pose
     void resetView();
 
-	///@brief Run oculus CV1 device.
-	void run();
+    ///@brief Run oculus CV1 device.
+    void run();
 };
