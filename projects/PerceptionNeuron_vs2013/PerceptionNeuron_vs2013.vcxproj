@@ -60,7 +60,7 @@
     <PostBuildEvent>
       <Command>
         copy ".\PerceptionNeuron.ini" "..\Release"
-        copy %SIGBUILD_NEURONDATAREADER_LIB%\NeuronDataReader.dll "..\Release"
+        copy "$(SIGBUILD_NEURONDATAREADER_LIB)\NeuronDataReader.dll" "..\Release"
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
