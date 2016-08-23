@@ -34,13 +34,24 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\srcs;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\NatNet_SDK_2.7\NatNetSDK\include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+        $(SolutionDir)..\srcs;
+        $(SIGBUILD_BOOST_INC);
+        $(NATNET_SDK_ROOT)\include;
+        $(SIGBUILD_SIGSERVICE_INC);
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-10.0;C:\SIGVerse\ext\NatNet_SDK_2.7\NatNetSDK\lib;C:\SIGVerse\GitHub\SIGService\Windows\Release_2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+        $(SIGBUILD_BOOST_LIB);
+        $(NATNET_SDK_ROOT)\lib;
+        $(SIGBUILD_SIGSERVICE_LIB);
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;NatNetLibStatic.lib;SIGService.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

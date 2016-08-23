@@ -34,13 +34,24 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\srcs;C:\SIGVerse\ext\boost_1_55_0;C:\SIGVerse\ext\OculusSDK_0.2.5\LibOVR\Include;C:\SIGVerse\GitHub\SIGService\Windows\SIGService;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+        $(SolutionDir)..\srcs;
+        $(SIGBUILD_BOOST_INC);
+        $(SIGBUILD_LIBOVR_INC);
+        $(SIGBUILD_SIGSERVICE_INC);
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\SIGVerse\ext\boost_1_55_0\lib32-msvc-10.0;C:\SIGVerse\ext\OculusSDK_0.2.5\LibOVR\Lib\Win32;C:\SIGVerse\GitHub\SIGService\Windows\Release_2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+        $(SIGBUILD_BOOST_LIB);
+        $(SIGBUILD_LIBOVR_LIB);
+        $(SIGBUILD_SIGSERVICE_LIB);
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
       <AdditionalDependencies>libovr.lib;winmm.lib;SIGService.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
