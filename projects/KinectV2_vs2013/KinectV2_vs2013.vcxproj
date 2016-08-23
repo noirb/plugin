@@ -39,7 +39,7 @@
         $(SolutionDir)..\srcs;
         $(KINECTSDK20_DIR)\inc;
         $(SIGBUILD_BOOST_INC);
-        $(OPENCV_ROOT)\include;
+        $(OPENCV_ROOT)\build\include;
         $(SIGBUILD_SIGSERVICE_INC);
         %(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
@@ -52,7 +52,7 @@
       <AdditionalLibraryDirectories>
         $(KINECTSDK20_DIR)\Lib\x86;
         $(SIGBUILD_BOOST_LIB);
-        $(OPENCV_ROOT)\lib\Release;
+        $(OPENCV_ROOT)\build\lib\Release;
         $(SIGBUILD_SIGSERVICE_LIB);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
@@ -60,9 +60,9 @@
     </Link>
     <PostBuildEvent>
       <Command>copy ".\KinectV2.ini" "..\Release"
-copy "$(OPENCV_ROOT)\bin\Release\opencv_core2413.dll" "..\Release"
-copy "$(OPENCV_ROOT)\bin\Release\opencv_highgui2413.dll" "..\Release"
-copy "$(OPENCV_ROOT)\bin\Release\opencv_imgproc2413.dll" "..\Release"
+copy "$(OPENCV_ROOT)\build\bin\Release\opencv_core2413.dll" "..\Release"
+copy "$(OPENCV_ROOT)\build\bin\Release\opencv_highgui2413.dll" "..\Release"
+copy "$(OPENCV_ROOT)\build\bin\Release\opencv_imgproc2413.dll" "..\Release"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
