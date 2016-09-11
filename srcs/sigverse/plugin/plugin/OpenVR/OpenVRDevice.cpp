@@ -68,7 +68,6 @@ void OpenVRDevice::Process(OpenVRSensorData* sensorData)
             {
                 case vr::TrackedDeviceClass_HMD:
                 {
-                    std::cout << "Found HMD" << std::endl;
                     SigCmn::Vector4 hmd_quat = extractQuaternion(m_rTrackedDevicePose[i].mDeviceToAbsoluteTracking);
                     sensorData->setQuaternion(OpenVRSensorData::DeviceType::HMD, hmd_quat);
                     sensorData->setPosition(OpenVRSensorData::DeviceType::HMD,
@@ -79,7 +78,6 @@ void OpenVRDevice::Process(OpenVRSensorData* sensorData)
                 }
                 case vr::TrackedDeviceClass_Controller:
                 {
-                    std::cout << "Found Controller" << std::endl;
                     SigCmn::Vector4 ctrlr_quat = extractQuaternion(m_rTrackedDevicePose[i].mDeviceToAbsoluteTracking);
 
                     auto controllerRole = m_pHMD->GetInt32TrackedDeviceProperty(i, vr::ETrackedDeviceProperty::Prop_ControllerRoleHint_Int32);
@@ -103,17 +101,16 @@ void OpenVRDevice::Process(OpenVRSensorData* sensorData)
                 }
                 case vr::TrackedDeviceClass_Other:
                 {
-                    std::cout << "Found Other device?" << std::endl;
                     break;
                 }
                 case vr::TrackedDeviceClass_Invalid:
                 {
-                    std::cout << "Found Invalid device?" << std::endl;
                     break;
                 }
                 default:
                 {
-                    std::cerr << "Device " << i << " has unknown type!" << std::endl;
+//                    std::cerr << "Device " << i << " has unknown type!" << std::endl;
+                    break;
                 }
             }
         }
@@ -159,7 +156,7 @@ void OpenVRDevice::run()
         OpenVRSensorData sensorData;
         Process(&sensorData);
 
-        std::cout << sensorData.encodeSensorData() << std::endl << std::endl << "----" << std::endl << std::endl;
+//        std::cout << sensorData.encodeSensorData() << std::endl << std::endl << "----" << std::endl << std::endl;
         if (this->sendMessageFlag) {
             const std::string sensorDataMessage = sensorData.encodeSensorData();
             const std::string messageHeader = this->generateMessageHeader();
