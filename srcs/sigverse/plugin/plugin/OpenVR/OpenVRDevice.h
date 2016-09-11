@@ -69,6 +69,12 @@ public:
     OpenVRDevice(int argc, char **argv);
     ~OpenVRDevice();
 
+    // Extracts the pressed/active buttons on the given controller state object
+    std::vector<std::string> getButtonStates(vr::VRControllerState_t controller_state, uint32_t controller_index);
+
+    // Extracts the analog axis inputs from the given controller state object
+    std::vector<std::string> getAxisStates(vr::VRControllerState_t controller_state, uint32_t controller_index);
+
     void Process(OpenVRSensorData* sensorData);
 
     void Release();
