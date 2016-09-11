@@ -57,7 +57,7 @@ void AvatarControllerByOpenVR::onRecvMsg(RecvMsgEvent &evt)
     OpenVRSensorData sensorData;
     sensorData.setSensorData(sensorDataMap);
 
-    ManNiiPosture posture = OpenVRDeviceManager::convertQuaternion2ManNiiPosture(sensorData.getQuaternion());
+    ManNiiPosture posture = OpenVRDeviceManager::convertQuaternion2ManNiiPosture(sensorData.getQuaternion(OpenVRSensorData::DeviceType::HMD));
 
     SimObj *obj = getObj(myname());
     OpenVRDeviceManager::setJointQuaternions2ManNii(obj, posture);
