@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf8"?>
-<world name="PerceptionNeuronRiftWorld">
+<world name="PerceptionNeuronOpenVRWorld">
 
 	<!--Gravity-->
 	<gravity x="0.0" y="-980.7" z="0.0"/>
@@ -8,7 +8,7 @@
 	<instanciate class="Man-bvh_yxz_finger_real.xml">
 		
 		<!--Agent name-->
-		<set-attr-value name="name" value="perception_neuron_rift_man"/>
+		<set-attr-value name="name" value="perception_neuron_openvr_man"/>
 
 		<!--C++-->
 		<set-attr-value name="language" value="c++"/>

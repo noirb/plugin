@@ -117,7 +117,7 @@ void AvatarControllerByPerceptionNeuronAndOpenVR::onRecvMsg(RecvMsgEvent &evt)
                 OpenVRSensorData sensorData;
                 sensorData.setSensorData(sensorDataMap);
 
-                ManNiiPosture posture = OpenVRDeviceManager::convertQuaternion2ManNiiPosture(sensorData.getQuaternion());
+                ManNiiPosture posture = OpenVRDeviceManager::convertQuaternion2ManNiiPosture(sensorData.getQuaternion(OpenVRSensorData::DeviceType::HMD));
 
                 Quaternion headQuaternion = posture.joint[ManNiiPosture::HEAD_JOINT0].quaternion;
 
@@ -186,20 +186,20 @@ void AvatarControllerByPerceptionNeuronAndOpenVR::readIniFileAndInitialize()
         perceptionNeuronDeviceType     = pt.get<std::string>(paramFileKeyPerceptionNeuronDevicetype);
         perceptionNeuronDeviceUniqueID = pt.get<std::string>(paramFileKeyPerceptionNeuronDeviceUniqueID);
 
-        openVRServiceName    = pt.get<std::string>(paramFileKeyopenVRServiceName);
-        openVRDeviceType     = pt.get<std::string>(paramFileKeyopenVRDevicetype);
-        openVRDeviceUniqueID = pt.get<std::string>(paramFileKeyopenVRDeviceUniqueID);
+        openVRServiceName    = pt.get<std::string>(paramFileKeyOpenVRServiceName);
+        openVRDeviceType     = pt.get<std::string>(paramFileKeyOpenVRDevicetype);
+        openVRDeviceUniqueID = pt.get<std::string>(paramFileKeyOpenVRDeviceUniqueID);
 
         std::cout << paramFileKeyPerceptionNeuronServiceName    << ":" << perceptionNeuronServiceName    << std::endl;
         std::cout << paramFileKeyPerceptionNeuronDevicetype     << ":" << perceptionNeuronDeviceType     << std::endl;
         std::cout << paramFileKeyPerceptionNeuronDeviceUniqueID << ":" << perceptionNeuronDeviceUniqueID << std::endl;
 
-        std::cout << paramFileKeyopenVRServiceName    << ":" << openVRCV1ServiceName    << std::endl;
-        std::cout << paramFileKeyopenVRDevicetype     << ":" << openVRCV1DeviceType     << std::endl;
-        std::cout << paramFileKeyopenVRDeviceUniqueID << ":" << openVRDeviceUniqueID << std::endl;
+        std::cout << paramFileKeyOpenVRServiceName    << ":" << openVRServiceName    << std::endl;
+        std::cout << paramFileKeyOpenVRDevicetype     << ":" << openVRDeviceType     << std::endl;
+        std::cout << paramFileKeyOpenVRDeviceUniqueID << ":" << openVRDeviceUniqueID << std::endl;
 
         this->perceptionNeuronDeviceManager = PerceptionNeuronDeviceManager(perceptionNeuronServiceName, perceptionNeuronDeviceType, perceptionNeuronDeviceUniqueID);
-        this->openVRDeviceManager        = openVRDeviceManager(openVRServiceName, openVRDeviceType, openVRDeviceUniqueID);
+        this->openVRDeviceManager        = OpenVRDeviceManager(openVRServiceName, openVRDeviceType, openVRDeviceUniqueID);
     }
     catch (boost::exception &ex)
     {
